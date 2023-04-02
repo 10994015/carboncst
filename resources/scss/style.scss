@@ -1,0 +1,44 @@
+$mainColor :#307EBA;
+header#header{
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 200px;
+    height: 145px;
+    >.logo{
+        height: 100%;
+        padding: 20px 0;
+        img{
+            height: 100%;
+        }
+    }
+    >nav{
+        display: flex;
+        height: 100%;
+        >a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            height: 100%;
+            text-align: center;
+            color:#333;
+            font-weight: 900;
+            &:hover{
+                border-bottom: 3px $mainColor solid;
+                color:$mainColor;
+            }
+        }
+    }
+
+}
+#home{
+    >.banners{
+        div{
+            img{
+            }
+        }
+    }
+}

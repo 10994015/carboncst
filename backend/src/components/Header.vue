@@ -10,7 +10,6 @@ const props = defineProps({
 })
 const userName = computed(()=>props.userName)
 const router = useRouter();
-
 const emit = defineEmits([
     'openSideBar',
 ]);
@@ -43,7 +42,7 @@ const logout = ()=>{
             class="flex items-center"
             >
             <img src="/images/hea.jpg" class="rounded-full w-10 mr-2" />
-            <p class="text-sm">username</p>
+            <p class="text-sm">{{userName}}</p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 ml-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>

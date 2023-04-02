@@ -1,26 +1,35 @@
 <script setup>
+import { ref, onMounted, computed } from 'vue';
+import store from "../store"
 import Loading from "./Loading.vue"
 import Sidebar from "./SideBar.vue"
 import Header from "./Header.vue"
 import Footer from "./Footer.vue"
-import { ref } from "vue";
 const sideBarOpen = ref(false);
+onMounted(() => {
+    store.dispatch('getUser');
+})
+const currentUser = computed(()=> store.state.user.data);
 const openSideBar = ()=>{
     sideBarOpen.value = !sideBarOpen.value;
 };
 </script>
 
 <template>
-    <div class="app">
+    <div class="app" v-if="currentUser.id">
         <Sidebar v-model="sideBarOpen" />
         <div class="main">
-            <Header @openSideBar='openSideBar'></Header>
+            <Header @openSideBar='openSideBar' :userName="currentUser.name" />
             <main>
                 <router-view></router-view>
             </main>
             <Footer text="Carbon" />
         </div>
         
+    </div>
+    <div class="loading" v-else>
+        <Loading />
+        <span>LOADING...</span>
     </div>
 </template>
 
