@@ -39,6 +39,7 @@ export function createArticle({commit}, article){
         form.append('title', article.title);
         form.append('image', article.image);
         form.append('content', article.content);
+        form.append('category', article.category);
         form.append('hidden', hidden);
         article = form;
     }
@@ -58,6 +59,7 @@ export function updateArticle({commit}, article){
         form.append('title', article.title);
         form.append('image', article.image);
         form.append('content', article.content);
+        form.append('category', article.category);
         form.append('hidden', hidden);
         form.append('_method', 'PUT');
         article = form;

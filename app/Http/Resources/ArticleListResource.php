@@ -20,6 +20,7 @@ class ArticleListResource extends JsonResource
             'title'=>$this->title,
             'image_url'=>$this->image ?? '',
             'hidden'=>$this->hidden,
+            'category'=>$this->category,
             'updated_at'=>(new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
         ];
     }

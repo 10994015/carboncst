@@ -28,6 +28,7 @@ class ArticleRequest extends FormRequest
             'image'=> ['nullable', 'image'],
             'content'=> ['nullable', 'string', 'required'],
             'hidden'=> ['boolean'],
+            'category'=>['required']
         ];
     }
 }

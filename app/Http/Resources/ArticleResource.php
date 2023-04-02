@@ -22,6 +22,7 @@ class ArticleResource extends JsonResource
             'content'=>$this->content ?? '',
             'image_url'=>$this->image ?? '',
             'hidden'=>$this->hidden ? true : false,
+            'category'=>$this->category,
             'created_at'=>(new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at'=>(new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
         ];

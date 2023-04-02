@@ -13,7 +13,7 @@ class Article extends Model
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
-    protected $fillable = ['title', 'content', 'image', 'image_mime', 'image_size', 'hidden', 'created_by', 'updated_by'];
+    protected $fillable = ['title', 'content', 'image', 'image_mime', 'image_size', 'hidden', 'created_by', 'updated_by', 'category'];
 
     public function getSlugOptions() : SlugOptions
     {
