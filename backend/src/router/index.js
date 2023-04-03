@@ -3,6 +3,8 @@ import AppLayout from "../components/AppLayout.vue"
 import Dashboard from "../views/Dashboard.vue";
 import Articles from "../views/Articles.vue";
 import AddArticle from "../views/AddArticle.vue";
+import Banners from "../views/Banners.vue";
+import AddBanner from "../views/AddBanner.vue";
 import Login from "../views/Login.vue";
 import store from "../store";
 
@@ -29,6 +31,16 @@ const routes = [
                 path:'add-articles/:id',
                 name:'app.add-article',
                 component:AddArticle,
+            },
+            {
+                path:'banners',
+                name:'app.banners',
+                component:Banners,
+            },
+            {
+                path:'add-banner/:id',
+                name:'app.add-banner',
+                component:AddBanner,
             },
         ]
     },

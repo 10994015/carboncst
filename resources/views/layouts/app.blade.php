@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/slick/slick-theme.css">
     <link rel="stylesheet" href="/css/style.css">
 
-
+    @livewireStyles
 
 </head>
 
@@ -36,7 +36,7 @@
 
         @include('components.footer')
     </div>
-
+    @livewireScripts
     <script src="/js/jquery-1.11.0.min.js"></script>
     <script src="/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="/js/app.js"></script>

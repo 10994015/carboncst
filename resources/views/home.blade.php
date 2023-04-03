@@ -20,7 +20,7 @@
           </div>
           <div class="content">
             <span>@if($article->category === 0)會務公告 @else 徵才公告 @endif</span>
-            <h3>{{$article->title}}</h3>
+            <a href="/news/{{$article->slug}}">{{$article->title}}</a>
             <p>
               @php echo nl2br($article->content) @endphp
             </p>

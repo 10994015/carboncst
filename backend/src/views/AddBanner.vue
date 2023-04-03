@@ -6,12 +6,10 @@ const route = useRoute();
 
 const router = useRouter();
 
-const DEFAULT_ARTICLE = {
+const DEFAULT_BANNER = {
   id: "",
-  title: "",
   image: "",
-  content: "",
-  category: 0,
+  url: "",
   hidden: false,
 };
 const image_url = ref("");
@@ -24,33 +22,32 @@ const previewImg = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
-const article = ref({ ...DEFAULT_ARTICLE });
+const banner = ref({ ...DEFAULT_BANNER });
 const isCreate = ref(false);
 
 onMounted(() => {
-  const articleId = route.params.id;
-  if (articleId === "create") {
+  const bannerId = route.params.id;
+  if (bannerId === "create") {
     randerLoading.value = true;
-    article.value.id = articleId;
+    banner.value.id = bannerId;
     isCreate.value = true;
     return;
   }
   store
-    .dispatch("isExistArticle", articleId)
+    .dispatch("isExistBanner", bannerId)
     .then((res) => {
       if (res.data) {
         store
-          .dispatch("getArticle", articleId)
+          .dispatch("getBanner", bannerId)
           .then((res) => {
-            article.value = res.data;
+            banner.value = res.data;
             image_url.value = res.data.image_url;
             isPreview.value = true;
             randerLoading.value = true;
 
-            article.value.title =
-              article.value.title == "null" ? "" : article.value.title;
-            article.value.content =
-              article.value.content == "null" ? "" : article.value.content;
+            banner.value.title = banner.value.title == "null" ? "" : banner.value.title;
+            banner.value.content =
+              banner.value.content == "null" ? "" : banner.value.content;
           })
           .then(() => {
             if (image_url.value != "") {
@@ -69,7 +66,7 @@ onMounted(() => {
 const previewImage = (ev) => {
   previewLoading.value = true;
   if (ev.target.files && ev.target.files[0]) {
-    article.value.image = ev.target.files[0];
+    banner.value.image = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       previewImg.value.src = e.target.result;
@@ -83,7 +80,7 @@ const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
     store
-      .dispatch("createArticle", article.value)
+      .dispatch("createBanner", banner.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "上傳成功！";
@@ -97,7 +94,7 @@ const onSubmit = () => {
       });
   } else {
     store
-      .dispatch("updateArticle", article.value)
+      .dispatch("updateBanner", banner.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "更新成功！";
@@ -112,7 +109,7 @@ const onSubmit = () => {
   }
 };
 watch(
-  () => article.value,
+  () => banner.value,
   (val) => {
     successMsg.value = null;
   },
@@ -121,9 +118,9 @@ watch(
 </script>
 
 <template>
-  <div class="addArticle">
-    <h1 v-if="isCreate">新增文章</h1>
-    <h1 v-else>編輯文章</h1>
+  <div class="addBanner">
+    <h1 v-if="isCreate">新增輪播圖</h1>
+    <h1 v-else>編輯輪播圖</h1>
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
@@ -131,22 +128,11 @@ watch(
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
-          <label for="">文章分類</label>
-          <select v-model="article.category">
-            <option value="0">會務公告</option>
-            <option value="1">徵才公告</option>
-          </select>
+          <label for="">輪播圖連結</label>
+          <input type="text" v-model="banner.url" />
         </div>
         <div class="form-group">
-          <label for="">文章標題</label>
-          <input type="text" v-model="article.title" />
-        </div>
-        <div class="form-group">
-          <label for="">文章內容</label>
-          <textarea v-model="article.content"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="">文章圖片</label>
+          <label for="">輪播圖上傳</label>
           <label for="imagefile" class="imagefileFor">
             <svg
               v-if="previewLoading"
@@ -194,8 +180,8 @@ watch(
         </div>
         <div class="chkbox-group">
           <div class="form-group">
-            <label for="">隱藏文章</label>
-            <input type="checkbox" v-model="article.hidden" />
+            <label for="">隱藏圖片</label>
+            <input type="checkbox" v-model="banner.hidden" />
           </div>
         </div>
         <div class="form-group btn-group mt-10">
@@ -223,11 +209,7 @@ watch(
             </svg>
             <span v-else>保存更改</span>
           </button>
-          <button
-            class="pre"
-            type="button"
-            @click="router.push({ name: 'app.articles' })"
-          >
+          <button class="pre" type="button" @click="router.push({ name: 'app.banners' })">
             回列表
           </button>
         </div>
@@ -262,7 +244,7 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.addArticle {
+.addBanner {
   display: flex;
   flex-direction: column;
   > h1 {

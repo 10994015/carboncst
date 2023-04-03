@@ -4,8 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ArticlesListResource extends JsonResource
+class BannerListResource extends JsonResource
 {
+    public static $wrap = false;
     /**
      * Transform the resource into an array.
      *
@@ -14,6 +15,11 @@ class ArticlesListResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'image_url'=>$this->image ?? '',
+            'hidden'=>$this->hidden,
+            'updated_at'=>(new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
+        ];
     }
 }
