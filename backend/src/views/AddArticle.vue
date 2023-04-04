@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from "vue";
 import store from "../store";
 import { useRouter, useRoute } from "vue-router";
+import CKEditor from "../components/shared/CKEditor.vue";
 const route = useRoute();
 
 const router = useRouter();
@@ -26,7 +27,6 @@ const errorMsg = ref(null);
 const successMsg = ref(null);
 const article = ref({ ...DEFAULT_ARTICLE });
 const isCreate = ref(false);
-
 onMounted(() => {
   const articleId = route.params.id;
   if (articleId === "create") {
@@ -111,6 +111,9 @@ const onSubmit = () => {
       });
   }
 };
+const getCkEditorContent = (val) => {
+  article.value.content = val;
+};
 watch(
   () => article.value,
   (val) => {
@@ -143,7 +146,8 @@ watch(
         </div>
         <div class="form-group">
           <label for="">文章內容</label>
-          <textarea v-model="article.content"></textarea>
+          <!-- <CKEditor :content="article.content" @sendContent="getCkEditorContent" /> -->
+          <textarea id="editor1" name="editor1" v-model="article.content"></textarea>
         </div>
         <div class="form-group">
           <label for="">文章圖片</label>
@@ -169,7 +173,7 @@ watch(
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <div v-if="!isPreview">
+            <div v-if="!isPreview || !article.image">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

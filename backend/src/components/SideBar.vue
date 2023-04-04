@@ -1,19 +1,31 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import CloseText from "./shared/CloseText.vue";
 
 const props = defineProps({
   modelValue: Boolean,
 });
+const emit = defineEmits(["openSideBar"]);
 const isAbout = ref(false);
 const isAwards = ref(false);
 const isInfo = ref(false);
+const sideBarOpen = computed(() => props.modelValue);
+const closeItems = () => {
+  isAbout.value = false;
+  isAwards.value = false;
+  isInfo.value = false;
+};
+watch(sideBarOpen, (val) => {
+  if (val) {
+    closeItems();
+  }
+});
 const openList = (name) => {
+  emit("openSideBar");
   if (name === "about") return (isAbout.value = !isAbout.value);
   if (name === "awards") return (isAwards.value = !isAwards.value);
   if (name === "info") return (isInfo.value = !isInfo.value);
 };
-const sideBarOpen = computed(() => props.modelValue);
 </script>
 
 <template>
@@ -97,6 +109,7 @@ const sideBarOpen = computed(() => props.modelValue);
           stroke-width="1.5"
           stroke="currentColor"
           :class="['w-3', 'h-3', 'ml-auto', { active: isAbout }]"
+          v-show="!sideBarOpen"
         >
           <path
             stroke-linecap="round"
@@ -149,6 +162,7 @@ const sideBarOpen = computed(() => props.modelValue);
           stroke-width="1.5"
           stroke="currentColor"
           :class="['w-3', 'h-3', 'ml-auto', { active: isAwards }]"
+          v-show="!sideBarOpen"
         >
           <path
             stroke-linecap="round"
@@ -235,6 +249,7 @@ const sideBarOpen = computed(() => props.modelValue);
           stroke-width="1.5"
           stroke="currentColor"
           :class="['w-3', 'h-3', 'ml-auto', { active: isInfo }]"
+          v-show="!sideBarOpen"
         >
           <path
             stroke-linecap="round"
