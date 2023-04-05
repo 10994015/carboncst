@@ -5,6 +5,14 @@ import Articles from "../views/Articles.vue";
 import AddArticle from "../views/AddArticle.vue";
 import Banners from "../views/Banners.vue";
 import AddBanner from "../views/AddBanner.vue";
+import Chairman from "../views/Chairman.vue";
+import AddChairman from "../views/AddChairman.vue";
+import Awardprogram from "../views/Awardprogram.vue";
+import AddAwardprogram from "../views/AddAwardprogram.vue";
+import Letters from "../views/Letters.vue";
+import AddLetter from "../views/AddLetter.vue";
+import CstDatabase from "../views/CstDatabase.vue";
+import AddCstDatabase from "../views/AddCstDatabase.vue";
 import Login from "../views/Login.vue";
 import store from "../store";
 
@@ -42,6 +50,47 @@ const routes = [
                 name:'app.add-banner',
                 component:AddBanner,
             },
+            {
+                path:'chairmans',
+                name:'app.chairmans',
+                component:Chairman,
+            },
+            {
+                path:'add-chairman/:id',
+                name:'app.add-chairman',
+                component:AddChairman,
+            },
+            {
+                path:'award-program',
+                name:'app.award-program',
+                component:Awardprogram,
+            },
+            {
+                path:'add-award-program/:id',
+                name:'app.add-award-program',
+                component:AddAwardprogram,
+            },
+            {
+                path:'letter',
+                name:'app.letters',
+                component:Letters,
+            },
+            {
+                path:'add-letter/:id',
+                name:'app.add-letter',
+                component:AddLetter,
+            },
+            {
+                path:'cst-database',
+                name:'app.cst-database',
+                component:CstDatabase,
+            },
+            {
+                path:'add-cst-database/:id',
+                name:'app.add-cst-database',
+                component:AddCstDatabase,
+            },
+            
         ]
     },
    {

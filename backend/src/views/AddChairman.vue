@@ -6,12 +6,12 @@ const route = useRoute();
 
 const router = useRouter();
 
-const DEFAULT_ARTICLE = {
+const DEFAULT_CHAIRMAN = {
   id: "",
-  title: "",
+  name: "",
+  message_date: "",
   image: "",
   content: "",
-  category: 0,
   hidden: false,
 };
 const image_url = ref("");
@@ -24,32 +24,32 @@ const previewImg = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
-const article = ref({ ...DEFAULT_ARTICLE });
+const chairman = ref({ ...DEFAULT_CHAIRMAN });
 const isCreate = ref(false);
 onMounted(() => {
-  const articleId = route.params.id;
-  if (articleId === "create") {
+  const chairmanId = route.params.id;
+  if (chairmanId === "create") {
     randerLoading.value = true;
-    article.value.id = articleId;
+    chairman.value.id = chairmanId;
     isCreate.value = true;
     return;
   }
   store
-    .dispatch("isExistArticle", articleId)
+    .dispatch("isExistChairman", chairmanId)
     .then((res) => {
       if (res.data) {
         store
-          .dispatch("getArticle", articleId)
+          .dispatch("getChairman", chairmanId)
           .then((res) => {
-            article.value = res.data;
+            chairman.value = res.data;
             image_url.value = res.data.image_url;
             isPreview.value = true;
             randerLoading.value = true;
 
-            article.value.title =
-              article.value.title == "null" ? "" : article.value.title;
-            article.value.content =
-              article.value.content == "null" ? "" : article.value.content;
+            chairman.value.name =
+              chairman.value.name == "null" ? "" : chairman.value.name;
+            chairman.value.content =
+              chairman.value.content == "null" ? "" : chairman.value.content;
           })
           .then(() => {
             if (image_url.value != "") {
@@ -68,7 +68,7 @@ onMounted(() => {
 const previewImage = (ev) => {
   previewLoading.value = true;
   if (ev.target.files && ev.target.files[0]) {
-    article.value.image = ev.target.files[0];
+    chairman.value.image = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       previewImg.value.src = e.target.result;
@@ -82,7 +82,7 @@ const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
     store
-      .dispatch("createArticle", article.value)
+      .dispatch("createChairman", chairman.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "上傳成功！";
@@ -96,7 +96,7 @@ const onSubmit = () => {
       });
   } else {
     store
-      .dispatch("updateArticle", article.value)
+      .dispatch("updateChairman", chairman.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "更新成功！";
@@ -110,22 +110,12 @@ const onSubmit = () => {
       });
   }
 };
-const getCkEditorContent = (val) => {
-  article.value.content = val;
-};
-watch(
-  () => article.value,
-  (val) => {
-    successMsg.value = null;
-  },
-  { deep: true }
-);
 </script>
 
 <template>
-  <div class="addArticle">
-    <h1 v-if="isCreate">新增文章</h1>
-    <h1 v-else>編輯文章</h1>
+  <div class="addChairman">
+    <h1 v-if="isCreate">新增理事長的話</h1>
+    <h1 v-else>編輯理事長的話</h1>
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
@@ -133,23 +123,19 @@ watch(
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
-          <label for="">文章分類</label>
-          <select v-model="article.category">
-            <option value="0">會務公告</option>
-            <option value="1">徵才公告</option>
-          </select>
+          <label for="">理事長姓名</label>
+          <input type="text" v-model="chairman.name" />
         </div>
         <div class="form-group">
-          <label for="">文章標題</label>
-          <input type="text" v-model="article.title" />
+          <label for="">留言時間</label>
+          <input type="text" v-model="chairman.message_date" />
         </div>
         <div class="form-group">
-          <label for="">文章內容</label>
-          <!-- <CKEditor :content="article.content" @sendContent="getCkEditorContent" /> -->
-          <textarea id="editor1" name="editor1" v-model="article.content"></textarea>
+          <label for="">內容</label>
+          <textarea v-model="chairman.content"></textarea>
         </div>
         <div class="form-group">
-          <label for="">文章圖片</label>
+          <label for="">理事長圖片</label>
           <label for="imagefile" class="imagefileFor">
             <svg
               v-if="previewLoading"
@@ -198,7 +184,7 @@ watch(
         <div class="chkbox-group">
           <div class="form-group">
             <label for="">隱藏文章</label>
-            <input type="checkbox" v-model="article.hidden" />
+            <input type="checkbox" v-model="chairman.hidden" />
           </div>
         </div>
         <div class="form-group btn-group mt-10">
@@ -229,7 +215,7 @@ watch(
           <button
             class="pre"
             type="button"
-            @click="router.push({ name: 'app.articles' })"
+            @click="router.push({ name: 'app.chairmans' })"
           >
             回列表
           </button>
@@ -265,7 +251,7 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.addArticle {
+.addChairman {
   display: flex;
   flex-direction: column;
   > h1 {

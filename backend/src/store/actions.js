@@ -20,6 +20,7 @@ export function getUser({commit}){
         return res;
     })
 }
+//article
 export function getArticles({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
     commit('setArticles', [true]);
     url = url || '/articles';
@@ -127,4 +128,250 @@ export function deleteBanner({commit}, id){
 }
 export function deleteBannerItems({commit}, ids){
     return axiosClient.post(`/bannerItems`, {'ids':ids});
+}
+
+//chairman
+
+export function getChairmans({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setChairmans', [true]);
+    url = url || '/chairmans';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setChairmans', [false, res.data]);
+    }).catch(err=>{
+        commit('setChairmans', [false]);
+    })
+}
+export function getChairman({commit}, id){
+    return axiosClient.get(`/chairmans/${id}`);
+}
+export function createChairman({commit}, chairman){
+    const hidden = (chairman.hidden) ? 1 :0;
+    if(chairman.image instanceof File){
+        const form = new FormData();
+        form.append('name', chairman.name);
+        form.append('message_date', chairman.message_date);
+        form.append('content', chairman.content);
+        form.append('image', chairman.image);
+        form.append('hidden', hidden);
+        chairman = form;
+    }
+    return axiosClient.post('/chairmans', chairman);
+}
+export function isExistChairman({commit}, id){
+    return axiosClient.post(`/isExistChairman`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateChairman({commit}, chairman){
+    const id = chairman.id;
+    const hidden = (chairman.hidden) ? 1 :0;
+    if(chairman.image instanceof File){
+        const form = new FormData();
+        form.append('id', chairman.id);
+        form.append('name', chairman.name);
+        form.append('message_date', chairman.message_date);
+        form.append('content', chairman.content);
+        form.append('image', chairman.image);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        chairman = form;
+    }else{
+        chairman._method = 'PUT'
+    }
+    return axiosClient.post(`/chairmans/${id}`, chairman);
+}
+export function deleteChairman({commit}, id){
+    return axiosClient.delete(`/chairmans/${id}`);
+}
+export function deleteChairmanItems({commit}, ids){
+    return axiosClient.post(`/chairmanItems`, {'ids':ids});
+}
+
+//award program
+
+export function getAwardprograms({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setAwardprograms', [true]);
+    url = url || '/awardprograms';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setAwardprograms', [false, res.data]);
+    }).catch(err=>{
+        commit('setAwardprograms', [false]);
+    })
+}
+export function getAwardprogram({commit}, id){
+    return axiosClient.get(`/awardprograms/${id}`);
+}
+export function createAwardprogram({commit}, awardprogram){
+    const hidden = (awardprogram.hidden) ? 1 :0;
+    const form = new FormData();
+    form.append('name', awardprogram.name);
+    form.append('award_name', awardprogram.award_name);
+    form.append('year', awardprogram.year);
+    form.append('units', awardprogram.units);
+    form.append('link', awardprogram.link);
+    form.append('hidden', hidden);
+    awardprogram = form;
+    return axiosClient.post('/awardprograms', awardprogram);
+}
+export function isExistAwardprogram({commit}, id){
+    return axiosClient.post(`/isExistAwardprogram`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateAwardprogram({commit}, awardprogram){
+    const id = awardprogram.id;
+    const hidden = (awardprogram.hidden) ? 1 :0;
+    if(awardprogram.image instanceof File){
+        const form = new FormData();
+        form.append('id', awardprogram.id);
+        form.append('name', awardprogram.name);
+        form.append('award_name', awardprogram.award_name);
+        form.append('year', awardprogram.year);
+        form.append('link', awardprogram.link);
+        form.append('units', awardprogram.units);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        awardprogram = form;
+    }else{
+        awardprogram._method = 'PUT'
+    }
+    return axiosClient.post(`/awardprograms/${id}`, awardprogram);
+}
+export function deleteAwardprogram({commit}, id){
+    return axiosClient.delete(`/awardprograms/${id}`);
+}
+export function deleteAwardprogramItems({commit}, ids){
+    return axiosClient.post(`/awardprogramItems`, {'ids':ids});
+}
+
+//letter
+
+export function getLetters({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setLetters', [true]);
+    url = url || '/letters';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setLetters', [false, res.data]);
+    }).catch(err=>{
+        commit('setLetters', [false]);
+    })
+}
+export function getLetter({commit}, id){
+    return axiosClient.get(`/letters/${id}`);
+}
+export function createLetter({commit}, letter){
+    const hidden = (letter.hidden) ? 1 :0;
+    if(letter.file instanceof File){
+        const form = new FormData();
+        form.append('name', letter.name);
+        form.append('file', letter.file);
+        form.append('hidden', hidden);
+        letter = form;
+    }
+    return axiosClient.post('/letters', letter);
+}
+export function isExistLetter({commit}, id){
+    return axiosClient.post(`/isExistLetter`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateLetter({commit}, letter){
+    const id = letter.id;
+    const hidden = (letter.hidden) ? 1 :0;
+    if(letter.file instanceof File){
+        const form = new FormData();
+        form.append('id', letter.id);
+        form.append('name', letter.name);
+        form.append('file', letter.file);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        letter = form;
+    }else{
+        letter._method = 'PUT'
+    }
+    return axiosClient.post(`/letters/${id}`, letter);
+}
+
+export function deleteLetter({commit}, id){
+    return axiosClient.delete(`/letters/${id}`);
+}
+export function deleteLetterItems({commit}, ids){
+    return axiosClient.post(`/letterItems`, {'ids':ids});
+}
+
+//cst database 
+
+export function getCstDatabases({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setCstDatabases', [true]);
+    url = url || '/cstDatabases';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setCstDatabases', [false, res.data]);
+    }).catch(err=>{
+        commit('setCstDatabases', [false]);
+    })
+}
+export function getCstDatabase({commit}, id){
+    return axiosClient.get(`/cstDatabases/${id}`);
+}
+export function createCstDatabase({commit}, cstdatabase){
+    const hidden = (cstdatabase.hidden) ? 1 :0;
+    if(cstdatabase.file instanceof File){
+        const form = new FormData();
+        form.append('name', cstdatabase.name);
+        form.append('units', cstdatabase.units);
+        form.append('job_title', cstdatabase.job_title);
+        form.append('field', cstdatabase.field);
+        form.append('button_1', cstdatabase.button_1);
+        form.append('link_1', cstdatabase.link_1);
+        form.append('button_2', cstdatabase.button_2);
+        form.append('link_2', cstdatabase.link_2);
+        form.append('button_3', cstdatabase.button_3);
+        form.append('link_3', cstdatabase.link_3);
+        form.append('button_4', cstdatabase.button_4);
+        form.append('link_4', cstdatabase.link_4);
+        form.append('button_5', cstdatabase.button_5);
+        form.append('link_5', cstdatabase.link_5);
+        form.append('hidden', hidden);
+        cstdatabase = form;
+    }
+    return axiosClient.post('/cstDatabases', cstdatabase);
+}
+export function isExistCstDatabase({commit}, id){
+    return axiosClient.post(`/isExistCstDatabase`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateCstDatabase({commit}, cstdatabase){
+    const id = cstdatabase.id;
+    const hidden = (cstdatabase.hidden) ? 1 :0;
+    if(cstdatabase.file instanceof File){
+        const form = new FormData();
+        form.append('id', cstdatabase.id);
+        form.append('name', cstdatabase.name);
+        form.append('units', cstdatabase.units);
+        form.append('job_title', cstdatabase.job_title);
+        form.append('field', cstdatabase.field);
+        form.append('button_1', cstdatabase.button_1);
+        form.append('link_1', cstdatabase.link_1);
+        form.append('button_2', cstdatabase.button_2);
+        form.append('link_2', cstdatabase.link_2);
+        form.append('button_3', cstdatabase.button_3);
+        form.append('link_3', cstdatabase.link_3);
+        form.append('button_4', cstdatabase.button_4);
+        form.append('link_4', cstdatabase.link_4);
+        form.append('button_5', cstdatabase.button_5);
+        form.append('link_5', cstdatabase.link_5);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        cstdatabase = form;
+    }else{
+        cstdatabase._method = 'PUT'
+    }
+    return axiosClient.post(`/cstDatabases/${id}`, cstdatabase);
+}
+
+export function deleteCstDatabase({commit}, id){
+    return axiosClient.delete(`/cstDatabases/${id}`);
+}
+export function deleteCstDatabaseItems({commit}, ids){
+    return axiosClient.post(`/cstdatabaseItems`, {'ids':ids});
 }

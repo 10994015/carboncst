@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AwardprogramController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ChairmanController;
+use App\Http\Controllers\CstDatabaseController;
+use App\Http\Controllers\LetterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +33,22 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::apiResource('banners', BannerController::class);
     Route::post('/isExistBanner', [BannerController::class, 'isExistBanner']);
     Route::post('/bannerItems', [BannerController::class, 'deleteItems']);
-    
- 
 
+    Route::apiResource('chairmans', ChairmanController::class);
+    Route::post('/isExistChairman', [ChairmanController::class, 'isExistChairman']);
+    Route::post('/chairmanItems', [ChairmanController::class, 'deleteItems']);
+
+    Route::apiResource('awardprograms', AwardprogramController::class);
+    Route::post('/isExistAwardprogram', [AwardprogramController::class, 'isExistAwardprogram']);
+    Route::post('/awardprogramItems', [AwardprogramController::class, 'deleteItems']);
+
+    Route::apiResource('letters', LetterController::class);
+    Route::post('/isExistLetter', [LetterController::class, 'isExistLetter']);
+    Route::post('/letterItems', [LetterController::class, 'deleteItems']);
+
+    Route::apiResource('cstDatabases', CstDatabaseController::class);
+    Route::post('/isExistCstDatabase', [CstDatabaseController::class, 'isExistCstDatabase']);
+    Route::post('/cstdatabaseItems', [CstDatabaseController::class, 'deleteItems']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

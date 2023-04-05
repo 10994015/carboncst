@@ -119,7 +119,7 @@ const openList = (name) => {
         </svg>
       </a>
       <ol :class="{ open: isAbout }">
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.chairmans' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -172,7 +172,7 @@ const openList = (name) => {
         </svg>
       </a>
       <ol :class="{ open: isAwards }">
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.award-program' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -190,7 +190,7 @@ const openList = (name) => {
 
           <CloseText textName="獎項項目" v-model="sideBarOpen" />
         </router-link>
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.letters' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -209,7 +209,7 @@ const openList = (name) => {
           <CloseText textName="推薦書下載" v-model="sideBarOpen" />
         </router-link>
       </ol>
-      <router-link :to="{ name: 'app.banners' }">
+      <router-link :to="{ name: 'app.cst-database' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

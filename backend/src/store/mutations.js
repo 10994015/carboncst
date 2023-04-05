@@ -40,3 +40,63 @@ export function setBanners(state, [loading, res=null]){
     }
     state.banners.loading = loading;
 }
+
+export function setChairmans(state, [loading, res=null]){
+    if(res){
+        state.chairmans = {
+            data: res.data,
+            links: res.meta.links,
+            total: res.meta.total,
+            limit: res.meta.per_page,
+            from: res.meta.from,
+            to: res.meta.to,
+            page: res.meta.current_page,
+        }
+    }
+    state.chairmans.loading = loading;
+}
+
+export function setAwardprograms(state, [loading, res=null]){
+    if(res){
+        state.awardprograms = {
+            data: res.data,
+            links: res.meta.links,
+            total: res.meta.total,
+            limit: res.meta.per_page,
+            from: res.meta.from,
+            to: res.meta.to,
+            page: res.meta.current_page,
+        }
+    }
+    state.awardprograms.loading = loading;
+}
+
+export function setLetters(state, [loading, res=null]){
+    if(res){
+        state.letters = {
+            data: res.data,
+            links: res.meta.links,
+            total: res.meta.total,
+            limit: res.meta.per_page,
+            from: res.meta.from,
+            to: res.meta.to,
+            page: res.meta.current_page,
+        }
+    }
+    state.letters.loading = loading;
+}
+
+export function setCstDatabases(state, [loading, res=null]){
+    if(res){
+        state.cstdatabases = {
+            data: res.data,
+            links: res.meta.links,
+            total: res.meta.total,
+            limit: res.meta.per_page,
+            from: res.meta.from,
+            to: res.meta.to,
+            page: res.meta.current_page,
+        }
+    }
+    state.cstdatabases.loading = loading;
+}

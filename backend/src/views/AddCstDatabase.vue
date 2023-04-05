@@ -6,12 +6,22 @@ const route = useRoute();
 
 const router = useRouter();
 
-const DEFAULT_ARTICLE = {
+const DEFAULT_CSTDATABASE = {
   id: "",
-  title: "",
-  image: "",
-  content: "",
-  category: 0,
+  name: "",
+  job_title: "",
+  units: "",
+  field: "",
+  button_1: "",
+  link_1: "",
+  button_2: "",
+  link_2: "",
+  button_3: "",
+  link_3: "",
+  button_4: "",
+  link_4: "",
+  button_5: "",
+  link_5: "",
   hidden: false,
 };
 const image_url = ref("");
@@ -24,38 +34,48 @@ const previewImg = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
-const article = ref({ ...DEFAULT_ARTICLE });
+const cstdatabase = ref({ ...DEFAULT_CSTDATABASE });
 const isCreate = ref(false);
 onMounted(() => {
-  const articleId = route.params.id;
-  if (articleId === "create") {
+  const cstdatabaseId = route.params.id;
+  if (cstdatabaseId === "create") {
     randerLoading.value = true;
-    article.value.id = articleId;
+    cstdatabase.value.id = cstdatabaseId;
     isCreate.value = true;
     return;
   }
   store
-    .dispatch("isExistArticle", articleId)
+    .dispatch("isExistCstDatabase", cstdatabaseId)
     .then((res) => {
       if (res.data) {
-        store
-          .dispatch("getArticle", articleId)
-          .then((res) => {
-            article.value = res.data;
-            image_url.value = res.data.image_url;
-            isPreview.value = true;
-            randerLoading.value = true;
+        store.dispatch("getCstDatabase", cstdatabaseId).then((res) => {
+          console.log(res);
+          cstdatabase.value = res.data;
+          image_url.value = res.data.image_url;
+          isPreview.value = true;
+          randerLoading.value = true;
 
-            article.value.title =
-              article.value.title == "null" ? "" : article.value.title;
-            article.value.content =
-              article.value.content == "null" ? "" : article.value.content;
-          })
-          .then(() => {
-            if (image_url.value != "") {
-              previewImg.value.src = image_url.value;
-            }
-          });
+          cstdatabase.value.button_1 =
+            cstdatabase.value.button_1 == "null" ? "" : cstdatabase.value.button_1;
+          cstdatabase.value.link_1 =
+            cstdatabase.value.link_1 == "null" ? "" : cstdatabase.value.link_1;
+          cstdatabase.value.button_2 =
+            cstdatabase.value.button_2 == "null" ? "" : cstdatabase.value.button_2;
+          cstdatabase.value.link_2 =
+            cstdatabase.value.link_2 == "null" ? "" : cstdatabase.value.link_2;
+          cstdatabase.value.button_3 =
+            cstdatabase.value.button_3 == "null" ? "" : cstdatabase.value.button_3;
+          cstdatabase.value.link_3 =
+            cstdatabase.value.link_3 == "null" ? "" : cstdatabase.value.link_3;
+          cstdatabase.value.button_4 =
+            cstdatabase.value.button_4 == "null" ? "" : cstdatabase.value.button_4;
+          cstdatabase.value.link_4 =
+            cstdatabase.value.link_4 == "null" ? "" : cstdatabase.value.link_4;
+          cstdatabase.value.button_5 =
+            cstdatabase.value.button_5 == "null" ? "" : cstdatabase.value.button_5;
+          cstdatabase.value.link_5 =
+            cstdatabase.value.link_5 == "null" ? "" : cstdatabase.value.link_5;
+        });
       } else {
         router.push({ path: "/notfound" });
       }
@@ -65,24 +85,11 @@ onMounted(() => {
     });
 });
 
-const previewImage = (ev) => {
-  previewLoading.value = true;
-  if (ev.target.files && ev.target.files[0]) {
-    article.value.image = ev.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      previewImg.value.src = e.target.result;
-    };
-    reader.readAsDataURL(ev.target.files[0]);
-  }
-  previewLoading.value = false;
-  isPreview.value = true;
-};
 const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
     store
-      .dispatch("createArticle", article.value)
+      .dispatch("createCstDatabase", cstdatabase.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "上傳成功！";
@@ -96,7 +103,7 @@ const onSubmit = () => {
       });
   } else {
     store
-      .dispatch("updateArticle", article.value)
+      .dispatch("updateCstDatabase", cstdatabase.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "更新成功！";
@@ -110,22 +117,12 @@ const onSubmit = () => {
       });
   }
 };
-const getCkEditorContent = (val) => {
-  article.value.content = val;
-};
-watch(
-  () => article.value,
-  (val) => {
-    successMsg.value = null;
-  },
-  { deep: true }
-);
 </script>
 
 <template>
-  <div class="addArticle">
-    <h1 v-if="isCreate">新增文章</h1>
-    <h1 v-else>編輯文章</h1>
+  <div class="addCstDatabase">
+    <h1 v-if="isCreate">新增碳才資料庫</h1>
+    <h1 v-else>編輯碳才資料庫</h1>
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
@@ -133,72 +130,90 @@ watch(
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
-          <label for="">文章分類</label>
-          <select v-model="article.category">
-            <option value="0">會務公告</option>
-            <option value="1">徵才公告</option>
-          </select>
+          <label for="">姓名</label>
+          <input type="text" v-model="cstdatabase.name" />
         </div>
         <div class="form-group">
-          <label for="">文章標題</label>
-          <input type="text" v-model="article.title" />
+          <label for="">服務單位</label>
+          <input type="text" v-model="cstdatabase.units" />
         </div>
         <div class="form-group">
-          <label for="">文章內容</label>
-          <!-- <CKEditor :content="article.content" @sendContent="getCkEditorContent" /> -->
-          <textarea id="editor1" name="editor1" v-model="article.content"></textarea>
+          <label for="">職稱</label>
+          <input type="text" v-model="cstdatabase.job_title" />
         </div>
         <div class="form-group">
-          <label for="">文章圖片</label>
-          <label for="imagefile" class="imagefileFor">
-            <svg
-              v-if="previewLoading"
-              class="animate-spin h-5 w-5 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                class="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                stroke-width="4"
-              ></circle>
-              <path
-                class="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            <div v-if="!isPreview">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-5 h-5 mb-2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                />
-              </svg>
-              <span>將文件拖放到此處或單擊以上傳。</span>
+          <label for="">研究領域</label>
+          <input type="text" v-model="cstdatabase.field" />
+        </div>
+        <div class="form-group">
+          <label for="">相關連結1(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="cstdatabase.button_1" />
             </div>
-            <div v-else class="isPreview">
-              <img src="" ref="previewImg" id="previewImg" />
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="cstdatabase.link_1" />
             </div>
-          </label>
-          <input type="file" id="imagefile" hidden @change="previewImage($event)" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結2(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="cstdatabase.button_2" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="cstdatabase.link_2" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結3(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="cstdatabase.button_3" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="cstdatabase.link_3" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結4(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="cstdatabase.button_4" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="cstdatabase.link_4" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結5(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="cstdatabase.button_5" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="cstdatabase.link_5" />
+            </div>
+          </div>
         </div>
         <div class="chkbox-group">
           <div class="form-group">
-            <label for="">隱藏文章</label>
-            <input type="checkbox" v-model="article.hidden" />
+            <label for="">隱藏</label>
+            <input type="checkbox" v-model="cstdatabase.hidden" />
           </div>
         </div>
         <div class="form-group btn-group mt-10">
@@ -229,7 +244,7 @@ watch(
           <button
             class="pre"
             type="button"
-            @click="router.push({ name: 'app.articles' })"
+            @click="router.push({ name: 'app.cst-database' })"
           >
             回列表
           </button>
@@ -265,7 +280,7 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.addArticle {
+.addCstDatabase {
   display: flex;
   flex-direction: column;
   > h1 {
