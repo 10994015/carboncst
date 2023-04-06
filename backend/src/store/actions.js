@@ -375,3 +375,119 @@ export function deleteCstDatabase({commit}, id){
 export function deleteCstDatabaseItems({commit}, ids){
     return axiosClient.post(`/cstdatabaseItems`, {'ids':ids});
 }
+
+//seminar
+
+export function getCstSeminars({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setCstSeminars', [true]);
+    url = url || '/cstSeminars';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setCstSeminars', [false, res.data]);
+    }).catch(err=>{
+        commit('setCstSeminars', [false]);
+    })
+}
+export function getCstSeminar({commit}, id){
+    return axiosClient.get(`/cstSeminars/${id}`);
+}
+export function createCstSeminar({commit}, smeinar){
+    const hidden = (smeinar.hidden) ? 1 :0;
+    if(smeinar.image instanceof File){
+        const form = new FormData();
+        form.append('title', smeinar.title);
+        form.append('link', smeinar.link);
+        form.append('image', smeinar.image);
+        form.append('content', smeinar.content);
+        form.append('hidden', hidden);
+        smeinar = form;
+    }
+    return axiosClient.post('/cstSeminars', smeinar);
+}
+export function isExistCstSeminar({commit}, id){
+    return axiosClient.post(`/isExistCstSeminar`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateCstSeminar({commit}, seminar){
+    const id = seminar.id;
+    const hidden = (seminar.hidden) ? 1 :0;
+    if(seminar.image instanceof File){
+        const form = new FormData();
+        form.append('id', seminar.id);
+        form.append('title', seminar.title);
+        form.append('link', seminar.link);
+        form.append('image', seminar.image);
+        form.append('content', seminar.content);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        seminar = form;
+    }else{
+        seminar._method = 'PUT'
+    }
+    return axiosClient.post(`/cstSeminars/${id}`, seminar);
+}
+
+export function deleteCstSeminar({commit}, id){
+    return axiosClient.delete(`/cstSeminars/${id}`);
+}
+export function deleteCstSeminarItems({commit}, ids){
+    return axiosClient.post(`/cstseminarItems`, {'ids':ids});
+}
+
+// oversea
+
+export function getOverseas({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setOverseas', [true]);
+    url = url || '/overseas';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setOverseas', [false, res.data]);
+    }).catch(err=>{
+        commit('setOverseas', [false]);
+    })
+}
+export function getOversea({commit}, id){
+    return axiosClient.get(`/overseas/${id}`);
+}
+export function createOversea({commit}, oversea){
+    const hidden = (oversea.hidden) ? 1 :0;
+    if(oversea.image instanceof File){
+        const form = new FormData();
+        form.append('title', oversea.title);
+        form.append('link', oversea.link);
+        form.append('image', oversea.image);
+        form.append('content', oversea.content);
+        form.append('hidden', hidden);
+        oversea = form;
+    }
+    return axiosClient.post('/overseas', oversea);
+}
+export function isExistOversea({commit}, id){
+    return axiosClient.post(`/isExistOversea`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateOversea({commit}, oversea){
+    const id = oversea.id;
+    const hidden = (oversea.hidden) ? 1 :0;
+    if(oversea.image instanceof File){
+        const form = new FormData();
+        form.append('id', oversea.id);
+        form.append('title', oversea.title);
+        form.append('link', oversea.link);
+        form.append('image', oversea.image);
+        form.append('content', oversea.content);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        oversea = form;
+    }else{
+        oversea._method = 'PUT'
+    }
+    return axiosClient.post(`/overseas/${id}`, oversea);
+}
+
+export function deleteOversea({commit}, id){
+    return axiosClient.delete(`/overseas/${id}`);
+}
+export function deleteOverseaItems({commit}, ids){
+    return axiosClient.post(`/overseaItems`, {'ids':ids});
+}

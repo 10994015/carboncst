@@ -6,7 +6,9 @@ use App\Http\Controllers\AwardprogramController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ChairmanController;
 use App\Http\Controllers\CstDatabaseController;
+use App\Http\Controllers\CstSeminarController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\OverseaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +51,14 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::apiResource('cstDatabases', CstDatabaseController::class);
     Route::post('/isExistCstDatabase', [CstDatabaseController::class, 'isExistCstDatabase']);
     Route::post('/cstdatabaseItems', [CstDatabaseController::class, 'deleteItems']);
+
+    Route::apiResource('cstSeminars', CstSeminarController::class);
+    Route::post('/isExistCstSeminar', [CstSeminarController::class, 'isExistCstSeminar']);
+    Route::post('/cstseminarItems', [CstSeminarController::class, 'deleteItems']);
+
+    Route::apiResource('overseas', OverseaController::class);
+    Route::post('/isExistOversea', [OverseaController::class, 'isExistOversea']);
+    Route::post('/overseaItems', [OverseaController::class, 'deleteItems']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

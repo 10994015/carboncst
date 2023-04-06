@@ -259,7 +259,7 @@ const openList = (name) => {
         </svg>
       </a>
       <ol :class="{ open: isInfo }">
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.cst-seminar' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -277,7 +277,7 @@ const openList = (name) => {
 
           <CloseText textName="臺灣碳材料學術研討會" v-model="sideBarOpen" />
         </router-link>
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.overseas' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

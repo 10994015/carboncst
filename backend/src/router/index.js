@@ -13,6 +13,10 @@ import Letters from "../views/Letters.vue";
 import AddLetter from "../views/AddLetter.vue";
 import CstDatabase from "../views/CstDatabase.vue";
 import AddCstDatabase from "../views/AddCstDatabase.vue";
+import CstSeminar from "../views/CstSeminar.vue";
+import AddCstSeminar from "../views/AddCstSeminar.vue";
+import Oversea from "../views/Oversea.vue";
+import AddOversea from "../views/AddOversea.vue";
 import Login from "../views/Login.vue";
 import store from "../store";
 
@@ -89,6 +93,26 @@ const routes = [
                 path:'add-cst-database/:id',
                 name:'app.add-cst-database',
                 component:AddCstDatabase,
+            },
+            {
+                path:'cst-seminar',
+                name:'app.cst-seminar',
+                component:CstSeminar,
+            },
+            {
+                path:'add-cst-seminar/:id',
+                name:'app.add-cst-seminar',
+                component:AddCstSeminar,
+            },
+            {
+                path:'overseas',
+                name:'app.overseas',
+                component:Oversea,
+            },
+            {
+                path:'add-oversea/:id',
+                name:'app.add-oversea',
+                component:AddOversea,
             },
             
         ]
