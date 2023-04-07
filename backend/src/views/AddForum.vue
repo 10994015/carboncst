@@ -6,12 +6,21 @@ const route = useRoute();
 
 const router = useRouter();
 
-const DEFAULT_CHAIRMAN = {
+const DEFAULT_FORUM = {
   id: "",
-  name: "",
-  message_date: "",
+  title: "",
   image: "",
   content: "",
+  button_1: "",
+  link_1: "",
+  button_2: "",
+  link_2: "",
+  button_3: "",
+  link_3: "",
+  button_4: "",
+  link_4: "",
+  button_5: "",
+  link_5: "",
   hidden: false,
 };
 const image_url = ref("");
@@ -24,32 +33,46 @@ const previewImg = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
-const chairman = ref({ ...DEFAULT_CHAIRMAN });
+const forum = ref({ ...DEFAULT_FORUM });
 const isCreate = ref(false);
 onMounted(() => {
-  const chairmanId = route.params.id;
-  if (chairmanId === "create") {
+  const forumId = route.params.id;
+  if (forumId === "create") {
     randerLoading.value = true;
-    chairman.value.id = chairmanId;
+    forum.value.id = forumId;
     isCreate.value = true;
     return;
   }
   store
-    .dispatch("isExistChairman", chairmanId)
+    .dispatch("isExistForum", forumId)
     .then((res) => {
       if (res.data) {
         store
-          .dispatch("getChairman", chairmanId)
+          .dispatch("getForum", forumId)
           .then((res) => {
-            chairman.value = res.data;
+            forum.value = res.data;
             image_url.value = res.data.image_url;
             isPreview.value = true;
             randerLoading.value = true;
 
-            chairman.value.name =
-              chairman.value.name == "null" ? "" : chairman.value.name;
-            chairman.value.content =
-              chairman.value.content == "null" ? "" : chairman.value.content;
+            forum.value.title = forum.value.title == "null" ? "" : forum.value.title;
+            forum.value.content =
+              forum.value.content == "null" ? "" : forum.value.content;
+            forum.value.button_1 =
+              forum.value.button_1 == "null" ? "" : forum.value.button_1;
+            forum.value.link_1 = forum.value.link_1 == "null" ? "" : forum.value.link_1;
+            forum.value.button_2 =
+              forum.value.button_2 == "null" ? "" : forum.value.button_2;
+            forum.value.link_2 = forum.value.link_2 == "null" ? "" : forum.value.link_2;
+            forum.value.button_3 =
+              forum.value.button_3 == "null" ? "" : forum.value.button_3;
+            forum.value.link_3 = forum.value.link_3 == "null" ? "" : forum.value.link_3;
+            forum.value.button_4 =
+              forum.value.button_4 == "null" ? "" : forum.value.button_4;
+            forum.value.link_4 = forum.value.link_4 == "null" ? "" : forum.value.link_4;
+            forum.value.button_5 =
+              forum.value.button_5 == "null" ? "" : forum.value.button_5;
+            forum.value.link_5 = forum.value.link_5 == "null" ? "" : forum.value.link_5;
           })
           .then(() => {
             if (image_url.value != "") {
@@ -68,7 +91,7 @@ onMounted(() => {
 const previewImage = (ev) => {
   previewLoading.value = true;
   if (ev.target.files && ev.target.files[0]) {
-    chairman.value.image = ev.target.files[0];
+    forum.value.image = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       previewImg.value.src = e.target.result;
@@ -82,7 +105,7 @@ const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
     store
-      .dispatch("createChairman", chairman.value)
+      .dispatch("createForum", forum.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "上傳成功！";
@@ -96,7 +119,7 @@ const onSubmit = () => {
       });
   } else {
     store
-      .dispatch("updateChairman", chairman.value)
+      .dispatch("updateForum", forum.value)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           successMsg.value = "更新成功！";
@@ -113,9 +136,9 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <div class="addChairman">
-    <h1 v-if="isCreate">新增理事長的話</h1>
-    <h1 v-else>編輯理事長的話</h1>
+  <div class="addForum">
+    <h1 v-if="isCreate">新增碳材料論壇</h1>
+    <h1 v-else>編輯碳材料論壇</h1>
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
@@ -123,19 +146,15 @@ const onSubmit = () => {
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
-          <label for="">理事長名稱及抬頭</label>
-          <input type="text" v-model="chairman.name" />
+          <label for="">論壇標題</label>
+          <input type="text" v-model="forum.title" />
         </div>
         <div class="form-group">
-          <label for="">留言時間</label>
-          <input type="text" v-model="chairman.message_date" />
+          <label for="">論壇內容</label>
+          <textarea id="editor1" name="editor1" v-model="forum.content"></textarea>
         </div>
         <div class="form-group">
-          <label for="">內容</label>
-          <textarea v-model="chairman.content"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="">理事長圖片</label>
+          <label for="">文章圖片</label>
           <label for="imagefile" class="imagefileFor">
             <svg
               v-if="previewLoading"
@@ -181,10 +200,75 @@ const onSubmit = () => {
           </label>
           <input type="file" id="imagefile" hidden @change="previewImage($event)" />
         </div>
+        <div class="form-group">
+          <label for="">相關連結1(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="forum.button_1" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="forum.link_1" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結2(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="forum.button_2" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="forum.link_2" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結3(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="forum.button_3" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="forum.link_3" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結4(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="forum.button_4" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="forum.link_4" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">相關連結5(可選)</label>
+          <div class="flex">
+            <div class="form-group w-[50%] mr-2">
+              <label for="">按鈕名稱</label>
+              <input type="text" v-model="forum.button_5" />
+            </div>
+            <div class="form-group w-[50%] ml-2">
+              <label for="">網址連結</label>
+              <input type="text" v-model="forum.link_5" />
+            </div>
+          </div>
+        </div>
         <div class="chkbox-group">
           <div class="form-group">
-            <label for="">隱藏文章</label>
-            <input type="checkbox" v-model="chairman.hidden" />
+            <label for="">隱藏</label>
+            <input type="checkbox" v-model="forum.hidden" />
           </div>
         </div>
         <div class="form-group btn-group mt-10">
@@ -212,11 +296,7 @@ const onSubmit = () => {
             </svg>
             <span v-else>保存更改</span>
           </button>
-          <button
-            class="pre"
-            type="button"
-            @click="router.push({ name: 'app.chairmans' })"
-          >
+          <button class="pre" type="button" @click="router.push({ name: 'app.forums' })">
             回列表
           </button>
         </div>
@@ -251,7 +331,7 @@ const onSubmit = () => {
 </template>
 
 <style lang="scss" scoped>
-.addChairman {
+.addForum {
   display: flex;
   flex-direction: column;
   > h1 {

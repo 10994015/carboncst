@@ -15,25 +15,37 @@
                 ev.target.parentNode.querySelector('.text').classList.toggle('open')
             }
         }">
-            @for($i=0;$i<3;$i++) <div class="chairman">
+            @foreach($forums as $i=>$forum)
+            <div class="chairman">
                 <div class="title @if($i===0) active @endif" x-on:click="openText($event)">
-                    <h2>線上工作坊Workshop</h2>
+                    <h2>{{$forum->title}}</h2>
                 </div>
                 <div class="text @if($i===0) open @endif">
                     <article>
                         <div class="link-group">
-                            <a href="/">我要報名</a>
-                            <a href="/">論壇簡章</a>
+                            @if($forum->button_1)
+                            <a href="{{$forum->link_1}}"> {{$forum->button_1}} </a>
+                            @endif
+                            @if($forum->button_2)
+                            <a href="{{$forum->link_2}}"> {{$forum->button_2}} </a>
+                            @endif
+                            @if($forum->button_3)
+                            <a href="{{$forum->link_3}}"> {{$forum->button_3}} </a>
+                            @endif
+                            @if($forum->button_4)
+                            <a href="{{$forum->link_4}}"> {{$forum->button_4}} </a>
+                            @endif
+                            @if($forum->button_5)
+                            <a href="{{$forum->link_5}}"> {{$forum->button_5}} </a>
+                            @endif
                         </div>
-                        石墨烯具有優異的導電、散熱、高比表面積、高電子遷移率、化學穩定性佳、具可撓等特性；其他碳材料家族，例如活性碳、奈米碳管、碳黑、碳纖維、石墨等等均在儲能、觸媒、複合材料、電磁波屏蔽、散熱、環境、感測器等具有非常廣泛的應用前景。
-                        本次工作坊的主題特別規劃了上述包括石墨烯及相關奈米碳材料在合成、製備與特性應用進行介紹，我們更聚焦在在碳材於儲能領域的應用，我們將邀請相關的專家學者就鋰離子電池、燃料電池、超級電容器、鋅離子電池乃至於最近最火熱的電動車用電池進行深入淺出的介紹，相信可以透過此工作坊更加了解到碳材料的基本特性以及在能源材料相關的應用。
-
-                        <img src="/images/workshop.jpg" />
+                        {{$forum->content}}
+                        <img src="{{$forum->image}}" />
                     </article>
                 </div>
+            </div>
+            @endforeach
         </div>
-        @endfor
-</div>
 
-</section>
+    </section>
 </div>

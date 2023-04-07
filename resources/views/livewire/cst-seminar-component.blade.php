@@ -15,24 +15,28 @@
             </label>
         </div>
         <div class="items">
+            @foreach ($seminars as $seminar)
             <div class="item">
                 <div class="imgbox">
                     <div class="light"></div>
-                    <img src="/images/news.jpg" alt="">
+                    @if($seminar->image)
+                    <img src="{{$seminar->image}}" alt="{{$seminar->title}}" />
+                    @else
+                    <img src="/images/news.jpg" />
+                    @endif
                 </div>
                 <div class="content">
-                    <h4>20231st International Symposium on Carbon Materials for Energy, Environment, Sustainability, and
-                        Bio-applications with the 6th Taiwan Carbon</h4>
+                    <h4>{{$seminar->title}}</h4>
                     <p>
-                        日期:2022/01/21(五)<br />
-                        主題:碳材料在儲能領域的應用<br />
-                        報名截止日:2022/01/07(五)
+                        @php echo nl2br($seminar->content) @endphp
                     </p>
-                    <a href="/">大會網站</a>
-                    <small>2023-04-02 15:44:18</small>
+                    @if($seminar->link)
+                    <a href="{{$seminar->link}}">大會網站</a>
+                    @endif
+                    <small>{{$seminar->updated_at}}</small>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </section>
 

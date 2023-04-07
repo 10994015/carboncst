@@ -17,6 +17,8 @@ import CstSeminar from "../views/CstSeminar.vue";
 import AddCstSeminar from "../views/AddCstSeminar.vue";
 import Oversea from "../views/Oversea.vue";
 import AddOversea from "../views/AddOversea.vue";
+import Forum from "../views/Forum.vue";
+import AddForum from "../views/AddForum.vue";
 import Login from "../views/Login.vue";
 import store from "../store";
 
@@ -113,6 +115,16 @@ const routes = [
                 path:'add-oversea/:id',
                 name:'app.add-oversea',
                 component:AddOversea,
+            },
+            {
+                path:'forums',
+                name:'app.forums',
+                component:Forum,
+            },
+            {
+                path:'add-forum/:id',
+                name:'app.add-forum',
+                component:AddForum,
             },
             
         ]

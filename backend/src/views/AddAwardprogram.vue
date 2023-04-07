@@ -103,7 +103,7 @@ const onSubmit = () => {
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
-          <label for="">year</label>
+          <label for="">年度</label>
           <select v-model="awardprogram.year">
             <option value="2020">2020</option>
             <option value="2021">2021</option>

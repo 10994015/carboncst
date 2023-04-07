@@ -15,20 +15,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($awards as $award)
                     <tr>
-                        <td>2022</td>
-                        <td>傑出服務獎</td>
-                        <td>獲獎者及抬頭</td>
+                        <td>{{$award->year}}</td>
+                        <td>{{$award->award_name}}</td>
+                        <td>{{$award->name}}</td>
                         <td>
-                            <a href="/">
+                            <a href="{{$award->link}}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                                </svg>宜蘭大學環境工程學系
+                                </svg>{{$award->units}}
                             </a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

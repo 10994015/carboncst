@@ -7,6 +7,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ChairmanController;
 use App\Http\Controllers\CstDatabaseController;
 use App\Http\Controllers\CstSeminarController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\OverseaController;
 use Illuminate\Http\Request;
@@ -59,6 +60,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::apiResource('overseas', OverseaController::class);
     Route::post('/isExistOversea', [OverseaController::class, 'isExistOversea']);
     Route::post('/overseaItems', [OverseaController::class, 'deleteItems']);
+
+    Route::apiResource('forums', ForumController::class);
+    Route::post('/isExistForum', [ForumController::class, 'isExistForum']);
+    Route::post('/forumItems', [ForumController::class, 'deleteItems']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

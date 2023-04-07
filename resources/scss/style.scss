@@ -525,6 +525,12 @@ section{
                     >article{
                         padding: 20px 25px ;
                         line-height: 2;
+                        img{
+                            float: right;
+                            width: 200px;
+                            margin:15px;
+                            box-shadow: 0 5px 5px #ccc;
+                        }
                     }
                     &.open{
                         max-height: none !important;

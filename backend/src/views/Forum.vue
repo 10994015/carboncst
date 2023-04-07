@@ -1,30 +1,30 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import store from "../store";
-import { ARTICLES_PER_PAGE } from "../constants";
+import { FORUM_PER_PAGE } from "../constants";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
-const perPage = ref(ARTICLES_PER_PAGE);
+const perPage = ref(FORUM_PER_PAGE);
 const search = ref("");
 const sortField = ref("updated_at");
 const sortDirection = ref("desc");
 
-const letters = computed(() => store.state.letters);
+const forums = computed(() => store.state.forums);
 
 const checkedItems = ref([]);
 const isSelectAllChecked = ref(false);
 const checkItem = ref(null);
 onMounted(() => {
-  getLetters();
+  getForums();
 });
 const getForPage = (ev, link) => {
   if (!link.url || link.active) return;
 
-  getLetters(link.url);
+  getForums(link.url);
 };
 
-const getLetters = (url = null) => {
-  store.dispatch("getLetters", {
+const getForums = (url = null) => {
+  store.dispatch("getForums", {
     url,
     sort_field: sortField.value,
     sort_direction: sortDirection.value,
@@ -32,7 +32,7 @@ const getLetters = (url = null) => {
     perPage: perPage.value,
   });
 };
-const sortLetters = (field) => {
+const sortForums = (field) => {
   sortField.value = field;
   if (sortField.value === field) {
     if (sortDirection.value === "asc") {
@@ -45,17 +45,17 @@ const sortLetters = (field) => {
     sortDirection.value = "asc";
   }
 
-  getLetters();
+  getForums();
 };
-const deleteLetter = (letter) => {
-  if (!confirm(`確定要刪除該項目嗎？`)) return;
-  store.dispatch("deleteLetter", letter.id).then((res) => {
+const deleteForum = (forum) => {
+  if (!confirm(`確定要刪除 ${forum.title} 嗎？`)) return;
+  store.dispatch("deleteForum", forum.id).then((res) => {
     alert("刪除成功！");
-    getLetters();
+    getForums();
   });
 };
 const selectedCheckItem = () => {
-  if (checkedItems.value.length < letters.value.total) {
+  if (checkedItems.value.length < forums.value.total) {
     isSelectAllChecked.value = false;
   }
 };
@@ -72,9 +72,9 @@ const selectAllCheckItems = () => {
 };
 const deleteCheckedItems = () => {
   if (confirm("確定刪除？")) {
-    store.dispatch("deleteLetterItems", checkedItems.value).then((res) => {
+    store.dispatch("deleteForumItems", checkedItems.value).then((res) => {
       alert("刪除成功！");
-      getLetters();
+      getForums();
       checkedItems.value = [];
     });
   }
@@ -82,9 +82,9 @@ const deleteCheckedItems = () => {
 </script>
 
 <template>
-  <div class="letters">
+  <div class="forums">
     <pre></pre>
-    <h1>推薦書列表</h1>
+    <h1>碳材料論壇列表</h1>
     <div class="card">
       <div class="card-header">
         <div class="left">
@@ -109,11 +109,11 @@ const deleteCheckedItems = () => {
               type="text"
               placeholder="搜尋..."
               v-model="search"
-              @change="getLetters()"
+              @change="getForums()"
             />
           </div>
           <div class="form-group">
-            <select v-model="perPage" @change="getLetters()">
+            <select v-model="perPage" @change="getForums()">
               <option value="10">10</option>
               <option value="20">20</option>
               <option value="50">50</option>
@@ -125,8 +125,8 @@ const deleteCheckedItems = () => {
           <div class="form-group">
             <router-link
               class="btn"
-              :to="{ name: 'app.add-letter', params: { id: 'create' } }"
-              >+ 新增推薦書</router-link
+              :to="{ name: 'app.add-forum', params: { id: 'create' } }"
+              >+ 新增碳材料論壇</router-link
             >
           </div>
         </div>
@@ -143,7 +143,7 @@ const deleteCheckedItems = () => {
                 />
               </th>
               <th
-                @click="sortLetters('id')"
+                @click="sortForums('id')"
                 :class="['w-[40px]', 'cursor-pointer', { active: sortField === 'id' }]"
               >
                 <div class="flex items-center">
@@ -183,12 +183,12 @@ const deleteCheckedItems = () => {
                 </div>
               </th>
               <th
-                @click="sortLetters('name')"
-                :class="['cursor-pointer', { active: sortField === 'name' }]"
+                @click="sortForums('image')"
+                :class="['cursor-pointer', { active: sortField === 'image' }]"
               >
                 <div class="flex items-center">
-                  <div>推薦書名稱</div>
-                  <div class="ml-2" v-if="sortField === 'name'">
+                  <div>圖片</div>
+                  <div class="ml-2" v-if="sortField === 'image'">
                     <svg
                       v-if="sortDirection === 'desc'"
                       xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +223,47 @@ const deleteCheckedItems = () => {
                 </div>
               </th>
               <th
-                @click="sortLetters('updated_at')"
+                @click="sortForums('title')"
+                :class="['cursor-pointer', { active: sortField === 'title' }]"
+              >
+                <div class="flex items-center">
+                  <div>標題</div>
+                  <div class="ml-2" v-if="sortField === 'title'">
+                    <svg
+                      v-if="sortDirection === 'desc'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                      />
+                    </svg>
+                    <svg
+                      v-if="sortDirection === 'asc'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </th>
+              <th
+                @click="sortForums('updated_at')"
                 :class="['cursor-pointer', { active: sortField === 'updated_at' }]"
               >
                 <div class="flex items-center">
@@ -266,7 +306,7 @@ const deleteCheckedItems = () => {
               <th>操作</th>
             </tr>
           </thead>
-          <tbody v-if="letters.loading" class="loadingTable">
+          <tbody v-if="forums.loading" class="loadingTable">
             <tr>
               <td colspan="7" class="w-full" style="text-align: center">
                 <svg
@@ -294,8 +334,8 @@ const deleteCheckedItems = () => {
           </tbody>
           <tbody v-else>
             <tr
-              v-for="(letter, idx) of letters.data"
-              :key="letter.id"
+              v-for="(forum, idx) of forums.data"
+              :key="forum.id"
               class="animate-fade-in-down"
             >
               <td class="w-[20px]">
@@ -304,21 +344,25 @@ const deleteCheckedItems = () => {
                   v-model="checkedItems"
                   @change="selectedCheckItem()"
                   ref="checkItem"
-                  :value="letter.id"
+                  :value="forum.id"
                 />
               </td>
-              <td class="w-[40px]">{{ letter.id }}</td>
-              <td>{{ letter.name }}</td>
-              <td>{{ letter.updated_at }}</td>
+              <td class="w-[40px]">{{ forum.id }}</td>
               <td>
-                <span v-if="letter.hidden">隱藏</span
+                <img v-if="forum.image_url" :src="forum.image_url" />
+                <img v-else src="/images/news.jpg" />
+              </td>
+              <td>{{ forum.title }}</td>
+              <td>{{ forum.updated_at }}</td>
+              <td>
+                <span v-if="forum.hidden">隱藏</span
                 ><span v-else class="active">顯示</span>
               </td>
               <td>
                 <button
                   class="edit ml-1"
                   @click="
-                    router.push({ name: 'app.add-letter', params: { id: letter.id } })
+                    router.push({ name: 'app.add-forum', params: { id: forum.id } })
                   "
                 >
                   <svg
@@ -336,7 +380,7 @@ const deleteCheckedItems = () => {
                     />
                   </svg>
                 </button>
-                <button class="delete ml-5" @click="deleteLetter(letter)">
+                <button class="delete ml-5" @click="deleteForum(forum)">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -355,7 +399,7 @@ const deleteCheckedItems = () => {
               </td>
             </tr>
 
-            <tr v-if="letters.data.length > 0">
+            <tr v-if="forums.data.length > 0">
               <td colspan="7">
                 <div class="flex items-center">
                   <svg
@@ -393,13 +437,13 @@ const deleteCheckedItems = () => {
           </tbody>
         </table>
       </div>
-      <div class="paging" v-if="letters.total > letters.limit">
-        <div class="pageInfo">Showing from {{ letters.from }} to {{ letters.to }}</div>
+      <div class="paging" v-if="forums.total > forums.limit">
+        <div class="pageInfo">Showing from {{ forums.from }} to {{ forums.to }}</div>
         <div class="pageBtn">
           <nav>
             <a
               href="#"
-              v-for="(link, i) of letters.links"
+              v-for="(link, i) of forums.links"
               :key="i"
               @click.prevent="getForPage($event, link)"
               :disabled="!link.url"
@@ -414,7 +458,7 @@ const deleteCheckedItems = () => {
 </template>
 
 <style lang="scss" scoped>
-.letters {
+.forums {
   display: flex;
   flex-direction: column;
   > h1 {

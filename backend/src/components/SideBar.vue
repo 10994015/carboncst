@@ -295,7 +295,7 @@ const openList = (name) => {
 
           <CloseText textName="國內外研討會" v-model="sideBarOpen" />
         </router-link>
-        <router-link :to="{ name: 'app.banners' }">
+        <router-link :to="{ name: 'app.forums' }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

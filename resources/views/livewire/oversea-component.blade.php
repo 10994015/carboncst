@@ -15,22 +15,26 @@
             </label>
         </div>
         <div class="items">
+            @foreach ($overseas as $oversea)
             <div class="item">
                 <div class="imgbox">
                     <div class="light"></div>
-                    <img src="/images/news.jpg" alt="">
+                    @if($oversea->image)
+                    <img src="{{$oversea->image}}" alt="{{$oversea->title}}" />
+                    @else
+                    <img src="/images/news.jpg" />
+
+                    @endif
                 </div>
                 <div class="content">
-                    <h4>Biosensors 2020</h4>
+                    <h4>{{$oversea->title}}</h4>
                     <p>
-                        Date: 2020/05/26~2020/05/29 (Tue.-Fri.)<br />
-                        Venue: Busan Exhibition and Conference Centre, Busan, Korea<br />
-                        Abstract deadline: 2019/11/13
+                        @php echo nl2br($oversea->content) @endphp
                     </p>
-                    <small>2023-04-02 15:44:18</small>
+                    <small>{{$oversea->updated_at}}</small>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </section>
 

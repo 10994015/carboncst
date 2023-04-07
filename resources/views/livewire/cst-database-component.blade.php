@@ -16,21 +16,41 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($databases as $database)
                     <tr>
-                        <td>陳君戶</td>
-                        <td>中山大學化學系</td>
-                        <td>教授</td>
+                        <td>{{$database->name}}</td>
+                        <td>{{$database->units}}</td>
+                        <td>{{$database->job_title}}</td>
                         <td>
-                            石墨烯、高機能奈米材料、能源材料、與生物分子檢測系統
+                            {{$database->field}}
                         </td>
                         <td>
                             <div class="link-group">
-                                <a href="">淨零碳排</a>
-                                <a href="">網站連結</a>
-                                <a href="">Email</a>
+                                @if($database->button_1)
+                                <a
+                                    href="@if(strtolower($database->button_1)==='email') mailto:{{ $database->link_1}} @else {{ $database->link_1}} @endif">{{$database->button_1}}</a>
+                                @endif
+                                @if($database->button_2)
+                                <a
+                                    href="@if(strtolower($database->button_2)==='email') mailto:{{ $database->link_2}} @else {{ $database->link_2}} @endif">{{$database->button_2}}</a>
+                                @endif
+                                @if($database->button_3)
+                                <a
+                                    href="@if(strtolower($database->button_3)==='email') mailto:{{ $database->link_3}} @else {{ $database->link_3}} @endif">{{$database->button_3}}</a>
+                                @endif
+                                @if($database->button_4)
+                                <a
+                                    href="@if(strtolower($database->button_4)==='email') mailto:{{ $database->link_4}} @else {{ $database->link_4}} @endif">{{$database->button_4}}</a>
+                                @endif
+                                @if($database->button_5)
+                                <a
+                                    href="@if(strtolower($database->button_5)==='email') mailto:{{ $database->link_5}} @else {{ $database->link_5}} @endif">{{$database->button_5}}</a>
+                                @endif
+
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

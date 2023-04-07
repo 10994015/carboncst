@@ -130,3 +130,18 @@ export function setOverseas(state, [loading, res=null]){
     }
     state.overseas.loading = loading;
 }
+
+export function setForums(state, [loading, res=null]){
+    if(res){
+        state.forums = {
+            data: res.data,
+            links: res.meta.links,
+            total: res.meta.total,
+            limit: res.meta.per_page,
+            from: res.meta.from,
+            to: res.meta.to,
+            page: res.meta.current_page,
+        }
+    }
+    state.forums.loading = loading;
+}

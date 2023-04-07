@@ -660,6 +660,9 @@ select {
 .z-50 {
   z-index: 50;
 }
+.float-right {
+  float: right;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;

@@ -6,3 +6,4 @@ export const LETTERS_PER_PAGE = 10;
 export const CSTDATABASE_PER_PAGE = 10;
 export const CSTSEMINAR_PER_PAGE = 10;
 export const OVERSEA_PER_PAGE = 10;
+export const FORUM_PER_PAGE = 10;

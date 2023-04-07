@@ -491,3 +491,79 @@ export function deleteOversea({commit}, id){
 export function deleteOverseaItems({commit}, ids){
     return axiosClient.post(`/overseaItems`, {'ids':ids});
 }
+
+//forum
+
+export function getForums({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setForums', [true]);
+    url = url || '/forums';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setForums', [false, res.data]);
+    }).catch(err=>{
+        commit('setForums', [false]);
+    })
+}
+export function getForum({commit}, id){
+    return axiosClient.get(`/forums/${id}`);
+}
+export function createForum({commit}, forum){
+    const hidden = (forum.hidden) ? 1 :0;
+    if(forum.image instanceof File){
+        const form = new FormData();
+        form.append('title', forum.title);
+        form.append('image', forum.image);
+        form.append('content', forum.content);
+        form.append('hidden', hidden);
+        form.append('button_1', forum.button_1);
+        form.append('link_1', forum.link_1);
+        form.append('button_2', forum.button_2);
+        form.append('link_2', forum.link_2);
+        form.append('button_3', forum.button_3);
+        form.append('link_3', forum.link_3);
+        form.append('button_4', forum.button_4);
+        form.append('link_4', forum.link_4);
+        form.append('button_5', forum.button_5);
+        form.append('link_5', forum.link_5);
+        forum = form;
+    }
+    return axiosClient.post('/forums', forum);
+}
+export function isExistForum({commit}, id){
+    return axiosClient.post(`/isExistForum`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateForum({commit}, forum){
+    const id = forum.id;
+    const hidden = (forum.hidden) ? 1 :0;
+    if(forum.image instanceof File){
+        const form = new FormData();
+        form.append('id', forum.id);
+        form.append('title', forum.title);
+        form.append('image', forum.image);
+        form.append('content', forum.content);
+        form.append('hidden', hidden);
+        form.append('button_1', forum.button_1);
+        form.append('link_1', forum.link_1);
+        form.append('button_2', forum.button_2);
+        form.append('link_2', forum.link_2);
+        form.append('button_3', forum.button_3);
+        form.append('link_3', forum.link_3);
+        form.append('button_4', forum.button_4);
+        form.append('link_4', forum.link_4);
+        form.append('button_5', forum.button_5);
+        form.append('link_5', forum.link_5);
+        form.append('_method', 'PUT');
+        forum = form;
+    }else{
+        forum._method = 'PUT'
+    }
+    return axiosClient.post(`/forums/${id}`, forum);
+}
+
+export function deleteForum({commit}, id){
+    return axiosClient.delete(`/forums/${id}`);
+}
+export function deleteForumItems({commit}, ids){
+    return axiosClient.post(`/forumItems`, {'ids':ids});
+}

@@ -13,14 +13,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($letters as $letter)
                     <tr>
                         <td>
-                            <a href="/">
-                                臺灣碳材料學會獎項推薦書-個人名義
+                            <a href="{{$letter->file}}" download>
+                                {{$letter->name}}
                             </a>
                         </td>
                         <td>
-                            <a href="">
+                            <a href="{{$letter->file}}" download>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,6 +31,7 @@
                             </a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

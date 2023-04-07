@@ -545,6 +545,12 @@ section > .title label button {
   padding: 20px 25px;
   line-height: 2;
 }
+#chairman-page > .chairmans > .content > .chairman > .text > article img {
+  float: right;
+  width: 200px;
+  margin: 15px;
+  box-shadow: 0 5px 5px #ccc;
+}
 #chairman-page > .chairmans > .content > .chairman > .text.open {
   max-height: none !important;
 }
