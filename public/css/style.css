@@ -175,12 +175,64 @@ nav.navigation > ul a:hover {
     display: none;
   }
 }
+#home > .page-container {
+  background-color: #f9f9f9;
+  width: 100%;
+  padding: 130px 10px 80px;
+}
+@media screen and (max-width: 600px) {
+  #home > .page-container {
+    padding: 30px 10px 30px;
+  }
+}
+#home > .page-container > .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 600px) {
+  #home > .page-container > .container {
+    grid-template-columns: repeat(1, 100%);
+  }
+}
+#home > .page-container > .container > .item {
+  background: linear-gradient(to top, #0b427c, #307EBA);
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  font-size: 19px;
+  transition: 0.3s;
+  font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+  #home > .page-container > .container > .item {
+    margin-bottom: 25px;
+  }
+}
+#home > .page-container > .container > .item svg {
+  transition: 0.3s;
+}
+#home > .page-container > .container > .item:hover > svg {
+  width: 80px;
+}
+#home > .page-container > .container > .item > h4 {
+  margin-top: 10px;
+}
 #home > .news {
   background-color: #f9f9f9;
-  padding: 80px 20px;
+  padding: 10px 20px 80px;
 }
 #home > .news > .title {
-  margin: 30px auto;
+  margin: 0 auto 30px;
   padding: 30px;
   display: flex;
   align-items: center;
