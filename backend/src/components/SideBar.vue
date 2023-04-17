@@ -31,7 +31,7 @@ const openList = (name) => {
 <template>
   <div :class="['sideBar', { close: sideBarOpen }]">
     <router-link to="/" class="logo">
-      <img src="/images/logo-sm.svg" />
+      <img src="@/assets/logo-sm.svg" />
       <CloseText textName="Carbon" v-model="sideBarOpen" />
     </router-link>
     <ul>

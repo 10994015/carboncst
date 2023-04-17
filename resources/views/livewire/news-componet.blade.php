@@ -20,14 +20,14 @@
                 <div class="imgbox">
                     <div class="light"></div>
                     @if($article->image)
-                    <img src="/images/{{$article->image}}" alt="{{$article->title}}">
+                    <img src="{{$article->image}}" alt="{{$article->title}}">
                     @else
                     <img src="/images/news.jpg" alt="{{$article->title}}">
                     @endif
                 </div>
                 <div class="content">
                     <span>@if($article->category==0) 會務公告 @else 徵才公告 @endif</span>
-                    <a href="/news/{{$article->slug}}">{{$article->title}}</a>
+                    <a href="javascript:;">{{$article->title}}</a>
                     <p>
                         @php echo nl2br($article->content) @endphp
                     </p>

@@ -48,7 +48,7 @@ const logout = () => {
     <Menu as="div" class="relative inline-block text-left">
       <div>
         <MenuButton class="flex items-center">
-          <img src="/images/hea.jpg" class="rounded-full w-10 mr-2" />
+          <img src="@/assets/hea.jpg" class="rounded-full w-10 mr-2" />
           <p class="text-sm">{{ userName }}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"

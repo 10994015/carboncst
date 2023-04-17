@@ -21,7 +21,7 @@
                     <div class="imgbox">
                         <div class="light"></div>
                         @if($article->image)
-                        <img src="/images/{{$article->image}}" alt="{{$article->title}}">
+                        <img src="{{$article->image}}" alt="{{$article->title}}">
                         @else
                         <img src="/images/news.jpg" alt="{{$article->title}}">
                         @endif

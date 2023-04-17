@@ -350,7 +350,7 @@ const deleteCheckedItems = () => {
               <td class="w-[40px]">{{ chairman.id }}</td>
               <td>
                 <img v-if="chairman.image_url" :src="chairman.image_url" />
-                <img v-else src="/images/news.jpg" />
+                <img v-else src="@/assets/news.jpg" />
               </td>
               <td>{{ chairman.name }}</td>
               <td>{{ chairman.updated_at }}</td>
