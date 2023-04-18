@@ -811,20 +811,14 @@ select {
 .w-8 {
   width: 2rem;
 }
+.w-\[60px\] {
+  width: 60px;
+}
 .w-auto {
   width: auto;
 }
 .w-full {
   width: 100%;
-}
-.w-\[100px\] {
-  width: 100px;
-}
-.w-\[70px\] {
-  width: 70px;
-}
-.w-\[60px\] {
-  width: 60px;
 }
 .max-w-6xl {
   max-width: 72rem;
