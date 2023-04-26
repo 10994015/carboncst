@@ -22,7 +22,7 @@
             <p>學會獎項</p><span>CST Awards</span>
             <ul>
                 <li onclick="window.location.href='/awards'">實施辦法</li>
-                <li onclick="window.location.href='/awardprogram' ">獎項項目</li>
+                <li onclick="window.location.href='/awardprogram' ">歷年獲獎名單</li>
                 <li onclick="window.location.href='/letter' ">推薦書下載</li>
             </ul>
         </a>

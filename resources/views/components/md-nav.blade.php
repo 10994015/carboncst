@@ -25,7 +25,7 @@
     </a>
     <ul :class="{'open':isAwards}">
         <a href="/awards">➤ 實施辦法</a>
-        <a href="/awardprogram">➤ 獎項項目</a>
+        <a href="/awardprogram">➤ 歷年獲獎名單</a>
         <a href="/letter">➤ 推薦書下載</a>
     </ul>
     <a href="/join-member">
