@@ -44,6 +44,10 @@ class OverseaController extends Controller
         
         $image = $data['image'] ?? NULL;
 
+        $images0 = $data['images0'] ?? NULL;
+        $images = [];
+        $imagesNum = $data['imagesNum'];
+
         if($image){
             $relatevePath = $this->saveImage($image);
             // $data['image'] = URL::to(Storage::url($relatevePath));
@@ -52,6 +56,19 @@ class OverseaController extends Controller
             $data['image_mime'] = $image->getClientMimeType();
             $data['image_size'] = $image->getSize();
         }
+
+        if($images0){
+            for($i=0;$i<=$imagesNum;$i++){
+                $relatevePath = $this->saveImage($data["images$i"]);
+                $data["images$i"] = URL::to('/storage/public/'.$relatevePath);
+
+                array_push($images, URL::to('/storage/public/'.$relatevePath));
+                unset($data["images$i"]);
+            }
+        }
+        unset($data['imagesNum']);
+
+        $data['images'] = implode(',', $images);
 
         $oversea = Oversea::create($data);
 
@@ -82,7 +99,10 @@ class OverseaController extends Controller
         $data['updated_by'] = $request->user()->id;
 
         $image = $data['image'] ?? null;
-        
+
+        $images0 = $data['images0'] ?? NULL;
+        $imagesNum = $data['imagesNum'];
+        $images = [];
         if($image){
             $relativePath = $this->saveImage($image);
             // $data['image'] = URL::to(Storage::url($relativePath));
@@ -95,6 +115,19 @@ class OverseaController extends Controller
                 Storage::deleteDirectory('/public/' . dirname($oversea->image));
             }
         }
+
+        if($images0){
+            for($i=0;$i<=$imagesNum;$i++){
+                $relatevePath = $this->saveImage($data["images$i"]);
+                $data["images$i"] = URL::to('/storage/public/'.$relatevePath);
+
+                array_push($images, URL::to('/storage/public/'.$relatevePath));
+                unset($data["images$i"]);
+            }
+
+        }
+        $data['images'] = implode(',', array_merge($images, explode(',', $data['ori_images'])));
+
         $oversea->update($data);
         return new OverseaResource($oversea);
     }

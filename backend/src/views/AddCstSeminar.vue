@@ -17,12 +17,15 @@ const DEFAULT_CSTSEMINAR = {
   hidden: false,
 };
 const image_url = ref("");
+const images_url = ref([]);
 
 const randerLoading = ref(false);
 
 const loading = ref(false);
 const previewLoading = ref(false);
+const previewsLoading = ref(false);
 const previewImg = ref(null);
+const prviews = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
@@ -45,7 +48,10 @@ onMounted(() => {
           .then((res) => {
             cstSeminar.value = res.data;
             image_url.value = res.data.image_url;
-            isPreview.value = true;
+            images_url.value = res.data.images_url.split(",");
+            if (image_url.value) {
+              isPreview.value = true;
+            }
             randerLoading.value = true;
 
             cstSeminar.value.title =
@@ -68,11 +74,9 @@ onMounted(() => {
       console.error(err);
     });
 });
-
 const previewImage = (ev) => {
   previewLoading.value = true;
   if (ev.target.files && ev.target.files[0]) {
-    console.log(ev.target.files[0]);
     cstSeminar.value.image = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -84,15 +88,32 @@ const previewImage = (ev) => {
   isPreview.value = true;
 };
 const uploadImages = (ev) => {
+  previewsLoading.value = true;
+  console.log(ev.target.files);
   if (ev.target.files && ev.target.files[0]) {
-    console.log(ev.target.files[0]);
-    // cstSeminar.value.images = ev.target.files;
-    // Array.from(ev.target.files).forEach((file) => {
-    //   cstSeminar.value.images.push(file);
-    // });
-    cstSeminar.value.images = ev.target.files;
+    Array.from(ev.target.files).forEach((file) => {
+      cstSeminar.value.images.push(file);
+    });
+    for (let i = 0; i < ev.target.files.length; i++) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        prviews.value.appendChild(img);
+      };
+      reader.readAsDataURL(ev.target.files[i]);
+    }
+  }
+  previewsLoading.value = false;
+};
+
+const deleteImg = (idx) => {
+  if (confirm("確定要刪除此圖片嗎?")) {
+    images_url.value.splice(idx, 1);
   }
 };
+
 const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
@@ -110,6 +131,7 @@ const onSubmit = () => {
         errorMsg.value = err.response.data.errors;
       });
   } else {
+    cstSeminar.value["ori_images"] = images_url.value;
     store
       .dispatch("updateCstSeminar", cstSeminar.value)
       .then((res) => {
@@ -201,7 +223,7 @@ const onSubmit = () => {
           <label for="">研討會其他圖片</label>
           <label for="imagefiles" class="imagefileFor">
             <svg
-              v-if="previewLoading"
+              v-if="previewsLoading"
               class="animate-spin h-5 w-5 text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -247,6 +269,31 @@ const onSubmit = () => {
             @change="uploadImages($event)"
           />
         </div>
+        <div class="form-group">
+          <label for="">預覽圖片</label>
+          <div class="prviews mb-3" ref="prviews"></div>
+          <div class="prviews">
+            <div class="imgbox" v-for="(img, idx) in images_url" :key="img">
+              <img :src="img" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+                @click="deleteImg(idx)"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
         <div class="chkbox-group">
           <div class="form-group">
             <label for="">隱藏文章</label>
@@ -381,6 +428,26 @@ const onSubmit = () => {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+      }
+      .prviews {
+        display: grid;
+        grid-template-columns: repeat(7, 13%);
+        grid-column-gap: 15px;
+        grid-row-gap: 1em;
+        > .imgbox {
+          width: 100%;
+          position: relative;
+          > img {
+            width: 100%;
+          }
+          svg {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            cursor: pointer;
+            color: #544;
+          }
+        }
       }
       .form-group {
         display: flex;

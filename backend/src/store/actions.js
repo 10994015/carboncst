@@ -392,28 +392,19 @@ export function getCstSeminar({commit}, id){
 }
 export function createCstSeminar({commit}, smeinar){
     const hidden = (smeinar.hidden) ? 1 :0;
-    console.log(smeinar.images);
-    // if(smeinar.image instanceof File || smeinar.images instanceof File){
-    //     const form = new FormData();
-    //     form.append('title', smeinar.title);
-    //     form.append('link', smeinar.link);
-    //     form.append('image', smeinar.image);
-    //     form.append('images', smeinar.images);
-        
-        
-        
-    //     form.append('content', smeinar.content);
-    //     form.append('hidden', hidden);
-    //     smeinar = form;
-    // }
+  
+    let imagesNum = -1
     const form = new FormData();
     form.append('title', smeinar.title);
     form.append('link', smeinar.link);
     form.append('image', smeinar.image);
 
-    form.append('images', (smeinar.images));
-    
-    
+    smeinar.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+
     form.append('content', smeinar.content);
     form.append('hidden', hidden);
     smeinar = form;
@@ -428,19 +419,39 @@ export function isExistCstSeminar({commit}, id){
 export function updateCstSeminar({commit}, seminar){
     const id = seminar.id;
     const hidden = (seminar.hidden) ? 1 :0;
+    // if(seminar.image instanceof File){
+    //     const form = new FormData();
+    //     form.append('id', seminar.id);
+    //     form.append('title', seminar.title);
+    //     form.append('link', seminar.link);
+    //     form.append('image', seminar.image);
+    //     form.append('content', seminar.content);
+    //     form.append('hidden', hidden);
+    //     form.append('_method', 'PUT');
+    //     seminar = form;
+    // }else{
+    //     seminar._method = 'PUT'
+    // }
+    let imagesNum = -1
+    const form = new FormData();
+    form.append('id', seminar.id);
+    form.append('title', seminar.title);
+    form.append('link', seminar.link);
     if(seminar.image instanceof File){
-        const form = new FormData();
-        form.append('id', seminar.id);
-        form.append('title', seminar.title);
-        form.append('link', seminar.link);
         form.append('image', seminar.image);
-        form.append('content', seminar.content);
-        form.append('hidden', hidden);
-        form.append('_method', 'PUT');
-        seminar = form;
-    }else{
-        seminar._method = 'PUT'
     }
+    seminar.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+    form.append('ori_images', seminar.ori_images);
+    form.append('content', seminar.content);
+    form.append('hidden', hidden);
+    form.append('_method', 'PUT');
+    seminar = form;
+
+
     return axiosClient.post(`/cstSeminars/${id}`, seminar);
 }
 
@@ -467,15 +478,21 @@ export function getOversea({commit}, id){
 }
 export function createOversea({commit}, oversea){
     const hidden = (oversea.hidden) ? 1 :0;
+    let imagesNum = -1
+    const form = new FormData();
+    form.append('title', oversea.title);
+    form.append('link', oversea.link);
     if(oversea.image instanceof File){
-        const form = new FormData();
-        form.append('title', oversea.title);
-        form.append('link', oversea.link);
         form.append('image', oversea.image);
-        form.append('content', oversea.content);
-        form.append('hidden', hidden);
-        oversea = form;
     }
+    oversea.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+    form.append('content', oversea.content);
+    form.append('hidden', hidden);
+    oversea = form;
     return axiosClient.post('/overseas', oversea);
 }
 export function isExistOversea({commit}, id){
@@ -486,19 +503,24 @@ export function isExistOversea({commit}, id){
 export function updateOversea({commit}, oversea){
     const id = oversea.id;
     const hidden = (oversea.hidden) ? 1 :0;
+    let imagesNum = -1
+    const form = new FormData();
+    form.append('id', oversea.id);
+    form.append('title', oversea.title);
+    form.append('link', oversea.link);
     if(oversea.image instanceof File){
-        const form = new FormData();
-        form.append('id', oversea.id);
-        form.append('title', oversea.title);
-        form.append('link', oversea.link);
         form.append('image', oversea.image);
-        form.append('content', oversea.content);
-        form.append('hidden', hidden);
-        form.append('_method', 'PUT');
-        oversea = form;
-    }else{
-        oversea._method = 'PUT'
     }
+    oversea.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+    form.append('ori_images', oversea.ori_images);
+    form.append('content', oversea.content);
+    form.append('hidden', hidden);
+    form.append('_method', 'PUT');
+    oversea = form;
     return axiosClient.post(`/overseas/${id}`, oversea);
 }
 
@@ -525,24 +547,30 @@ export function getForum({commit}, id){
 }
 export function createForum({commit}, forum){
     const hidden = (forum.hidden) ? 1 :0;
+    let imagesNum = -1
+    const form = new FormData();
+    form.append('title', forum.title);
     if(forum.image instanceof File){
-        const form = new FormData();
-        form.append('title', forum.title);
         form.append('image', forum.image);
-        form.append('content', forum.content);
-        form.append('hidden', hidden);
-        form.append('button_1', forum.button_1);
-        form.append('link_1', forum.link_1);
-        form.append('button_2', forum.button_2);
-        form.append('link_2', forum.link_2);
-        form.append('button_3', forum.button_3);
-        form.append('link_3', forum.link_3);
-        form.append('button_4', forum.button_4);
-        form.append('link_4', forum.link_4);
-        form.append('button_5', forum.button_5);
-        form.append('link_5', forum.link_5);
-        forum = form;
     }
+    forum.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+    form.append('content', forum.content);
+    form.append('hidden', hidden);
+    form.append('button_1', forum.button_1);
+    form.append('link_1', forum.link_1);
+    form.append('button_2', forum.button_2);
+    form.append('link_2', forum.link_2);
+    form.append('button_3', forum.button_3);
+    form.append('link_3', forum.link_3);
+    form.append('button_4', forum.button_4);
+    form.append('link_4', forum.link_4);
+    form.append('button_5', forum.button_5);
+    form.append('link_5', forum.link_5);
+    forum = form;
     return axiosClient.post('/forums', forum);
 }
 export function isExistForum({commit}, id){
@@ -553,28 +581,34 @@ export function isExistForum({commit}, id){
 export function updateForum({commit}, forum){
     const id = forum.id;
     const hidden = (forum.hidden) ? 1 :0;
+    let imagesNum = -1
+
+    const form = new FormData();
+    form.append('id', forum.id);
+    form.append('title', forum.title);
     if(forum.image instanceof File){
-        const form = new FormData();
-        form.append('id', forum.id);
-        form.append('title', forum.title);
         form.append('image', forum.image);
-        form.append('content', forum.content);
-        form.append('hidden', hidden);
-        form.append('button_1', forum.button_1);
-        form.append('link_1', forum.link_1);
-        form.append('button_2', forum.button_2);
-        form.append('link_2', forum.link_2);
-        form.append('button_3', forum.button_3);
-        form.append('link_3', forum.link_3);
-        form.append('button_4', forum.button_4);
-        form.append('link_4', forum.link_4);
-        form.append('button_5', forum.button_5);
-        form.append('link_5', forum.link_5);
-        form.append('_method', 'PUT');
-        forum = form;
-    }else{
-        forum._method = 'PUT'
     }
+    forum.images.forEach((image, i)=>{
+        form.append(`images${i}`, image);
+        imagesNum++;
+    })
+    form.append('imagesNum', imagesNum);
+    form.append('ori_images', forum.ori_images);
+    form.append('content', forum.content);
+    form.append('hidden', hidden);
+    form.append('button_1', forum.button_1);
+    form.append('link_1', forum.link_1);
+    form.append('button_2', forum.button_2);
+    form.append('link_2', forum.link_2);
+    form.append('button_3', forum.button_3);
+    form.append('link_3', forum.link_3);
+    form.append('button_4', forum.button_4);
+    form.append('link_4', forum.link_4);
+    form.append('button_5', forum.button_5);
+    form.append('link_5', forum.link_5);
+    form.append('_method', 'PUT');
+    forum = form;
     return axiosClient.post(`/forums/${id}`, forum);
 }
 

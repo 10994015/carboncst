@@ -10,5 +10,5 @@ class Oversea extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 'link', 'content', 'image', 'image_mime', 'image_size', 'hidden', 'created_by', 'updated_by'];
+    protected $fillable = ['title', 'link', 'content', 'image', 'image_mime', 'image_size', 'images', 'hidden', 'created_by', 'updated_by'];
 }

@@ -42,16 +42,11 @@ class CstSeminarController extends Controller
         $data['updated_by'] = $request->user()->id;
         
         $image = $data['image'] ?? NULL;
-
-        $images = $data['images'] ?? NULL;
+        $images0 = $data['images0'] ?? NULL;
+        $images = [];
         
-
-        log::info($images);
-
-        // foreach($images as $image){
-        //     log::info($image);
-        // }
-        // log::info(get_object_vars($images));
+        $imagesNum = $data['imagesNum'];
+       
         if($image){
             $relatevePath = $this->saveImage($image);
             // $data['image'] = URL::to(Storage::url($relatevePath));
@@ -61,15 +56,23 @@ class CstSeminarController extends Controller
             $data['image_size'] = $image->getSize();
         }
 
-        // if($images){
-        //     foreach($images as $image){
-        //         log::info($image);
-        //     }
-        // }
+        if($images0){
+            for($i=0;$i<=$imagesNum;$i++){
+                $relatevePath = $this->saveImage($data["images$i"]);
+                $data["images$i"] = URL::to('/storage/public/'.$relatevePath);
 
-        // $cstSeminar = CstSeminar::create($data);
+                array_push($images, URL::to('/storage/public/'.$relatevePath));
+                unset($data["images$i"]);
+            }
+        }
+        unset($data['imagesNum']);
 
-        // return new CstSeminarResource($cstSeminar);
+        $data['images'] = implode(',', $images);
+
+
+        $cstSeminar = CstSeminar::create($data);
+
+        return new CstSeminarResource($cstSeminar);
     }
 
     /**
@@ -96,7 +99,9 @@ class CstSeminarController extends Controller
         $data['updated_by'] = $request->user()->id;
 
         $image = $data['image'] ?? null;
-        
+        $images0 = $data['images0'] ?? NULL;
+        $imagesNum = $data['imagesNum'];
+        $images = [];
         if($image){
             $relativePath = $this->saveImage($image);
             // $data['image'] = URL::to(Storage::url($relativePath));
@@ -109,6 +114,18 @@ class CstSeminarController extends Controller
                 Storage::deleteDirectory('/public/' . dirname($cstSeminar->image));
             }
         }
+        if($images0){
+            for($i=0;$i<=$imagesNum;$i++){
+                $relatevePath = $this->saveImage($data["images$i"]);
+                $data["images$i"] = URL::to('/storage/public/'.$relatevePath);
+
+                array_push($images, URL::to('/storage/public/'.$relatevePath));
+                unset($data["images$i"]);
+            }
+
+        }
+        $data['images'] = implode(',', array_merge($images, explode(',', $data['ori_images'])));
+
         $cstSeminar->update($data);
         return new CstSeminarResource($cstSeminar);
     }

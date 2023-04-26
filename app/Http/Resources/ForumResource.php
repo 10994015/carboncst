@@ -20,6 +20,8 @@ class ForumResource extends JsonResource
             'title'=>$this->title,
             'content'=>$this->content ?? '',
             'image_url'=>$this->image ?? '',
+            'images_url'=>$this->images ?? '',
+            'images'=>[],
             'hidden'=>$this->hidden ? true : false,
             'button_1'=>$this->button_1,
             'link_1'=>$this->link_1,

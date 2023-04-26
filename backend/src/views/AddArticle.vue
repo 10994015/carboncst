@@ -43,7 +43,9 @@ onMounted(() => {
           .then((res) => {
             article.value = res.data;
             image_url.value = res.data.image_url;
-            isPreview.value = true;
+            if (image_url.value) {
+              isPreview.value = true;
+            }
             randerLoading.value = true;
 
             article.value.title =

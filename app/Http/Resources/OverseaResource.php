@@ -21,6 +21,8 @@ class OverseaResource extends JsonResource
             'link'=>$this->link,
             'content'=>$this->content ?? '',
             'image_url'=>$this->image ?? '',
+            'images_url'=>$this->images ?? '',
+            'images'=>[],
             'hidden'=>$this->hidden ? true : false,
             'created_at'=>(new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at'=>(new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
