@@ -27,6 +27,8 @@ class CstSeminarRequest extends FormRequest
             'title'=> ['required', 'max:2000'],
             'link'=> ['nullable', 'max:2000'],
             'image'=> ['nullable', 'image'],
+            'images'=> ['nullable'],
+            'images.*' => ['image'],
             'content'=> ['nullable', 'string', 'required'],
             'hidden'=> ['boolean'],
         ];

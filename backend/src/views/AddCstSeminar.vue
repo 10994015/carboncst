@@ -11,6 +11,7 @@ const DEFAULT_CSTSEMINAR = {
   title: "",
   link: "",
   image: "",
+  images: [],
   content: "",
   category: 0,
   hidden: false,
@@ -71,6 +72,7 @@ onMounted(() => {
 const previewImage = (ev) => {
   previewLoading.value = true;
   if (ev.target.files && ev.target.files[0]) {
+    console.log(ev.target.files[0]);
     cstSeminar.value.image = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -80,6 +82,16 @@ const previewImage = (ev) => {
   }
   previewLoading.value = false;
   isPreview.value = true;
+};
+const uploadImages = (ev) => {
+  if (ev.target.files && ev.target.files[0]) {
+    console.log(ev.target.files[0]);
+    // cstSeminar.value.images = ev.target.files;
+    // Array.from(ev.target.files).forEach((file) => {
+    //   cstSeminar.value.images.push(file);
+    // });
+    cstSeminar.value.images = ev.target.files;
+  }
 };
 const onSubmit = () => {
   loading.value = true;
@@ -139,7 +151,7 @@ const onSubmit = () => {
           <input type="text" v-model="cstSeminar.link" />
         </div>
         <div class="form-group">
-          <label for="">研討會圖片</label>
+          <label for="">研討會封面圖片</label>
           <label for="imagefile" class="imagefileFor">
             <svg
               v-if="previewLoading"
@@ -184,6 +196,56 @@ const onSubmit = () => {
             </div>
           </label>
           <input type="file" id="imagefile" hidden @change="previewImage($event)" />
+        </div>
+        <div class="form-group">
+          <label for="">研討會其他圖片</label>
+          <label for="imagefiles" class="imagefileFor">
+            <svg
+              v-if="previewLoading"
+              class="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <div v-if="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 mb-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                />
+              </svg>
+              <span>單擊此處以上傳多張圖片。</span>
+            </div>
+          </label>
+          <input
+            type="file"
+            id="imagefiles"
+            multiple
+            hidden
+            @change="uploadImages($event)"
+          />
         </div>
         <div class="chkbox-group">
           <div class="form-group">

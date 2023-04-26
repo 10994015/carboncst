@@ -40,10 +40,18 @@ class CstSeminarController extends Controller
         $data = $request->validated();
         $data['created_by'] = $request->user()->id;
         $data['updated_by'] = $request->user()->id;
-
         
         $image = $data['image'] ?? NULL;
 
+        $images = $data['images'] ?? NULL;
+        
+
+        log::info($images);
+
+        // foreach($images as $image){
+        //     log::info($image);
+        // }
+        // log::info(get_object_vars($images));
         if($image){
             $relatevePath = $this->saveImage($image);
             // $data['image'] = URL::to(Storage::url($relatevePath));
@@ -53,9 +61,15 @@ class CstSeminarController extends Controller
             $data['image_size'] = $image->getSize();
         }
 
-        $cstSeminar = CstSeminar::create($data);
+        // if($images){
+        //     foreach($images as $image){
+        //         log::info($image);
+        //     }
+        // }
 
-        return new CstSeminarResource($cstSeminar);
+        // $cstSeminar = CstSeminar::create($data);
+
+        // return new CstSeminarResource($cstSeminar);
     }
 
     /**

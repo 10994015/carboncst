@@ -2,7 +2,7 @@
     <section class="awardprogram">
         <div class="title">
             <img src="/images/CST Logo.png" alt="臺灣碳材料學會" />
-            <h2>獎項項目</h2>
+            <h2>歷年獲獎名單</h2>
         </div>
         <div class="content">
             <table>

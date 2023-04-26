@@ -864,6 +864,7 @@ section > .title label button {
   border: 1px #ccc solid;
   padding: 10px;
   text-align: center;
+  min-width: 80px;
 }
 #cstdatabase-page > section > .content table td > .link-group, #cstdatabase-page > section > .content table th > .link-group {
   display: flex;

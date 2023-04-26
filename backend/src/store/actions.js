@@ -392,15 +392,32 @@ export function getCstSeminar({commit}, id){
 }
 export function createCstSeminar({commit}, smeinar){
     const hidden = (smeinar.hidden) ? 1 :0;
-    if(smeinar.image instanceof File){
-        const form = new FormData();
-        form.append('title', smeinar.title);
-        form.append('link', smeinar.link);
-        form.append('image', smeinar.image);
-        form.append('content', smeinar.content);
-        form.append('hidden', hidden);
-        smeinar = form;
-    }
+    console.log(smeinar.images);
+    // if(smeinar.image instanceof File || smeinar.images instanceof File){
+    //     const form = new FormData();
+    //     form.append('title', smeinar.title);
+    //     form.append('link', smeinar.link);
+    //     form.append('image', smeinar.image);
+    //     form.append('images', smeinar.images);
+        
+        
+        
+    //     form.append('content', smeinar.content);
+    //     form.append('hidden', hidden);
+    //     smeinar = form;
+    // }
+    const form = new FormData();
+    form.append('title', smeinar.title);
+    form.append('link', smeinar.link);
+    form.append('image', smeinar.image);
+
+    form.append('images', (smeinar.images));
+    
+    
+    form.append('content', smeinar.content);
+    form.append('hidden', hidden);
+    smeinar = form;
+
     return axiosClient.post('/cstSeminars', smeinar);
 }
 export function isExistCstSeminar({commit}, id){
