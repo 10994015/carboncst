@@ -1379,7 +1379,7 @@ footer#footer{
     >.content{
         width:100%;
         max-width: 800px;
-        height: 60vh;
+        height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1403,9 +1403,8 @@ footer#footer{
             }
         }
         >img{
-            width:100%;
+            width:auto;
             height: 100%;
-            max-height: 80vh;
             object-fit: cover;
             border:2px #fff solid;
             border-radius: 6px;
@@ -1436,7 +1435,7 @@ footer#footer{
         height: 40px;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 30px;
+        margin-top: 10px;
         @media screen and (max-width:950px){
             width:95%;
         }

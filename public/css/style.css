@@ -1402,7 +1402,7 @@ footer#footer > .item > div {
 .img-model#img-model > .content {
   width: 100%;
   max-width: 800px;
-  height: 60vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1429,9 +1429,8 @@ footer#footer > .item > div {
   color: #000;
 }
 .img-model#img-model > .content > img {
-  width: 100%;
+  width: auto;
   height: 100%;
-  max-height: 80vh;
   -o-object-fit: cover;
      object-fit: cover;
   border: 2px #fff solid;
@@ -1464,7 +1463,7 @@ footer#footer > .item > div {
   height: 40px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 @media screen and (max-width: 950px) {
   .img-model#img-model > .smallImgList {
