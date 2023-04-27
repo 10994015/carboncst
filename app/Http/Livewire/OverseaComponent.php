@@ -9,8 +9,23 @@ class OverseaComponent extends Component
 {
     public $searchText = '';
     public $inputText = '';
+    public $image = '';
+    public $images = [];
     public function searchFn(){
         $this->searchText = $this->inputText;
+    }
+    public function openImgModel($id){
+        $oversea = Oversea::find($id);
+        $this->image = $oversea->image ?? '/images/news.jpg';
+        $this->images = $oversea->images===NULL ? [] : explode(',', $oversea->images);
+        array_unshift($this->images, $this->image);
+
+        $this->dispatchBrowserEvent('openImgModel');
+
+    }
+    public function toggleImage($img){
+        $this->image = $img;
+        $this->dispatchBrowserEvent('successToggle');
     }
     public function render()
     {

@@ -1388,6 +1388,20 @@ footer#footer{
         @media screen and (max-width:950px){
             width:95%;
         }
+        >.loading{
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >svg{
+                color:#000;
+            }
+        }
         >img{
             width:100%;
             height: 100%;
@@ -1459,24 +1473,6 @@ footer#footer{
     z-index: 99999;
     >svg{
         color:#fff;
-        width: 30px;
-        height: 30px;
-    }
-}
-
-.notbg-loading{
-    position: fixed;
-    top: 0;
-    left:0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    align-items: center;
-    z-index: 1000000;
-    >svg{
-        color:#000;
         width: 30px;
         height: 30px;
     }

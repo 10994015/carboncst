@@ -1414,6 +1414,20 @@ footer#footer > .item > div {
     width: 95%;
   }
 }
+.img-model#img-model > .content > .loading {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-model#img-model > .content > .loading > svg {
+  color: #000;
+}
 .img-model#img-model > .content > img {
   width: 100%;
   height: 100%;
@@ -1493,24 +1507,6 @@ footer#footer > .item > div {
 }
 .loading > svg {
   color: #fff;
-  width: 30px;
-  height: 30px;
-}
-
-.notbg-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  background-color: #fff;
-  align-items: center;
-  z-index: 1000000;
-}
-.notbg-loading > svg {
-  color: #000;
   width: 30px;
   height: 30px;
 }
