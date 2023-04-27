@@ -48,7 +48,11 @@ onMounted(() => {
           .then((res) => {
             oversea.value = res.data;
             image_url.value = res.data.image_url;
-            images_url.value = res.data.images_url.split(",");
+            if (res.data.images_url == "" || res.data.images_url == null) {
+              images_url.value = null;
+            } else {
+              images_url.value = res.data.images_url.split(",");
+            }
             if (image_url.value) {
               isPreview.value = true;
             }
@@ -153,7 +157,6 @@ const onSubmit = () => {
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
-        <span v-if="successMsg">{{ successMsg }}</span>
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
@@ -295,6 +298,7 @@ const onSubmit = () => {
             <input type="checkbox" v-model="oversea.hidden" />
           </div>
         </div>
+        <span v-if="successMsg" class="successMsg">{{ successMsg }}</span>
         <div class="form-group btn-group mt-10">
           <button type="submit" :class="{ loading: loading }">
             <svg
@@ -386,14 +390,7 @@ const onSubmit = () => {
         margin-top: 5px;
         margin-bottom: 15px;
       }
-      span {
-        margin-top: 15px;
-        background-color: rgb(0, 190, 48);
-        color: #fff;
-        border-radius: 3px;
-        padding: 10px 20px;
-        font-size: 13px;
-      }
+
       > .categoryBtn {
         margin-left: auto;
         button {
@@ -443,6 +440,16 @@ const onSubmit = () => {
             color: #544;
           }
         }
+      }
+      span.successMsg {
+        margin-top: 15px;
+        background-color: rgb(0, 190, 48);
+        color: #fff;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 13px;
+        max-width: 120px;
+        text-align: center;
       }
       .form-group {
         display: flex;

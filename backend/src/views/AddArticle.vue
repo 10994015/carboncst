@@ -131,7 +131,6 @@ watch(
     <div class="card">
       <div class="card-title">
         <h2>Basic Information</h2>
-        <span v-if="successMsg">{{ successMsg }}</span>
       </div>
       <form v-if="randerLoading" action="" @submit.prevent="onSubmit()">
         <div class="form-group">
@@ -203,6 +202,7 @@ watch(
             <input type="checkbox" v-model="article.hidden" />
           </div>
         </div>
+        <span v-if="successMsg" class="successMsg">{{ successMsg }}</span>
         <div class="form-group btn-group mt-10">
           <button type="submit" :class="{ loading: loading }">
             <svg
@@ -294,14 +294,6 @@ watch(
         margin-top: 5px;
         margin-bottom: 15px;
       }
-      span {
-        margin-top: 15px;
-        background-color: rgb(0, 190, 48);
-        color: #fff;
-        border-radius: 3px;
-        padding: 10px 20px;
-        font-size: 13px;
-      }
       > .categoryBtn {
         margin-left: auto;
         button {
@@ -331,6 +323,16 @@ watch(
         display: flex;
         justify-content: flex-start;
         align-items: center;
+      }
+      span.successMsg {
+        margin-top: 15px;
+        background-color: rgb(0, 190, 48);
+        color: #fff;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 13px;
+        max-width: 120px;
+        text-align: center;
       }
       .form-group {
         display: flex;
