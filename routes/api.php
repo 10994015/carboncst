@@ -27,8 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::get('/user', [AuthController::class, 'getUser']);
-    //Article
     Route::post('/logout', [AuthController::class, 'logout']);
+    //Article
     Route::apiResource('articles', ArticleController::class);
     Route::post('/isExistArticle', [ArticleController::class, 'isExistArticle']);
     Route::post('/articleItems', [ArticleController::class, 'deleteItems']);
