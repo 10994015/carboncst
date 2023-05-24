@@ -30,7 +30,11 @@
                                 </svg>{{$award->units}}
                             </a>
                         </td>
+                        @if($award->file)
                         <td><a href="{{$award->file}}" target="_blank" download>{{$award->file_name}}</a></td>
+                        @else
+                        <td>-</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

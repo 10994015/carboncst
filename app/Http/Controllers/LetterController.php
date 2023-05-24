@@ -113,7 +113,7 @@ class LetterController extends Controller
         if(!Storage::exists($path)){
             Storage::makeDirectory($path, 0755, true);
         }
-        if(!Storage::putFileAs('public/' . $path, $file, $file->getClientOriginalName())){
+        if(!Storage::putFileAs( $path, $file, $file->getClientOriginalName())){
             throw new \Exception("Unable to save file \"{$file->getClientOriginalName()}\"");
         }
 
