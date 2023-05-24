@@ -10,6 +10,6 @@ class Awardprogram extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['name','award_name','year', 'units', 'link', 'hidden', 'created_by', 'updated_by'];
+    protected $fillable = ['name','award_name','year', 'units', 'link', 'file_name', 'file', 'hidden', 'created_by', 'updated_by'];
 
 }

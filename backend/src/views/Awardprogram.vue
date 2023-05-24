@@ -84,7 +84,7 @@ const deleteCheckedItems = () => {
 <template>
   <div class="awardprograms">
     <pre></pre>
-    <h1>獎項項目</h1>
+    <h1>歷年獲獎名單</h1>
     <div class="card">
       <div class="card-header">
         <div class="left">

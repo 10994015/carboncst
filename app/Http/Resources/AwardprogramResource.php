@@ -23,6 +23,8 @@ class AwardprogramResource extends JsonResource
             'year'=>$this->year,
             'link'=>$this->link ?? '',
             'hidden'=>$this->hidden ? true : false,
+            'file_url'=>$this->file ?? '',
+            'file_name'=>$this->file_name ?? '',
             'category'=>$this->category,
             'created_at'=>(new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at'=>(new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),

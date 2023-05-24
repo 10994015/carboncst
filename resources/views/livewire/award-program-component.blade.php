@@ -12,6 +12,7 @@
                         <th>獎項名稱</th>
                         <th>獲獎者及抬頭</th>
                         <th>服務單位</th>
+                        <th>檔案下載</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,7 @@
                                 </svg>{{$award->units}}
                             </a>
                         </td>
+                        <td><a href="{{$award->file}}" target="_blank" download>{{$award->file_name}}</a></td>
                     </tr>
                     @endforeach
                 </tbody>

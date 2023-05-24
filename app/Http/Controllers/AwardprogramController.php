@@ -42,15 +42,14 @@ class AwardprogramController extends Controller
         $data['updated_by'] = $request->user()->id;
 
         
-        $image = $data['image'] ?? NULL;
+        $file = $data['file'] ?? NULL;
 
-        if($image){
-            $relatevePath = $this->saveImage($image);
-            // $data['image'] = URL::to(Storage::url($relatevePath));
-            $data['image'] = URL::to('/storage/public/'.$relatevePath);
-
-            $data['image_mime'] = $image->getClientMimeType();
-            $data['image_size'] = $image->getSize();
+        if($file){
+            $relatevePath = $this->saveImage($file);
+            log::info($relatevePath);
+            $data['file'] = URL::to(Storage::url($relatevePath));
+            $data['file_mime'] = $file->getClientMimeType();
+            $data['file_size'] = $file->getSize();
         }
 
         $awardprogram = Awardprogram::create($data);
@@ -81,18 +80,17 @@ class AwardprogramController extends Controller
         $data = $request->validated();
         $data['updated_by'] = $request->user()->id;
 
-        $image = $data['image'] ?? null;
+        $file = $data['file'] ?? null;
         
-        if($image){
-            $relativePath = $this->saveImage($image);
-            // $data['image'] = URL::to(Storage::url($relativePath));
-            $data['image'] = URL::to('/storage/public/'.$relativePath);
+        if($file){
+            $relativePath = $this->saveImage($file);
+            log::info($relativePath);
+            $data['file'] = URL::to(Storage::url($relativePath));
+            $data['file_mime'] = $file->getClientMimeType();
+            $data['file_size'] = $file->getSize();
 
-            $data['image_mime'] = $image->getClientMimeType();
-            $data['image_size'] = $image->getSize();
-
-            if($awardprogram->image){
-                Storage::deleteDirectory('/public/' . dirname($awardprogram->image));
+            if($awardprogram->file){
+                Storage::deleteDirectory('/public/' . dirname($awardprogram->file));
             }
         }
         $awardprogram->update($data);
@@ -111,16 +109,16 @@ class AwardprogramController extends Controller
 
         return response()->noContent(); //回應204
     }
-    public function saveImage(UploadedFile $image){
+    public function saveImage(UploadedFile $file){
         $path = 'images/' . Str::random();
         if(!Storage::exists($path)){
             Storage::makeDirectory($path, 0755, true);
         }
-        if(!Storage::putFileAs('public/' . $path, $image, $image->getClientOriginalName())){
-            throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
+        if(!Storage::putFileAs( $path, $file, $file->getClientOriginalName())){
+            throw new \Exception("Unable to save file \"{$file->getClientOriginalName()}\"");
         }
 
-        return $path . '/' .$image->getClientOriginalName();
+        return $path . '/' .$file->getClientOriginalName();
     }
 
     public function isExistAwardprogram(Request $req){

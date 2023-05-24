@@ -63,10 +63,10 @@
                     </p>
                 </li>
             </ol>
-            <a href="" class="btn">
+            <a href="/documents/personal.doc" download="個人會員申請書.doc" class="btn">
                 學生/個人會員申請書
             </a>
-            <a href="" class="btn">
+            <a href="/documents/team.doc" download="團體會員申請書.doc" class="btn">
                 團體會員申請書
             </a>
             <a href="" class="btn">

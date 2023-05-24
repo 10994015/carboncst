@@ -13,15 +13,18 @@ const DEFAULT_ARTICLE = {
   name: "",
   link: "",
   units: "",
+  file: "",
+  file_name: "",
   hidden: false,
 };
-const image_url = ref("");
+const file_url = ref("");
 
 const randerLoading = ref(false);
 
 const loading = ref(false);
 const previewLoading = ref(false);
 const previewImg = ref(null);
+const previewFi = ref(null);
 const isPreview = ref(false);
 const errorMsg = ref(null);
 const successMsg = ref(null);
@@ -39,17 +42,24 @@ onMounted(() => {
     .dispatch("isExistAwardprogram", awardprogramId)
     .then((res) => {
       if (res.data) {
-        store.dispatch("getAwardprogram", awardprogramId).then((res) => {
-          awardprogram.value = res.data;
-          image_url.value = res.data.image_url;
-          isPreview.value = true;
-          randerLoading.value = true;
+        store
+          .dispatch("getAwardprogram", awardprogramId)
+          .then((res) => {
+            awardprogram.value = res.data;
+            file_url.value = res.data.file_url;
+            isPreview.value = true;
+            randerLoading.value = true;
 
-          awardprogram.value.title =
-            awardprogram.value.title == "null" ? "" : awardprogram.value.title;
-          awardprogram.value.content =
-            awardprogram.value.content == "null" ? "" : awardprogram.value.content;
-        });
+            awardprogram.value.title =
+              awardprogram.value.title == "null" ? "" : awardprogram.value.title;
+            awardprogram.value.content =
+              awardprogram.value.content == "null" ? "" : awardprogram.value.content;
+          })
+          .then(() => {
+            if (file_url.value != "") {
+              previewFi.value.innerText = file_url.value;
+            }
+          });
       } else {
         router.push({ path: "/notfound" });
       }
@@ -58,6 +68,20 @@ onMounted(() => {
       console.error(err);
     });
 });
+const previewFile = (ev) => {
+  previewLoading.value = true;
+  if (ev.target.files && ev.target.files[0]) {
+    awardprogram.value.file = ev.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewFi.value.innerText = ev.target.files[0].name;
+    };
+    reader.readAsDataURL(ev.target.files[0]);
+  }
+  previewLoading.value = false;
+  isPreview.value = true;
+};
+
 const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
@@ -132,6 +156,58 @@ const onSubmit = () => {
         <div class="form-group">
           <label for="">服務單位連結</label>
           <input type="text" v-model="awardprogram.link" />
+        </div>
+        <div class="form-group">
+          <label for="">檔案名稱</label>
+          <input type="text" v-model="awardprogram.file_name" />
+        </div>
+        <div class="form-group">
+          <label for="">檔案上傳</label>
+          <label for="imagefile" class="imagefileFor">
+            <svg
+              v-if="previewLoading"
+              class="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <div v-if="!isPreview">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 mb-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                />
+              </svg>
+              <span>將文件拖放到此處或單擊以上傳。</span>
+            </div>
+            <div v-else class="isPreview">
+              <p ref="previewFi" class="w-[200px]"></p>
+              <!-- <img src="" ref="previewImg" id="previewImg" /> -->
+            </div>
+          </label>
+          <input type="file" id="imagefile" hidden @change="previewFile($event)" />
         </div>
         <div class="chkbox-group">
           <div class="form-group">

@@ -188,7 +188,7 @@ const openList = (name) => {
             />
           </svg>
 
-          <CloseText textName="獎項項目" v-model="sideBarOpen" />
+          <CloseText textName="歷年獲獎名單" v-model="sideBarOpen" />
         </router-link>
         <router-link :to="{ name: 'app.letters' }">
           <svg

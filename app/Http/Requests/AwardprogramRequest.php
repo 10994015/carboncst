@@ -30,6 +30,8 @@ class AwardprogramRequest extends FormRequest
             'units'=> ['required', 'max:2000'],
             'year'=> ['required'],
             'hidden'=> ['boolean'],
+            'file'=>['nullable'],
+            'file_name'=>['nullable', 'max:2000']
         ];
     }
 }

@@ -209,6 +209,8 @@ export function createAwardprogram({commit}, awardprogram){
     form.append('year', awardprogram.year);
     form.append('units', awardprogram.units);
     form.append('link', awardprogram.link);
+    form.append('file', awardprogram.file);
+    form.append('file_name', awardprogram.file_name);
     form.append('hidden', hidden);
     awardprogram = form;
     return axiosClient.post('/awardprograms', awardprogram);
@@ -221,7 +223,7 @@ export function isExistAwardprogram({commit}, id){
 export function updateAwardprogram({commit}, awardprogram){
     const id = awardprogram.id;
     const hidden = (awardprogram.hidden) ? 1 :0;
-    if(awardprogram.image instanceof File){
+    if(awardprogram.file instanceof File){
         const form = new FormData();
         form.append('id', awardprogram.id);
         form.append('name', awardprogram.name);
@@ -229,6 +231,8 @@ export function updateAwardprogram({commit}, awardprogram){
         form.append('year', awardprogram.year);
         form.append('link', awardprogram.link);
         form.append('units', awardprogram.units);
+        form.append('file', awardprogram.file);
+        form.append('file_name', awardprogram.file_name);
         form.append('hidden', hidden);
         form.append('_method', 'PUT');
         awardprogram = form;

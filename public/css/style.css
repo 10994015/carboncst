@@ -275,7 +275,8 @@ nav.navigation > ul a:hover {
   }
 }
 #home > .news > .items > .item > .imgbox {
-  width: 300px;
+  width: 200px;
+  min-width: 200px;
   background-color: #555;
   margin-right: 50px;
   position: relative;
@@ -304,7 +305,7 @@ nav.navigation > ul a:hover {
 }
 #home > .news > .items > .item > .content {
   padding: 0 0 30px 12px;
-  max-width: 500px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -460,7 +461,8 @@ section > .title label button {
   }
 }
 #news-page > .news > .items > .item > .imgbox {
-  width: 300px;
+  width: 200px;
+  min-width: 200px;
   background-color: #555;
   margin-right: 50px;
   position: relative;
@@ -489,7 +491,7 @@ section > .title label button {
 }
 #news-page > .news > .items > .item > .content {
   padding: 0 0 30px 12px;
-  max-width: 500px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -942,7 +944,8 @@ section > .title label button {
   }
 }
 #seminar-page > .seminar > .items > .item > .imgbox {
-  width: 300px;
+  width: 200px;
+  min-width: 200px;
   background-color: #555;
   margin-right: 50px;
   position: relative;
@@ -972,7 +975,7 @@ section > .title label button {
 }
 #seminar-page > .seminar > .items > .item > .content {
   padding: 0 0 30px 12px;
-  max-width: 500px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1092,7 +1095,8 @@ section > .title label button {
   }
 }
 #oversea-page > .oversea > .items > .item > .imgbox {
-  width: 300px;
+  width: 200px;
+  min-width: 200px;
   background-color: #555;
   margin-right: 50px;
   position: relative;
@@ -1121,7 +1125,7 @@ section > .title label button {
 }
 #oversea-page > .oversea > .items > .item > .content {
   padding: 0 0 30px 12px;
-  max-width: 500px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
