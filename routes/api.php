@@ -9,6 +9,7 @@ use App\Http\Controllers\CstDatabaseController;
 use App\Http\Controllers\CstSeminarController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\OverseaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function(){
     Route::apiResource('chairmans', ChairmanController::class);
     Route::post('/isExistChairman', [ChairmanController::class, 'isExistChairman']);
     Route::post('/chairmanItems', [ChairmanController::class, 'deleteItems']);
+
+    Route::apiResource('organizations', OrganizationController::class);
+    Route::post('/isExistOrganization', [OrganizationController::class, 'isExistOrganization']);
+    Route::post('/organizationItems', [OrganizationController::class, 'deleteItems']);
 
     Route::apiResource('awardprograms', AwardprogramController::class);
     Route::post('/isExistAwardprogram', [AwardprogramController::class, 'isExistAwardprogram']);

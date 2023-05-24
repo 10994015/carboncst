@@ -618,7 +618,18 @@ section{
         margin: 0 auto;
         >.content{
             width: 100%;
+            h3{
+                color:$mainColor;
+                font-size: 20px;
+                font-weight: 600;
+                margin: 12px 0 3px;
+            }
+            p{
+                line-height: 1.5;
+                margin-top: 15px;
+            }
             img{
+                margin-top: 30px;
                 width: 100%;
             }
         }
@@ -1252,6 +1263,7 @@ section{
         form{
             display: flex;
             flex-direction: column;
+            margin-bottom: 25px;
             input{
                 border:1px #aaa solid;
                 width: 100%;
@@ -1268,14 +1280,50 @@ section{
                 height: 150px;
                 margin-bottom: 15px;
             }
+            .captcha_box{
+                display: flex;
+                >button{
+                    &.reload{
+                        background-color: rgb(221, 69, 69);
+                        width: 40px;
+                        height: 40px;     
+                        border-radius: 10px;        
+                        float: left;    
+                        margin-left: 8px   
+                    }     
+                }
+            }
+           
             button{
                 background-color: $mainColor;
                 color:#fff;
                 max-width: 500px;
                 width: 100%;
                 padding: 10px 0;
-                
+                justify-content: center;
+                align-items: center;      
+                &.disabled{
+                    background-color: #999;
+                } 
+                    
             }
+        }
+        .error{
+            color:#f00;
+        }
+        .alert-success{
+            width: 100%;
+            padding: 15px 0px; 
+            color:#00B900;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+        .alert-error{
+            width: 100%;
+            padding: 15px 0px; 
+            color:#f00;
+            border-radius: 6px;
+            font-weight: 700;
         }
     }
 }

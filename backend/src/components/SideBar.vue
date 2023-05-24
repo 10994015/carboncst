@@ -137,6 +137,24 @@ const openList = (name) => {
 
           <CloseText textName="理事長的話" v-model="sideBarOpen" />
         </router-link>
+        <router-link :to="{ name: 'app.organization' }">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-3 h-3"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+
+          <CloseText textName="組織架構" v-model="sideBarOpen" />
+        </router-link>
       </ol>
       <a href="javascript:;" @click="openList('awards')">
         <svg

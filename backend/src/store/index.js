@@ -37,6 +37,16 @@ const store = createStore({
             limit: null,
             total: null,
         },
+        organizations:{
+            loading:false,
+            data:[],
+            links:[],
+            from: null,
+            to: null,
+            page: 1,
+            limit: null,
+            total: null,
+        },
         awardprograms:{
             loading:false,
             data:[],

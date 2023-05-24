@@ -639,7 +639,18 @@ section > .title label button {
 #organization-page > .organization > .content {
   width: 100%;
 }
+#organization-page > .organization > .content h3 {
+  color: #307EBA;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 12px 0 3px;
+}
+#organization-page > .organization > .content p {
+  line-height: 1.5;
+  margin-top: 15px;
+}
 #organization-page > .organization > .content img {
+  margin-top: 30px;
   width: 100%;
 }
 
@@ -1269,6 +1280,7 @@ section > .title label button {
 #contact-page > .contact form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
 }
 #contact-page > .contact form input {
   border: 1px #aaa solid;
@@ -1286,12 +1298,45 @@ section > .title label button {
   height: 150px;
   margin-bottom: 15px;
 }
+#contact-page > .contact form .captcha_box {
+  display: flex;
+}
+#contact-page > .contact form .captcha_box > button.reload {
+  background-color: rgb(221, 69, 69);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  float: left;
+  margin-left: 8px;
+}
 #contact-page > .contact form button {
   background-color: #307EBA;
   color: #fff;
   max-width: 500px;
   width: 100%;
   padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+}
+#contact-page > .contact form button.disabled {
+  background-color: #999;
+}
+#contact-page > .contact .error {
+  color: #f00;
+}
+#contact-page > .contact .alert-success {
+  width: 100%;
+  padding: 15px 0px;
+  color: #00B900;
+  border-radius: 6px;
+  font-weight: 700;
+}
+#contact-page > .contact .alert-error {
+  width: 100%;
+  padding: 15px 0px;
+  color: #f00;
+  border-radius: 6px;
+  font-weight: 700;
 }
 
 .readmore {

@@ -7,6 +7,8 @@ import Banners from "../views/Banners.vue";
 import AddBanner from "../views/AddBanner.vue";
 import Chairman from "../views/Chairman.vue";
 import AddChairman from "../views/AddChairman.vue";
+import Organization from "../views/Organization.vue";
+import AddOrganization from "../views/AddOrganization.vue";
 import Awardprogram from "../views/Awardprogram.vue";
 import AddAwardprogram from "../views/AddAwardprogram.vue";
 import Letters from "../views/Letters.vue";
@@ -65,6 +67,16 @@ const routes = [
                 path:'add-chairman/:id',
                 name:'app.add-chairman',
                 component:AddChairman,
+            },
+            {
+                path:'organization',
+                name:'app.organization',
+                component:Organization,
+            },
+            {
+                path:'add-organization/:id',
+                name:'app.add-organization',
+                component:AddOrganization,
             },
             {
                 path:'award-program',

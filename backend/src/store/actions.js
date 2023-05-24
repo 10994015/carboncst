@@ -187,6 +187,19 @@ export function deleteChairmanItems({commit}, ids){
     return axiosClient.post(`/chairmanItems`, {'ids':ids});
 }
 
+// organization
+
+export function getOrganizations({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
+    commit('setOrganizations', [true]);
+    url = url || '/organizations';
+    return axiosClient.get(url, {params:{search, per_page:perPage, sort_field, sort_direction}}).then(res=>{
+        commit('setOrganizations', [false, res.data]);
+    }).catch(err=>{
+        commit('setOrganizations', [false]);
+    })
+}
+
+
 //award program
 
 export function getAwardprograms({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction}){
