@@ -48,7 +48,7 @@ const sortOrganizations = (field) => {
   getOrganizations();
 };
 const deleteOrganization = (organization) => {
-  if (!confirm(`確定要刪除 ${organization.name} 嗎？`)) return;
+  if (!confirm(`確定要刪除嗎？`)) return;
   store.dispatch("deleteOrganization", organization.id).then((res) => {
     alert("刪除成功！");
     getOrganizations();
@@ -123,11 +123,11 @@ const deleteCheckedItems = () => {
         </div>
         <div class="right">
           <div class="form-group">
-            <router-link
+            <!-- <router-link
               class="btn"
               :to="{ name: 'app.add-organization', params: { id: 'create' } }"
               >+ 新增組織架構</router-link
-            >
+            > -->
           </div>
         </div>
       </div>

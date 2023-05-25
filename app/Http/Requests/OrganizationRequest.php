@@ -24,7 +24,10 @@ class OrganizationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=> ['required', 'max:2000'],
+            'image'=> ['nullable', 'image'],
+            'content'=> ['nullable', 'string', 'required'],
+            'hidden'=> ['boolean'],
         ];
     }
 }

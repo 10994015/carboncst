@@ -199,6 +199,51 @@ export function getOrganizations({commit}, {url = null, search = '', perPage = 1
     })
 }
 
+export function getOrganization({commit}, id){
+    return axiosClient.get(`/organizations/${id}`);
+}
+export function createOrganization({commit}, organization){
+    console.log(organization);
+    const hidden = (organization.hidden) ? 1 :0;
+    if(organization.image instanceof File){
+        const form = new FormData();
+        form.append('title', organization.title);
+        form.append('content', organization.content);
+        form.append('image', organization.image);
+        form.append('hidden', hidden);
+        organization = form;
+    }
+    return axiosClient.post('/organizations', organization);
+}
+export function isExistOrganization({commit}, id){
+    return axiosClient.post(`/isExistOrganization`, {id: id}).then(res=>{
+        return res;
+    });
+}
+export function updateOrganization({commit}, organization){
+    const id = organization.id;
+    const hidden = (organization.hidden) ? 1 :0;
+    if(organization.image instanceof File){
+        const form = new FormData();
+        form.append('id', organization.id);
+        form.append('title', organization.title);
+        form.append('content', organization.content);
+        form.append('image', organization.image);
+        form.append('hidden', hidden);
+        form.append('_method', 'PUT');
+        organization = form;
+    }else{
+        organization._method = 'PUT'
+    }
+    return axiosClient.post(`/organizations/${id}`, organization);
+}
+export function deleteOrganization({commit}, id){
+    return axiosClient.delete(`/organizations/${id}`);
+}
+export function deleteOrganizationItems({commit}, ids){
+    return axiosClient.post(`/organizationItems`, {'ids':ids});
+}
+
 
 //award program
 

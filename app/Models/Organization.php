@@ -11,6 +11,7 @@ class Organization extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'organizations';
     protected $fillable = ['title', 'content', 'image', 'image_mime', 'image_size', 'hidden', 'created_by', 'updated_by'];
 
 }
