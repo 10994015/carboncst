@@ -16,7 +16,7 @@ class CreateOrganizationTable extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 2000);
+            $table->string('title', 2000)->nullable();
             $table->longText('content')->nullable();
             $table->string('image', 2000)->nullable();
             $table->string('image_mime')->nullable();
