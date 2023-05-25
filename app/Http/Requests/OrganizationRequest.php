@@ -26,7 +26,7 @@ class OrganizationRequest extends FormRequest
         return [
             'title'=> ['nullable', 'max:2000'],
             'image'=> ['nullable', 'image'],
-            'content'=> ['nullable', 'string', 'required'],
+            'content'=> ['nullable', 'string'],
             'hidden'=> ['boolean'],
         ];
     }
