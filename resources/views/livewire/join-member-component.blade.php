@@ -69,7 +69,7 @@
             <a href="/documents/team.doc" download="團體會員申請書.doc" class="btn">
                 團體會員申請書
             </a>
-            <a href="" class="btn">
+            <a href="/documents/power.doc" download class="btn">
                 委託書
             </a>
             <h3>繳費方式</h3>
