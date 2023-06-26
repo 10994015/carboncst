@@ -9,7 +9,7 @@ class AwardProgramComponent extends Component
 {
     public function render()
     {
-        $awards = Awardprogram::where('hidden', false)->orderBy('updated_at', 'desc')->get();
+        $awards = Awardprogram::where('hidden', false)->orderBy('year', 'desc')->get();
         return view('livewire.award-program-component', ['awards'=>$awards]);
     }
 }
