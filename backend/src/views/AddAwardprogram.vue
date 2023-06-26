@@ -81,7 +81,11 @@ const previewFile = (ev) => {
   previewLoading.value = false;
   isPreview.value = true;
 };
-
+const deleteFile = () => {
+  awardprogram.value.file = "";
+  previewFi.value.innerText = "";
+  isPreview.value = false;
+};
 const onSubmit = () => {
   loading.value = true;
   if (isCreate.value) {
@@ -185,7 +189,7 @@ const onSubmit = () => {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <div v-if="!isPreview">
+            <div v-if="!isPreview || !awardprogram.file_url">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -203,6 +207,7 @@ const onSubmit = () => {
               <span>將文件拖放到此處或單擊以上傳。</span>
             </div>
             <div v-else class="isPreview">
+              <a href="javascript:;" class="deleteFileBtn" @click="deleteFile()">X</a>
               <p ref="previewFi" class="w-[200px]"></p>
               <!-- <img src="" ref="previewImg" id="previewImg" /> -->
             </div>
@@ -375,12 +380,20 @@ const onSubmit = () => {
             position: relative;
             width: 100%;
             height: 100%;
-            &.isPreview > svg {
-              position: absolute;
-              top: 8px;
-              right: 15px;
-              color: #fff;
-              cursor: pointer;
+            &.isPreview {
+              position: relative;
+              > .deleteFileBtn {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+              }
+              > svg {
+                position: absolute;
+                top: 8px;
+                right: 15px;
+                color: #fff;
+                cursor: pointer;
+              }
             }
             > img {
               position: absolute;
