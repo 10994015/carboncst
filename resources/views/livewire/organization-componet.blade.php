@@ -6,7 +6,7 @@
         </div>
         <div class="content">
             <h3>{{$organiztion->title}}</h3>
-            <p>@php echo nl2br($organiztion->content) @endphp</p>
+            <p>{!! $organiztion->content !!}</p>
             <img src="{{$organiztion->image}}" alt="{{$organiztion->title}}">
         </div>
     </section>
