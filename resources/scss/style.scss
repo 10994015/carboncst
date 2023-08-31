@@ -315,6 +315,9 @@ nav.navigation{
                         color:#333;
                         margin-top: 12px;
                         letter-spacing: .8px;
+                        a{
+                            color:$mainColor;
+                        }
                     }
                     small{
                         font-size: 13px;
@@ -483,7 +486,7 @@ section{
                         color:#666;
                         font-size: 14px;
                     }
-                    a{
+                    >a{
                         font-weight: 900;
                         font-size: 24px;
                         margin-top: 15px;
@@ -496,6 +499,9 @@ section{
                         color:#333;
                         margin-top: 12px;
                         letter-spacing: .8px;
+                        a{
+                            color:$mainColor;
+                        }
                     }
                     small{
                         font-size: 13px;

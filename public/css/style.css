@@ -334,6 +334,9 @@ nav.navigation > ul a:hover {
   margin-top: 12px;
   letter-spacing: 0.8px;
 }
+#home > .news > .items > .item > .content p a {
+  color: #307EBA;
+}
 #home > .news > .items > .item > .content small {
   font-size: 13px;
   color: #666;
@@ -506,7 +509,7 @@ section > .title label button {
   color: #666;
   font-size: 14px;
 }
-#news-page > .news > .items > .item > .content a {
+#news-page > .news > .items > .item > .content > a {
   font-weight: 900;
   font-size: 24px;
   margin-top: 15px;
@@ -519,6 +522,9 @@ section > .title label button {
   color: #333;
   margin-top: 12px;
   letter-spacing: 0.8px;
+}
+#news-page > .news > .items > .item > .content p a {
+  color: #307EBA;
 }
 #news-page > .news > .items > .item > .content small {
   font-size: 13px;
