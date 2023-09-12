@@ -45,7 +45,7 @@
                 <div class="content">
                     <h4>{{$oversea->title}}</h4>
                     <p>
-                        {!! $oversea->content !!}
+                        {!! nl2br($oversea->content) !!}
                     </p>
                     <small>{{$oversea->updated_at}}</small>
                 </div>

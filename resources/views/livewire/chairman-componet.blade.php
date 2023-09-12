@@ -23,7 +23,7 @@
                 <div class="text @if($i===0) open @endif">
                     <article>
                         <img src="{{$chairman->image}}" class="float-right" />
-                        {!! $chairman->content !!}
+                        {!! nl2br($chairman->content) !!}
                     </article>
                 </div>
             </div>

@@ -30,7 +30,7 @@
                         <span>@if($article->category==0) 會務公告 @else 徵才公告 @endif</span>
                         <a href="/news/{{$article->slug}}">{{$article->title}}</a>
                         <p>
-                            {!! $article->content !!}
+                            {!! nl2br($article->content) !!}
                         </p>
                         <small>{{$article->updated_at}}</small>
                     </div>

@@ -43,7 +43,7 @@
                 <div class="content">
                     <h4>{{$seminar->title}}</h4>
                     <p>
-                        {!! $seminar->content !!}
+                        {!! nl2br($seminar->content) !!}
                     </p>
                     @if($seminar->link)
                     <a href="{{$seminar->link}}">大會網站</a>
