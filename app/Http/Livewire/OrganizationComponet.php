@@ -10,7 +10,7 @@ class OrganizationComponet extends Component
 {
     public function render()
     {
-        $organiztion = Organization::where('hidden', false)->orderBy('updated_at', 'desc')->first();
-        return view('livewire.organization-componet', ['organiztion'=>$organiztion]);
+        $organiztions = Organization::where('hidden', false)->orderBy('updated_at', 'desc')->get();
+        return view('livewire.organization-componet', ['organiztions'=>$organiztions]);
     }
 }

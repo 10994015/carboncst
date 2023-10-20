@@ -123,11 +123,11 @@ const deleteCheckedItems = () => {
         </div>
         <div class="right">
           <div class="form-group">
-            <!-- <router-link
+            <router-link
               class="btn"
               :to="{ name: 'app.add-organization', params: { id: 'create' } }"
               >+ 新增組織架構</router-link
-            > -->
+            >
           </div>
         </div>
       </div>
