@@ -24,7 +24,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=> ['required', 'max:2000'],
+            'title'=> ['required', 'max:2000', 'string'],
             'image'=> ['nullable', 'image'],
             'content'=> ['nullable', 'string', 'required'],
             'hidden'=> ['boolean'],

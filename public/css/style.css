@@ -644,6 +644,9 @@ section > .title label button {
 }
 #organization-page > .organization > .content {
   width: 100%;
+  margin-bottom: 20px;
+  border-bottom: 1px #ccc solid;
+  padding-bottom: 30px;
 }
 #organization-page > .organization > .content h3 {
   color: #307EBA;
@@ -656,7 +659,7 @@ section > .title label button {
   margin-top: 15px;
 }
 #organization-page > .organization > .content img {
-  margin-top: 30px;
+  margin: 30px 0;
   width: 100%;
 }
 
