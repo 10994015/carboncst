@@ -74,7 +74,8 @@ const previewFile = (ev) => {
     awardprogram.value.file = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      previewFi.value.innerText = ev.target.files[0].name;
+        console.log(previewFi.value.innerText);
+      previewFi.value.innerText = e.target.result;
     };
     reader.readAsDataURL(ev.target.files[0]);
   }
@@ -290,10 +291,10 @@ const onSubmit = () => {
   flex-direction: column;
   > h1 {
     font-weight: 900;
-    color: #fff;
+    color: #2d343c;
   }
   > .card {
-    background-color: #242a30;
+    background-color: #fff;
     border-radius: 12px;
     padding: 1.5rem 4rem 1.5rem 2.5rem;
     margin-top: 25px;
@@ -304,7 +305,7 @@ const onSubmit = () => {
       flex-direction: column;
       align-items: flex-start;
       h2 {
-        color: #fff;
+        color: #2d343c;
         font-size: 17px;
         font-weight: 800;
       }
@@ -315,16 +316,16 @@ const onSubmit = () => {
       > .categoryBtn {
         margin-left: auto;
         button {
-          background-color: #1c84ee;
-          color: #fff;
+          background-color: #43B883;
+          color: #2d343c;
           border-radius: 25px;
           padding: 10px 23px;
           transition: 0.3s;
           font-size: 13px;
           margin-left: 16px;
           &:hover {
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           > i {
             margin-right: 3px;
@@ -345,7 +346,7 @@ const onSubmit = () => {
       span.successMsg {
         margin-top: 15px;
         background-color: rgb(0, 190, 48);
-        color: #fff;
+        color: #2d343c;
         border-radius: 3px;
         padding: 10px 20px;
         font-size: 13px;
@@ -363,12 +364,12 @@ const onSubmit = () => {
           margin-bottom: 10px;
           font-weight: 900;
           font-size: 13px;
-          color: #ced4da;
+          color: #2d343c;
         }
         > .imagefileFor {
           width: 100%;
           height: 140px;
-          background-color: #282f36;
+          background-color: #fff;
           border: 2px #30373f dashed;
           cursor: pointer;
           > div {
@@ -391,7 +392,7 @@ const onSubmit = () => {
                 position: absolute;
                 top: 8px;
                 right: 15px;
-                color: #fff;
+                color: #2d343c;
                 cursor: pointer;
               }
             }
@@ -412,8 +413,8 @@ const onSubmit = () => {
           outline: none;
           border-radius: 5px;
           padding: 0 12px;
-          background-color: #282f36;
-          color: #adb5bd;
+          background-color: #fff;
+          color: #2d343c;
           border: 1px #30373f solid;
           height: 36px;
           font-size: 14px;
@@ -442,8 +443,8 @@ const onSubmit = () => {
           outline: none;
           border-radius: 5px;
           padding: 8px 12px;
-          background-color: #282f36;
-          color: #adb5bd;
+          background-color: #fff;
+          color: #2d343c;
           border: 1px #30373f solid;
           height: 140px;
           font-size: 14px;
@@ -452,9 +453,9 @@ const onSubmit = () => {
         }
         > button,
         .pre {
-          color: #f6f6f6;
-          background-color: #1c84ee;
-          border-color: #1c84ee;
+          color: #fff;
+          background-color: #43B883;
+          border-color: #43B883;
           border-radius: 5px;
           height: 38px;
           font-size: 13px;
@@ -466,25 +467,26 @@ const onSubmit = () => {
           align-items: center;
           padding: 0 20px;
           &:hover {
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           &.loading {
             cursor: not-allowed;
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           > svg {
             text-align: center;
           }
         }
         .pre {
-          background-color: #74788d;
-          color: #f6f6f6;
+          background-color: #fff;
+          color: #2d343c;
           margin-left: 10px;
           &:hover {
             background-color: #636678;
             border-color: #5d6071;
+            color:#fff;
           }
         }
       }
@@ -533,7 +535,7 @@ input[type="radio"] {
     transition: 0.5s;
   }
   &:checked {
-    background: linear-gradient(to right, #1c84ee, #185cc9);
+    background: linear-gradient(to right, #43B883, #185cc9);
     &::before {
       left: 25px;
     }

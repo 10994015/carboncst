@@ -397,10 +397,10 @@ const deleteCheckedItems = () => {
   flex-direction: column;
   > h1 {
     font-weight: 900;
-    color: #fff;
+    color: #282f36;
   }
   > .card {
-    background-color: #242a30;
+    background-color: #fff;
     border-radius: 12px;
     padding: 1.5rem 2.5rem;
     margin-top: 25px;
@@ -418,7 +418,7 @@ const deleteCheckedItems = () => {
           display: flex;
           align-items: center;
           .icon {
-            background-color: #282f36;
+            background-color: #fff;
             width: 40px;
             height: 40px;
             border: 1px solid #30373f;
@@ -428,7 +428,7 @@ const deleteCheckedItems = () => {
             margin-right: 0;
           }
           input[type="text"] {
-            background-color: #282f36;
+            background-color: #fff;
             border: 1px solid #30373f;
             width: 190px;
             height: 40px;
@@ -456,14 +456,15 @@ const deleteCheckedItems = () => {
             }
           }
           select {
-            color: #adb5bd;
-            background-color: #282f36;
+            color: #282f36;
+            background-color: #fff;
             border: 1px solid #30373f;
             border-radius: 0.25rem;
             width: 100px;
             height: 40px;
             padding: 0 7px;
             outline: none;
+            margin-left: 15px;
           }
         }
       }
@@ -475,13 +476,13 @@ const deleteCheckedItems = () => {
         width: 100%;
         font-size: 14px;
         > thead {
-          background-color: #363a38;
+          background-color: #fff;
           > tr {
             > th {
               text-align: left;
               padding: 15px;
               &.active {
-                background-color: #313533;
+                background-color: #eee;
               }
             }
           }
@@ -494,6 +495,7 @@ const deleteCheckedItems = () => {
               padding: 30px 0;
               > svg {
                 margin: 0 auto;
+                color:#282f36;
               }
             }
           }
@@ -536,13 +538,15 @@ const deleteCheckedItems = () => {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color:#777;
       > .pageBtn {
         nav {
           display: flex;
           justify-content: center;
           align-items: center;
+
           a {
-            color: #fff;
+            color: #282f36;
             border-radius: 30px !important;
             margin: 0 3px !important;
             border: none;
@@ -554,12 +558,13 @@ const deleteCheckedItems = () => {
             font-size: 12px;
             transition: 0.3s;
             &:hover {
-              color: #1c84ee;
-              background-color: #282f36;
+              color: #fff;
+              background-color: #1c84ee;
             }
             &.active {
               background-color: #1c84ee;
               border-color: #1c84ee;
+              color:#fff;
               &:hover {
                 color: #fff;
                 background-color: #1c84ee;

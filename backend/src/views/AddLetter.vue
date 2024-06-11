@@ -273,21 +273,22 @@ watch(
   flex-direction: column;
   > h1 {
     font-weight: 900;
-    color: #fff;
+    color: #2d343c;
   }
   > .card {
-    background-color: #242a30;
+    background-color: #fff;
     border-radius: 12px;
     padding: 1.5rem 4rem 1.5rem 2.5rem;
     margin-top: 25px;
+    border:1px #2d343c solid;
     > .card-title {
-      border-bottom: 1px #2d343c solid;
+      border-bottom: 1px #ddd solid;
       padding-bottom: 25px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       h2 {
-        color: #fff;
+        color: #2d343c;
         font-size: 17px;
         font-weight: 800;
       }
@@ -298,7 +299,7 @@ watch(
       > .categoryBtn {
         margin-left: auto;
         button {
-          background-color: #1c84ee;
+          background-color: #43B883;
           color: #fff;
           border-radius: 25px;
           padding: 10px 23px;
@@ -306,8 +307,8 @@ watch(
           font-size: 13px;
           margin-left: 16px;
           &:hover {
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           > i {
             margin-right: 3px;
@@ -325,10 +326,30 @@ watch(
         justify-content: flex-start;
         align-items: center;
       }
+      .prviews {
+        display: grid;
+        grid-template-columns: repeat(7, 13%);
+        grid-column-gap: 15px;
+        grid-row-gap: 1em;
+        > .imgbox {
+          width: 100%;
+          position: relative;
+          > img {
+            width: 100%;
+          }
+          svg {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            cursor: pointer;
+            color: #544;
+          }
+        }
+      }
       span.successMsg {
         margin-top: 15px;
         background-color: rgb(0, 190, 48);
-        color: #fff;
+        color: #2d343c;
         border-radius: 3px;
         padding: 10px 20px;
         font-size: 13px;
@@ -346,12 +367,12 @@ watch(
           margin-bottom: 10px;
           font-weight: 900;
           font-size: 13px;
-          color: #ced4da;
+          color: #2d343c;
         }
         > .imagefileFor {
           width: 100%;
           height: 140px;
-          background-color: #282f36;
+          background-color: #fff;
           border: 2px #30373f dashed;
           cursor: pointer;
           > div {
@@ -363,20 +384,12 @@ watch(
             position: relative;
             width: 100%;
             height: 100%;
-            &.isPreview {
-              position: relative;
-              > .deleteFileBtn {
-                position: absolute;
-                top: 10px;
-                right: 15px;
-              }
-              > svg {
-                position: absolute;
-                top: 8px;
-                right: 15px;
-                color: #fff;
-                cursor: pointer;
-              }
+            &.isPreview > svg {
+              position: absolute;
+              top: 8px;
+              right: 15px;
+              color: #2d343c;
+              cursor: pointer;
             }
             > img {
               position: absolute;
@@ -395,8 +408,8 @@ watch(
           outline: none;
           border-radius: 5px;
           padding: 0 12px;
-          background-color: #282f36;
-          color: #adb5bd;
+          background-color: #fff;
+          color: #2d343c;
           border: 1px #30373f solid;
           height: 36px;
           font-size: 14px;
@@ -425,8 +438,8 @@ watch(
           outline: none;
           border-radius: 5px;
           padding: 8px 12px;
-          background-color: #282f36;
-          color: #adb5bd;
+          background-color: #fff;
+          color: #2d343c;
           border: 1px #30373f solid;
           height: 140px;
           font-size: 14px;
@@ -435,9 +448,9 @@ watch(
         }
         > button,
         .pre {
-          color: #f6f6f6;
-          background-color: #1c84ee;
-          border-color: #1c84ee;
+          color: #fff;
+          background-color: #43B883;
+          border-color: #43B883;
           border-radius: 5px;
           height: 38px;
           font-size: 13px;
@@ -449,25 +462,26 @@ watch(
           align-items: center;
           padding: 0 20px;
           &:hover {
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           &.loading {
             cursor: not-allowed;
-            background-color: #1870ca;
-            border-color: #1870ca;
+            background-color: #399b6f;
+            border-color: #399b6f;
           }
           > svg {
             text-align: center;
           }
         }
         .pre {
-          background-color: #74788d;
-          color: #f6f6f6;
+          background-color: #fff;
+          color: #2d343c;
           margin-left: 10px;
           &:hover {
             background-color: #636678;
             border-color: #5d6071;
+            color:#fff;
           }
         }
       }

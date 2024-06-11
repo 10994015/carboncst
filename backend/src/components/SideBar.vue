@@ -360,9 +360,11 @@ const openList = (name) => {
   width: 250px;
   min-height: 100vh;
   height: auto;
-  background-color: #242a30;
+  background-color: #43B883;
   padding: 20px 10px;
   transition: 0.3s;
+  color:#fff;
+  border-right: 1px #282f36 solid;
   &.close {
     width: 70px;
     min-width: 70px;

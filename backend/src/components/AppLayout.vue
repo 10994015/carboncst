@@ -54,8 +54,8 @@ const openSideBar = () => {
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: #191e22;
-  color: #aaa;
+  background-color: #E5E7EB;
+  color: #000;
   display: flex;
   > .main {
     width: 100%;
