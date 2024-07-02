@@ -12,7 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/header.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]).sass('resources/scss/style.scss', 'public/css');;
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ]);
+
+if (mix.inProduction()) {
+    mix.version();
+}

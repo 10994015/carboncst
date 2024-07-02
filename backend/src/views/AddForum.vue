@@ -66,24 +66,24 @@ onMounted(() => {
             }
             randerLoading.value = true;
 
-            forum.value.title = forum.value.title == "null" ? "" : forum.value.title;
-            forum.value.content =
-              forum.value.content == "null" ? "" : forum.value.content;
+            forum.value.title = forum.value.title == null ? "" : forum.value.title;
+            console.log(forum.value.button_1);
+            forum.value.content = forum.value.content == null ? "" : forum.value.content;
             forum.value.button_1 =
-              forum.value.button_1 == "null" ? "" : forum.value.button_1;
-            forum.value.link_1 = forum.value.link_1 == "null" ? "" : forum.value.link_1;
+              forum.value.button_1 == null ? "" : forum.value.button_1;
+            forum.value.link_1 = forum.value.link_1 == null ? "" : forum.value.link_1;
             forum.value.button_2 =
-              forum.value.button_2 == "null" ? "" : forum.value.button_2;
-            forum.value.link_2 = forum.value.link_2 == "null" ? "" : forum.value.link_2;
+              forum.value.button_2 == null ? "" : forum.value.button_2;
+            forum.value.link_2 = forum.value.link_2 == null ? "" : forum.value.link_2;
             forum.value.button_3 =
-              forum.value.button_3 == "null" ? "" : forum.value.button_3;
-            forum.value.link_3 = forum.value.link_3 == "null" ? "" : forum.value.link_3;
+              forum.value.button_3 == null ? "" : forum.value.button_3;
+            forum.value.link_3 = forum.value.link_3 == null ? "" : forum.value.link_3;
             forum.value.button_4 =
-              forum.value.button_4 == "null" ? "" : forum.value.button_4;
-            forum.value.link_4 = forum.value.link_4 == "null" ? "" : forum.value.link_4;
+              forum.value.button_4 == null ? "" : forum.value.button_4;
+            forum.value.link_4 = forum.value.link_4 == null ? "" : forum.value.link_4;
             forum.value.button_5 =
-              forum.value.button_5 == "null" ? "" : forum.value.button_5;
-            forum.value.link_5 = forum.value.link_5 == "null" ? "" : forum.value.link_5;
+              forum.value.button_5 == null ? "" : forum.value.button_5;
+            forum.value.link_5 = forum.value.link_5 == null ? "" : forum.value.link_5;
           })
           .then(() => {
             if (image_url.value != "") {

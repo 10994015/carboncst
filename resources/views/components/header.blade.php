@@ -43,5 +43,8 @@
         <a href="/contact">
             <p>聯絡我們</p><span>Contact Us</span>
         </a>
+        <a href="/login">
+            <p>登入/註冊</p><span>Login</span>
+        </a>
     </nav>
 </header>

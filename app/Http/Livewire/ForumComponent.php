@@ -34,6 +34,6 @@ class ForumComponent extends Component
     public function render()
     {
         $forums = Forum::where('hidden', false)->orderBy('updated_at', 'desc')->get();
-        return view('livewire.forum-component', ['forums'=>$forums]);
+        return view('livewire.forum-component', ['forums'=>$forums])->layout('layouts.base');;
     }
 }

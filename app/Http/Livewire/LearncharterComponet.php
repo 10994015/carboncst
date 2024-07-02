@@ -8,6 +8,6 @@ class LearncharterComponet extends Component
 {
     public function render()
     {
-        return view('livewire.learncharter-componet');
+        return view('livewire.learncharter-componet')->layout('layouts.base');;
     }
 }

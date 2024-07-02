@@ -12,6 +12,6 @@ class HomeComponet extends Component
     {
         $articles = Article::where('hidden', false)->orderBy('updated_at', 'desc')->take(5)->get();
         $banners = Banner::where('hidden', false)->orderBy('updated_at', 'desc')->get();
-        return view('livewire.home-componet', ['articles'=>$articles, 'banners'=>$banners]);
+        return view('livewire.home-componet', ['articles'=>$articles, 'banners'=>$banners])->layout('layouts.base');
     }
 }

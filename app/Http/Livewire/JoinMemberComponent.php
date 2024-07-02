@@ -8,6 +8,6 @@ class JoinMemberComponent extends Component
 {
     public function render()
     {
-        return view('livewire.join-member-component');
+        return view('livewire.join-member-component')->layout('layouts.base');;
     }
 }

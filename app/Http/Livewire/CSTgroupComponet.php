@@ -8,6 +8,6 @@ class CSTgroupComponet extends Component
 {
     public function render()
     {
-        return view('livewire.c-s-tgroup-componet');
+        return view('livewire.c-s-tgroup-componet')->layout('layouts.base');;
     }
 }

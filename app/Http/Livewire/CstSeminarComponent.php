@@ -32,6 +32,6 @@ class CstSeminarComponent extends Component
     public function render()
     {
         $seminars = CstSeminar::where([['hidden',false], ['title', 'like', "%$this->searchText%"]])->orderBy('updated_at', 'desc')->get();
-        return view('livewire.cst-seminar-component', ['seminars'=>$seminars]);
+        return view('livewire.cst-seminar-component', ['seminars'=>$seminars])->layout('layouts.base');;
     }
 }

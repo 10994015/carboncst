@@ -15,6 +15,6 @@ class NewsComponet extends Component
     public function render()
     {
         $articles = Article::where([['hidden',false], ['title', 'like', "%$this->searchText%"]])->orWhere([['hidden',false], ['content', 'like', "%$this->searchText%"]])->orderBy('updated_at', 'desc')->paginate(8);
-        return view('livewire.news-componet', ['articles'=>$articles]);
+        return view('livewire.news-componet', ['articles'=>$articles])->layout('layouts.base');;
     }
 }

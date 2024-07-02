@@ -8,6 +8,6 @@ class AwardsComponent extends Component
 {
     public function render()
     {
-        return view('livewire.awards-component');
+        return view('livewire.awards-component')->layout('layouts.base');;
     }
 }
