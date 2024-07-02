@@ -35,7 +35,7 @@
                     <h2>{{$forum->title}}</h2>
                 </div>
                 <div class="text @if(in_array($i, $openArr)) open @endif">
-                    <article>
+                    <div>
                         <div class="link-group">
                             @if($forum->button_1)
                             <a href="{{$forum->link_1}}"> {{$forum->button_1}} </a>
@@ -53,10 +53,12 @@
                             <a href="{{$forum->link_5}}"> {{$forum->button_5}} </a>
                             @endif
                         </div>
-                        {!! html_entity_decode($forum->content) !!}
+                        <article>
+                            {!! html_entity_decode($forum->content) !!}
+                        </article>
                         <img class="cursor-pointer" src="{{$forum->image}}" wire:click="openImgModel({{$forum->id}})"
                             x-on:click="isLoading = true" />
-                    </article>
+                    </div>
                 </div>
             </div>
             @endforeach
