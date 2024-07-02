@@ -3,7 +3,7 @@
     isLoading:false,
     isToggleLoading:false,
     openModelFn(e){
-        this.openModel = true
+        this.openModel = ture
     },
     openText:function(ev){
         if(ev.target.tagName === 'P' || ev.target.tagName === 'H2'){
@@ -35,7 +35,7 @@
                     <h2>{{$forum->title}}</h2>
                 </div>
                 <div class="text @if(in_array($i, $openArr)) open @endif">
-                    <div>
+                    <article>
                         <div class="link-group">
                             @if($forum->button_1)
                             <a href="{{$forum->link_1}}"> {{$forum->button_1}} </a>
@@ -53,12 +53,10 @@
                             <a href="{{$forum->link_5}}"> {{$forum->button_5}} </a>
                             @endif
                         </div>
-                        <article>
-                            123
-                        </article>
+                        {!! nl2br($forum->content) !!}
                         <img class="cursor-pointer" src="{{$forum->image}}" wire:click="openImgModel({{$forum->id}})"
                             x-on:click="isLoading = true" />
-                    </div>
+                    </article>
                 </div>
             </div>
             @endforeach
