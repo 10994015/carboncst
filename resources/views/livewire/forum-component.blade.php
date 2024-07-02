@@ -54,7 +54,7 @@
                             @endif
                         </div>
                         <article>
-                            {!! html_entity_decode($forum->content) !!}
+                            {!! ($forum->content) ."<br /><br /><br /><br /><br />" !!}<br/><br /><br /><br /><br />
                         </article>
                         <img class="cursor-pointer" src="{{$forum->image}}" wire:click="openImgModel({{$forum->id}})"
                             x-on:click="isLoading = true" />
