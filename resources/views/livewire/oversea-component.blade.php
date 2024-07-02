@@ -37,13 +37,15 @@
                     <div class="light"></div>
                     @if($oversea->image)
                     <img src="{{$oversea->image}}" alt="{{$oversea->title}}" />
-                    @else
-                    <img src="/images/news.jpg" />
-
                     @endif
                 </div>
                 <div class="content">
+                    @if($oversea->link)
+                    <a href="{{$oversea->link}}">{{$oversea->title}}</a>
+                    @else
                     <h4>{{$oversea->title}}</h4>
+                    @endif
+                    
                     <p>
                         {!! nl2br($oversea->content) !!}
                     </p>

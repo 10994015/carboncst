@@ -138,16 +138,18 @@ const logout = () => {
 
 <style lang="scss" scoped>
 header {
-  background-color: #282f36;
+  background-color: #fff;
   padding: 20px 50px 20px 20px;
   display: flex;
   justify-content: space-between;
+  color:#282f36;
+  border-bottom: 1px #282f36 solid;
   > .left {
     display: flex;
     justify-content: center;
     align-items: center;
     > svg {
-      color: #fff;
+      color: #282f36;
       cursor: pointer;
       margin-right: 20px;
     }
@@ -158,7 +160,7 @@ header {
       > input {
         background-color: #2f373f;
         width: 190px;
-        color: #ddd;
+        color: #fff;
         height: 40px;
         padding: 0 12px;
         border-top-left-radius: 6px;
@@ -168,7 +170,7 @@ header {
       }
       > button {
         cursor: pointer;
-        color: #fff;
+        color: #282f36;
         background-color: #1c84ee;
         width: 40px;
         height: 40px;
@@ -176,7 +178,7 @@ header {
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
         svg {
-          color: #fff;
+          color: #282f36;
           padding: 0;
           margin: 0;
           display: inline;

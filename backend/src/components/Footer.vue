@@ -16,13 +16,13 @@ const text = computed(()=>props.text);
 
 <style lang="scss" scoped>
 footer{
-    background-color: #242A30;
-    color:#adb5bd;
+    background-color: #43B883;
+    color:#fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
     padding: 25px 40px;
-    box-shadow: -1px -1px 1px #393d4180;
+    box-shadow: -1px -1px 1px #282f36;
 }
 </style>
