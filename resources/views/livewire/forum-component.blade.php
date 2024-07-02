@@ -53,7 +53,8 @@
                             <a href="{{$forum->link_5}}"> {{$forum->button_5}} </a>
                             @endif
                         </div>
-                        {!! nl2br($forum->content) !!}
+                        {{-- {!! nl2br($forum->content) !!} --}}
+                        @php echo nl2br($forum->content)  @endphp 
                         <img class="cursor-pointer" src="{{$forum->image}}" wire:click="openImgModel({{$forum->id}})"
                             x-on:click="isLoading = true" />
                     </article>
