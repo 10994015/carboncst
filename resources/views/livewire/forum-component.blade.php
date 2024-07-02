@@ -3,18 +3,9 @@
     isLoading:false,
     isToggleLoading:false,
     openModelFn(e){
-        this.openModel = ture
+        this.openModel = true
     },
-    openText:function(ev){
-        if(ev.target.tagName === 'P' || ev.target.tagName === 'H2'){
-            ev.target.parentNode.classList.toggle('active')
-            ev.target.parentNode.parentNode.querySelector('.text').classList.toggle('open')
-            return;
-        }
-        ev.target.classList.toggle('active')
-        ev.target.parentNode.querySelector('.text').classList.toggle('open')
-    }
-}" x-init="
+    " x-init="
     window.addEventListener('openImgModel', function(event) {
         isLoading = false
         openModel = true
