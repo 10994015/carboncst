@@ -5,7 +5,16 @@
     openModelFn(e){
         this.openModel = true
     },
-    " x-init="
+    openText:function(ev){
+        if(ev.target.tagName === 'P' || ev.target.tagName === 'H2'){
+            ev.target.parentNode.classList.toggle('active')
+            ev.target.parentNode.parentNode.querySelector('.text').classList.toggle('open')
+            return;
+        }
+        ev.target.classList.toggle('active')
+        ev.target.parentNode.querySelector('.text').classList.toggle('open')
+    }
+}" x-init="
     window.addEventListener('openImgModel', function(event) {
         isLoading = false
         openModel = true
@@ -45,7 +54,7 @@
                             @endif
                         </div>
                         <article>
-                            {!! ($forum->content) ."<br /><br /><br /><br /><br />" !!}<br/><br /><br /><br /><br />
+                            123
                         </article>
                         <img class="cursor-pointer" src="{{$forum->image}}" wire:click="openImgModel({{$forum->id}})"
                             x-on:click="isLoading = true" />
