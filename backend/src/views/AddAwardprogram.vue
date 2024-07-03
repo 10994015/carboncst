@@ -51,9 +51,9 @@ onMounted(() => {
             randerLoading.value = true;
 
             awardprogram.value.title =
-              awardprogram.value.title == "null" ? "" : awardprogram.value.title;
+              awardprogram.value.title == null ? "" : awardprogram.value.title;
             awardprogram.value.content =
-              awardprogram.value.content == "null" ? "" : awardprogram.value.content;
+              awardprogram.value.content == null ? "" : awardprogram.value.content;
           })
           .then(() => {
             if (file_url.value != "") {
@@ -74,7 +74,7 @@ const previewFile = (ev) => {
     awardprogram.value.file = ev.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-        console.log(previewFi.value.innerText);
+      console.log(previewFi.value.innerText);
       previewFi.value.innerText = e.target.result;
     };
     reader.readAsDataURL(ev.target.files[0]);
@@ -316,7 +316,7 @@ const onSubmit = () => {
       > .categoryBtn {
         margin-left: auto;
         button {
-          background-color: #43B883;
+          background-color: #43b883;
           color: #2d343c;
           border-radius: 25px;
           padding: 10px 23px;
@@ -454,8 +454,8 @@ const onSubmit = () => {
         > button,
         .pre {
           color: #fff;
-          background-color: #43B883;
-          border-color: #43B883;
+          background-color: #43b883;
+          border-color: #43b883;
           border-radius: 5px;
           height: 38px;
           font-size: 13px;
@@ -486,7 +486,7 @@ const onSubmit = () => {
           &:hover {
             background-color: #636678;
             border-color: #5d6071;
-            color:#fff;
+            color: #fff;
           }
         }
       }
@@ -535,7 +535,7 @@ input[type="radio"] {
     transition: 0.5s;
   }
   &:checked {
-    background: linear-gradient(to right, #43B883, #185cc9);
+    background: linear-gradient(to right, #43b883, #185cc9);
     &::before {
       left: 25px;
     }

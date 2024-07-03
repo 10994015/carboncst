@@ -58,11 +58,10 @@ onMounted(() => {
             }
             randerLoading.value = true;
 
-            oversea.value.title =
-              oversea.value.title == "null" ? "" : oversea.value.title;
+            oversea.value.title = oversea.value.title == null ? "" : oversea.value.title;
             oversea.value.content =
-              oversea.value.content == "null" ? "" : oversea.value.content;
-            oversea.value.link = oversea.value.link == "null" ? "" : oversea.value.link;
+              oversea.value.content == null ? "" : oversea.value.content;
+            oversea.value.link = oversea.value.link == null ? "" : oversea.value.link;
           })
           .then(() => {
             if (image_url.value != "") {
@@ -375,7 +374,7 @@ const onSubmit = () => {
     border-radius: 12px;
     padding: 1.5rem 4rem 1.5rem 2.5rem;
     margin-top: 25px;
-    border:1px #2d343c solid;
+    border: 1px #2d343c solid;
     > .card-title {
       border-bottom: 1px #ddd solid;
       padding-bottom: 25px;
@@ -394,7 +393,7 @@ const onSubmit = () => {
       > .categoryBtn {
         margin-left: auto;
         button {
-          background-color: #43B883;
+          background-color: #43b883;
           color: #fff;
           border-radius: 25px;
           padding: 10px 23px;
@@ -544,8 +543,8 @@ const onSubmit = () => {
         > button,
         .pre {
           color: #fff;
-          background-color: #43B883;
-          border-color: #43B883;
+          background-color: #43b883;
+          border-color: #43b883;
           border-radius: 5px;
           height: 38px;
           font-size: 13px;
@@ -576,7 +575,7 @@ const onSubmit = () => {
           &:hover {
             background-color: #636678;
             border-color: #5d6071;
-            color:#fff;
+            color: #fff;
           }
         }
       }

@@ -2,7 +2,7 @@
 import { ref, onMounted, watch } from "vue";
 import store from "../store";
 import { useRouter, useRoute } from "vue-router";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const route = useRoute();
 
@@ -31,8 +31,6 @@ const isCreate = ref(false);
 
 //ckeditor
 
-
-
 onMounted(() => {
   const articleId = route.params.id;
   if (articleId === "create") {
@@ -55,10 +53,9 @@ onMounted(() => {
             }
             randerLoading.value = true;
 
-            article.value.title =
-              article.value.title == "null" ? "" : article.value.title;
+            article.value.title = article.value.title == null ? "" : article.value.title;
             article.value.content =
-              article.value.content == "null" ? "" : article.value.content;
+              article.value.content == null ? "" : article.value.content;
           })
           .then(() => {
             if (image_url.value != "") {
@@ -155,11 +152,7 @@ const editor = ref(ClassicEditor);
         <div class="form-group">
           <label for="">文章內容</label>
           <!-- <CKEditor :content="article.content" @sendContent="getCkEditorContent" /> -->
-          <ckeditor
-            :editor="editor"
-            id="editor"
-            v-model="article.content"
-          ></ckeditor>
+          <ckeditor :editor="editor" id="editor" v-model="article.content"></ckeditor>
           <!-- <textarea id="editor1" name="editor1" v-model="article.content"></textarea>-->
         </div>
         <div class="form-group">
@@ -292,7 +285,7 @@ const editor = ref(ClassicEditor);
     border-radius: 12px;
     padding: 1.5rem 4rem 1.5rem 2.5rem;
     margin-top: 25px;
-    border:1px #2d343c solid;
+    border: 1px #2d343c solid;
     > .card-title {
       border-bottom: 1px #ddd solid;
       padding-bottom: 25px;
@@ -311,7 +304,7 @@ const editor = ref(ClassicEditor);
       > .categoryBtn {
         margin-left: auto;
         button {
-          background-color: #43B883;
+          background-color: #43b883;
           color: #fff;
           border-radius: 25px;
           padding: 10px 23px;
@@ -461,8 +454,8 @@ const editor = ref(ClassicEditor);
         > button,
         .pre {
           color: #fff;
-          background-color: #43B883;
-          border-color: #43B883;
+          background-color: #43b883;
+          border-color: #43b883;
           border-radius: 5px;
           height: 38px;
           font-size: 13px;
@@ -493,7 +486,7 @@ const editor = ref(ClassicEditor);
           &:hover {
             background-color: #636678;
             border-color: #5d6071;
-            color:#fff;
+            color: #fff;
           }
         }
       }
@@ -542,7 +535,7 @@ input[type="radio"] {
     transition: 0.5s;
   }
   &:checked {
-    background: linear-gradient(to right, #43B883, #185cc9);
+    background: linear-gradient(to right, #43b883, #185cc9);
     &::before {
       left: 25px;
     }

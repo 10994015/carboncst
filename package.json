@@ -10,18 +10,11 @@
         "production": "mix --production"
     },
     "devDependencies": {
-<<<<<<< HEAD
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.0.2",
         "axios": "^0.21",
-=======
-        "@tailwindcss/forms": "^0.5.2",
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.2",
-        "axios": "^1.7.2",
->>>>>>> 9f8955028c5ef34599344afc4dc932bb130106cd
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
