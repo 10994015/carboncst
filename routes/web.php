@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewController;
 use App\Http\Livewire\AwardProgramComponent;
 use App\Http\Livewire\AwardsComponent;
+use App\Http\Livewire\BulletinComponent;
 use App\Http\Livewire\ChairmanComponet;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\CstDatabaseComponent;
@@ -47,6 +48,7 @@ Route::get('/cst-seminar', CstSeminarComponent::class);
 Route::get('/oversea', OverseaComponent::class);
 Route::get('/forum', ForumComponent::class);
 Route::get('/contact', ContactComponent::class);
+Route::get('/bulletin', BulletinComponent::class);
 
 
 
@@ -55,4 +57,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

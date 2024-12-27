@@ -6,9 +6,9 @@
     </div>
     <div class="item">
         <h3><img src="/images/CST2-.png" alt="臺灣碳材料學會" />聯絡方式</h3>
-        <span>會址：30013 新竹市東區光復路2段101號</span>
-        <span>國立清華大學 材料實驗館207室</span>
+        <span>秘書處：03-2655401張秘書</span>
         <span>Email：carbon.cst@gmail.com</span>
+        <span>會址：桃園市中壢區中北路200號工學館721室</span>
         <a href="https://www.facebook.com/carbon.cst" class="fb"><img src="/images/fb.png" alt="臺灣碳材料學會" /></a>
     </div>
     <div class="item end">

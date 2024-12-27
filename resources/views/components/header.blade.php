@@ -1,4 +1,4 @@
-<header class=" " id="header">
+<header class="" id="header">
     <a href="/" class="logo"><img src="/images/logo.png" alt="臺灣碳材料學會"></a>
     <i class="fas fa-bars" id="menuBar"></i>
     <nav>
@@ -42,6 +42,9 @@
         </a>
         <a href="/contact">
             <p>聯絡我們</p><span>Contact Us</span>
+        </a>
+        <a href="/bulletin">
+            <p>會刊專區</p><span>Bulletin Section</span>
         </a>
     </nav>
 </header>
