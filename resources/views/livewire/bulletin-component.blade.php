@@ -8,25 +8,13 @@
         </div>
 
         <div class="pdf-container">
-            <object
+            <iframe
+                src="/pdf/20241227.pdf"
                 class="pdf-viewer"
-                data="/pdf/20241227.pdf"
-                type="application/pdf">
-                <div class="fallback">
-                    <div class="fallback-content">
-                        <svg class="icon" viewBox="0 0 24 24" width="48" height="48">
-                            <path fill="currentColor" d="M12 2L2 12h3v8h14v-8h3L12 2zM12 16l-4-4h8l-4 4z"/>
-                        </svg>
-                        <p>無法直接顯示 PDF 文件</p>
-                        <a href="/pdf/20241227.pdf"
-                           class="btn btn-download"
-                           download>
-                            下載文件
-                        </a>
-                    </div>
-                </div>
-            </object>
-
+                style="width: 100%; height: 100%;"
+                scrolling="auto"
+                frameborder="0">
+            </iframe>
         </div>
     </div>
 </div>
