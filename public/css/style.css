@@ -1646,12 +1646,11 @@ footer#footer > .item > div {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   background-color: #f1f5f9;
 }
 .bulletin .pdf-container .fallback .fallback-content {
   text-align: center;
-  padding: 2rem;
+  width: 100%;
 }
 .bulletin .pdf-container .fallback .fallback-content .icon {
   color: #64748b;
@@ -1661,10 +1660,9 @@ footer#footer > .item > div {
 .bulletin .pdf-container .fallback .fallback-content .icon:hover {
   color: #2563eb;
 }
-.bulletin .pdf-container .fallback .fallback-content p {
-  color: #475569;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
+.bulletin .pdf-container .fallback .fallback-content img {
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
