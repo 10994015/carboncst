@@ -1,7 +1,7 @@
 <div class="bulletin">
     <div class="container">
         <div class="content-header">
-            <h2>臺灣碳材料學會會刊 創刊號</h2>
+            <h2>臺灣碳材料學會會誌 創刊號</h2>
             <div class="actions">
                 <a href="/pdf/20241227.pdf" download="臺灣探材料學會會刊" class="btn btn-primary">下載 PDF</a>
             </div>
