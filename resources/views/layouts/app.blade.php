@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/slick/slick.css">
     <link rel="stylesheet" href="/slick/slick-theme.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     @livewireStyles
 
