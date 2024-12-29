@@ -40,11 +40,11 @@
                 <li onclick="window.location.href='/forum' ">碳材料論壇</li>
             </ul>
         </a>
-        <a href="/contact">
-            <p>聯絡我們</p><span>Contact Us</span>
-        </a>
         <a href="/bulletin">
             <p>會刊專區</p><span>Bulletin Section</span>
+        </a>
+        <a href="/contact">
+            <p>聯絡我們</p><span>Contact Us</span>
         </a>
     </nav>
 </header>

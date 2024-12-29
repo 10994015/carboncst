@@ -42,6 +42,9 @@
         <a href="/oversea">➤ 國內外研討會</a>
         <a href="/forum">➤ 碳材料論壇</a>
     </ul>
+    <a href="/bulletin">
+        <p>會刊專區</p><span>Bulletin Section</span>
+    </a>
     <a href="/contact">
         <p>聯絡我們</p><span>Contact Us</span>
     </a>
