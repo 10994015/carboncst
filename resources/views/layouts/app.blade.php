@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/slick/slick.css">
     <link rel="stylesheet" href="/slick/slick-theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/payment.css">
 
     @livewireStyles
 

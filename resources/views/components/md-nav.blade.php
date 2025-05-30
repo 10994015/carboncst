@@ -2,15 +2,36 @@
     isAbout:false,
     isInfo:false,
     isAwards:false,
+    isUser:false
 }">
     <i class="fas fa-times" id="menuClose"></i>
+
+    <!-- 登入狀態區域 (手機版頂部) -->
+    <div class="mobile-auth-section">
+        @auth
+            <!-- 已登入：簡潔版用戶資訊 -->
+            <ul :class="{'open':isUser}" class="mobile-user-dropdown">
+                <a href="/profile">➤ 個人資料</a>
+                <a href="/payment/history">➤ 付款紀錄</a>
+                <a href="javascript:;" onclick="confirmLogout()" class="logout-link">➤ 登出</a>
+            </ul>
+        @else
+            <!-- 未登入：顯示登入/註冊按鈕 -->
+            <div class="mobile-auth-buttons">
+                <a href="{{ route('login') }}" class="mobile-login-btn">會員登入</a>
+                <a href="{{ route('register') }}" class="mobile-register-btn">立即註冊</a>
+            </div>
+        @endauth
+    </div>
+
+    <!-- 原有的導航選單 -->
     <a href="/">
         <p>首頁</p><span>Home</span>
     </a>
     <a href="/news">
         <p>最新消息</p><span>News</span>
     </a>
-    <a href="javascript:;" x-on:click="isInfo = false;isAwards=false,isAbout = !isAbout">
+    <a href="javascript:;" x-on:click="isInfo = false;isAwards=false;isUser=false;isAbout = !isAbout">
         <p>關於學會</p><span>About CST</span>
     </a>
     <ul :class="{'open':isAbout}">
@@ -20,7 +41,7 @@
         <a href="/cst-group">➤ 學會平台小組</a>
         <a href="/learnchart">➤ 學會章程</a>
     </ul>
-    <a href="javascript:;" x-on:click="isAbout = false;isInfo=false;isAwards = !isAwards">
+    <a href="javascript:;" x-on:click="isAbout = false;isInfo=false;isUser=false;isAwards = !isAwards">
         <p>學會獎項</p><span>CST Awards</span>
     </a>
     <ul :class="{'open':isAwards}">
@@ -34,7 +55,7 @@
     <a href="/cst-database">
         <p>『碳才』資料庫</p><span>CST Database</span>
     </a>
-    <a href="javascript:;" x-on:click="isAbout = false;isAwards=false;isInfo = !isInfo">
+    <a href="javascript:;" x-on:click="isAbout = false;isAwards=false;isUser=false;isInfo = !isInfo">
         <p>論壇&研討會資訊</p><span>Seminar Information</span>
     </a>
     <ul :class="{'open':isInfo}">
@@ -48,4 +69,14 @@
     <a href="/contact">
         <p>聯絡我們</p><span>Contact Us</span>
     </a>
+    <a href="/payment">
+        <p>付款專區</p><span>Payment</span>
+    </a>
+
+    <!-- 隱藏的登出表單 -->
+    @auth
+        <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @endauth
 </nav>

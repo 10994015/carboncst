@@ -1,0 +1,345 @@
+// 顏色變數
+$primary-color: #2563eb;
+$primary-hover: #1d4ed8;
+$secondary-color: #6b7280;
+$success-color: #059669;
+$error-color: #dc2626;
+$border-color: #d1d5db;
+$background-gray: #f9fafb;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+
+// 間距變數
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// 圓角變數
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 0.75rem;
+
+// 陰影變數
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// 轉場效果
+$transition-fast: 0.15s ease-in-out;
+$transition-normal: 0.2s ease-in-out;
+
+// 付款容器
+.payment-container {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: $spacing-lg;
+    background-color: white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+}
+
+// 付款標題
+.payment-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+}
+
+// 錯誤訊息
+.error-message {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: $error-color;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-md;
+    font-size: 0.875rem;
+}
+
+// 方案網格
+.plans-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// 方案卡片
+.plan-card {
+    cursor: pointer;
+    padding: $spacing-md;
+    border: 2px solid $border-color;
+    border-radius: $border-radius-lg;
+    transition: all $transition-normal;
+    position: relative;
+
+    &:hover {
+        border-color: #9ca3af;
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+    }
+
+    &--selected {
+        border-color: $primary-color;
+        background-color: #eff6ff;
+
+        &:hover {
+            border-color: $primary-color;
+        }
+    }
+}
+
+// 方案標題區域
+.plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+}
+
+// 方案名稱
+.plan-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 0;
+}
+
+// 方案選擇圓點
+.plan-radio {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+
+    .plan-card--selected & {
+        border-color: $primary-color;
+        background-color: $primary-color;
+    }
+
+    &__dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: white;
+        border-radius: 50%;
+    }
+}
+
+// 方案價格
+.plan-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: $spacing-sm;
+    line-height: 1.2;
+}
+
+// 方案描述
+.plan-description {
+    color: $text-light;
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+// 優惠標籤容器
+.plan-badge-container {
+    margin-top: $spacing-sm;
+}
+
+// 優惠標籤
+.plan-badge {
+    display: inline-block;
+    background-color: #dcfce7;
+    color: $success-color;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 9999px;
+    line-height: 1.2;
+}
+
+// 付款摘要
+.payment-summary {
+    background-color: $background-gray;
+    padding: $spacing-md;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-lg;
+}
+
+// 摘要標題
+.summary-title {
+    font-weight: 600;
+    color: $text-dark;
+    margin: 0 0 $spacing-sm 0;
+    font-size: 1rem;
+}
+
+// 摘要內容
+.summary-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// 摘要方案名稱
+.summary-plan {
+    color: $text-light;
+    font-size: 0.875rem;
+}
+
+// 摘要價格
+.summary-price {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: $text-dark;
+}
+
+// 付款按鈕容器
+.payment-button-container {
+    text-align: center;
+}
+
+// 付款按鈕
+.payment-button {
+    width: 100%;
+    background-color: $primary-color;
+    color: white;
+    font-weight: 700;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-lg;
+    border: none;
+    cursor: pointer;
+    transition: all $transition-normal;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+
+    &:hover:not(:disabled) {
+        background-color: $primary-hover;
+        transform: translateY(-1px);
+        box-shadow: $shadow-md;
+    }
+
+    &:disabled {
+        background-color: #9ca3af;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    }
+}
+
+// 載入動畫
+.loading-spinner {
+    width: 1.25rem;
+    height: 1.25rem;
+    animation: spin 1s linear infinite;
+
+    &__circle {
+        opacity: 0.25;
+    }
+
+    &__path {
+        opacity: 0.75;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// 付款說明
+.payment-info {
+    margin-top: $spacing-md;
+    font-size: 0.875rem;
+    color: $text-light;
+    text-align: center;
+    line-height: 1.5;
+
+    p {
+        margin: $spacing-xs 0;
+    }
+}
+
+// 響應式設計
+@media (max-width: 640px) {
+    .payment-container {
+        margin: $spacing-md;
+        padding: $spacing-md;
+    }
+
+    .payment-title {
+        font-size: 1.25rem;
+    }
+
+    .plan-price {
+        font-size: 1.5rem;
+    }
+
+    .payment-button {
+        font-size: 0.875rem;
+        padding: $spacing-sm $spacing-md;
+    }
+}
+
+// 深色模式支援（可選）
+@media (prefers-color-scheme: dark) {
+    .payment-container {
+        background-color: #1f2937;
+        color: #f9fafb;
+    }
+
+    .payment-title {
+        color: #f9fafb;
+    }
+
+    .plan-card {
+        border-color: #374151;
+        background-color: #374151;
+
+        &--selected {
+            background-color: #1e3a8a;
+            border-color: $primary-color;
+        }
+    }
+
+    .plan-name {
+        color: #f9fafb;
+    }
+
+    .payment-summary {
+        background-color: #374151;
+    }
+
+    .summary-title {
+        color: #f9fafb;
+    }
+
+    .summary-price {
+        color: #f9fafb;
+    }
+}

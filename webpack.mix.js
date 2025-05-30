@@ -15,4 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/header.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]).sass('resources/scss/style.scss', 'public/css');;
+    ]).sass('resources/scss/style.scss', 'public/css')
+    .sass('resources/scss/auth.scss', 'public/css/auth.css')
+    .sass('resources/scss/payment.scss', 'public/css/payment.css');

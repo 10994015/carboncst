@@ -1,0 +1,385 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  background: #ffffff;
+  color: #2d2d2d;
+}
+
+.carbon-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.carbon-login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 480px) {
+  .carbon-login-card {
+    padding: 30px 25px;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.carbon-logo .logo-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+}
+.carbon-logo .logo-icon .logo-svg {
+  width: 100%;
+  height: 100%;
+}
+.carbon-logo .logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #2d2d2d;
+}
+.carbon-logo .logo-subtitle {
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.carbon-form .form-group {
+  margin-bottom: 20px;
+}
+.carbon-form .form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-bottom: 8px;
+}
+.carbon-form .carbon-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  color: #2d2d2d;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.carbon-form .carbon-input::-moz-placeholder {
+  color: #999999;
+}
+.carbon-form .carbon-input::placeholder {
+  color: #999999;
+}
+.carbon-form .carbon-input:focus {
+  outline: none;
+  border-color: #2d2d2d;
+  box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.1);
+}
+
+.form-group-checkbox {
+  margin: 25px 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.checkbox-label .carbon-checkbox {
+  display: none;
+}
+.checkbox-label .carbon-checkbox:checked + .checkbox-custom {
+  background: #2d2d2d;
+  border-color: #2d2d2d;
+}
+.checkbox-label .carbon-checkbox:checked + .checkbox-custom::after {
+  opacity: 1;
+  transform: scale(1);
+}
+.checkbox-label .checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e5e5e5;
+  border-radius: 3px;
+  margin-right: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.checkbox-label .checkbox-custom::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.checkbox-label .checkbox-custom:hover {
+  border-color: #666666;
+}
+.checkbox-label .checkbox-text {
+  font-size: 14px;
+  color: #666666;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.action-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.forgot-password-link,
+.register-link {
+  color: #666666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.forgot-password-link:hover,
+.register-link:hover {
+  color: #2d2d2d;
+  text-decoration: underline;
+}
+
+.register-link {
+  color: #2d2d2d;
+  font-weight: 600;
+}
+.register-link:hover {
+  color: #1a1a1a;
+}
+
+.link-divider {
+  color: #999999;
+  margin: 0 4px;
+}
+
+.carbon-button {
+  width: 100%;
+  padding: 14px 32px;
+  background: #2d2d2d;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.carbon-button .button-text {
+  position: relative;
+  z-index: 2;
+}
+.carbon-button:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 45, 45, 0.2);
+}
+.carbon-button:active {
+  transform: translateY(0);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5;
+}
+.login-footer p {
+  margin: 0;
+  font-size: 12px;
+  color: #999999;
+  letter-spacing: 0.5px;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-4 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mb-4 ul li {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #dc2626;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.mb-4 ul li:last-child {
+  margin-bottom: 0;
+}
+
+.text-green-600 {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #16a34a;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .carbon-login-container {
+    padding: 15px;
+  }
+  .carbon-login-card {
+    padding: 30px 20px;
+  }
+  .carbon-logo .logo-text {
+    font-size: 22px;
+  }
+  .carbon-logo .logo-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .carbon-input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+  .carbon-button {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+}
+.carbon-login-card {
+  max-width: 450px;
+}
+@media (max-width: 480px) {
+  .carbon-login-card {
+    max-width: 100%;
+  }
+}
+
+.student-fields {
+  background: rgba(45, 45, 45, 0.02);
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+.student-fields .form-group {
+  margin-bottom: 16px;
+}
+.student-fields .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.carbon-input[type=date] {
+  color: #2d2d2d;
+}
+.carbon-input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+.carbon-input[type=date]:invalid {
+  color: #999999;
+}
+
+.login-link {
+  color: #2d2d2d;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.login-link:hover {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+
+.carbon-form .form-group {
+  margin-bottom: 18px;
+}
+.carbon-form .form-group-checkbox {
+  margin: 20px 0 15px 0;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: #999999;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.form-label.required::after {
+  content: " *";
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.carbon-input.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+.carbon-input.success {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+@media (max-width: 768px) {
+  .carbon-login-card {
+    padding: 25px 20px;
+  }
+  .carbon-form .form-group {
+    margin-bottom: 16px;
+  }
+  .student-fields {
+    padding: 15px;
+    margin-top: 12px;
+  }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+.student-fields {
+  animation: slideDown 0.3s ease;
+}

@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/header.js": "/js/header.js",
     "/css/app.css": "/css/app.css",
+    "/css/payment.css": "/css/payment.css",
+    "/css/auth.css": "/css/auth.css",
     "/css/style.css": "/css/style.css"
 }

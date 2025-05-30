@@ -1,0 +1,473 @@
+// 碳材料學會登入頁面樣式 - 簡潔白色版本
+// Variables
+$carbon-black: #2d2d2d;
+$carbon-gray: #666666;
+$carbon-light-gray: #999999;
+$carbon-border: #e5e5e5;
+$carbon-white: #ffffff;
+$carbon-accent: #2d2d2d;
+$carbon-accent-hover: #1a1a1a;
+
+// Mixins
+@mixin smooth-transition($property: all, $duration: 0.3s) {
+  transition: $property $duration ease;
+}
+
+// Reset and Base
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+  background: $carbon-white;
+  color: $carbon-black;
+}
+
+// Main Container
+.carbon-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: $carbon-white;
+}
+
+// Login Card
+.carbon-login-card {
+  width: 100%;
+  max-width: 400px;
+  background: $carbon-white;
+  border: 1px solid $carbon-border;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    padding: 30px 25px;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+// Logo Section
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.carbon-logo {
+  .logo-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    .logo-svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: $carbon-black;
+  }
+
+  .logo-subtitle {
+    font-size: 14px;
+    color: $carbon-gray;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Form Styles
+.carbon-form {
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: $carbon-black;
+    margin-bottom: 8px;
+  }
+
+  .carbon-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: $carbon-white;
+    border: 1px solid $carbon-border;
+    border-radius: 8px;
+    color: $carbon-black;
+    font-size: 16px;
+    @include smooth-transition;
+
+    &::placeholder {
+      color: $carbon-light-gray;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $carbon-accent;
+      box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.1);
+    }
+  }
+}
+
+// Checkbox Styles
+.form-group-checkbox {
+  margin: 25px 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  .carbon-checkbox {
+    display: none;
+
+    &:checked + .checkbox-custom {
+      background: $carbon-accent;
+      border-color: $carbon-accent;
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  .checkbox-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid $carbon-border;
+    border-radius: 3px;
+    margin-right: 12px;
+    position: relative;
+    @include smooth-transition;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 5px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      @include smooth-transition;
+    }
+
+    &:hover {
+      border-color: $carbon-gray;
+    }
+  }
+
+  .checkbox-text {
+    font-size: 14px;
+    color: $carbon-gray;
+  }
+}
+
+// Form Actions
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.action-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.forgot-password-link,
+.register-link {
+  color: $carbon-gray;
+  text-decoration: none;
+  @include smooth-transition;
+
+  &:hover {
+    color: $carbon-black;
+    text-decoration: underline;
+  }
+}
+
+.register-link {
+  color: $carbon-accent;
+  font-weight: 600;
+
+  &:hover {
+    color: $carbon-accent-hover;
+  }
+}
+
+.link-divider {
+  color: $carbon-light-gray;
+  margin: 0 4px;
+}
+
+// Button Styles
+.carbon-button {
+  width: 100%;
+  padding: 14px 32px;
+  background: $carbon-accent;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  @include smooth-transition;
+
+  .button-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  &:hover {
+    background: $carbon-accent-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(45, 45, 45, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Footer
+.login-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid $carbon-border;
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: $carbon-light-gray;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Error Messages
+.mb-4 {
+  margin-bottom: 1rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: #dc2626;
+      font-size: 14px;
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Success Messages
+.text-green-600 {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #16a34a;
+  font-size: 14px;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .carbon-login-container {
+    padding: 15px;
+  }
+
+  .carbon-login-card {
+    padding: 30px 20px;
+  }
+
+  .carbon-logo {
+    .logo-text {
+      font-size: 22px;
+    }
+
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  .carbon-input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .carbon-button {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+}
+
+// 註冊頁面額外樣式（添加到原有的 SCSS 檔案中）
+
+// 註冊頁面特定樣式
+.carbon-login-card {
+    // 註冊頁面需要更多空間容納額外欄位
+    max-width: 450px;
+
+    @media (max-width: 480px) {
+      max-width: 100%;
+    }
+  }
+
+  // 學生欄位區塊
+  .student-fields {
+    background: rgba(45, 45, 45, 0.02);
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+
+    .form-group {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // 日期輸入框特殊樣式
+  .carbon-input[type="date"] {
+    color: $carbon-black;
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(0.6);
+      cursor: pointer;
+    }
+
+    // 當沒有選擇日期時的提示樣式
+    &:invalid {
+      color: $carbon-light-gray;
+    }
+  }
+
+  // 登入連結樣式（與註冊連結相似但顏色不同）
+  .login-link {
+    color: $carbon-accent;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    @include smooth-transition;
+
+    &:hover {
+      color: $carbon-accent-hover;
+      text-decoration: underline;
+    }
+  }
+
+  // 表單群組間距調整（註冊頁面欄位較多）
+  .carbon-form {
+    .form-group {
+      margin-bottom: 18px; // 比登入頁面稍微緊湊一點
+    }
+
+    // Checkbox 群組的特殊間距
+    .form-group-checkbox {
+      margin: 20px 0 15px 0;
+    }
+  }
+
+  // 表單驗證提示
+  .field-hint {
+    font-size: 12px;
+    color: $carbon-light-gray;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  // 必填欄位標示
+  .form-label {
+    &.required::after {
+      content: ' *';
+      color: #dc2626;
+      font-weight: bold;
+    }
+  }
+
+  // 表單驗證樣式增強
+  .carbon-input {
+    &.error {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+
+    &.success {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+    }
+  }
+
+  // 響應式調整
+  @media (max-width: 768px) {
+    .carbon-login-card {
+      padding: 25px 20px;
+    }
+
+    .carbon-form {
+      .form-group {
+        margin-bottom: 16px;
+      }
+    }
+
+    .student-fields {
+      padding: 15px;
+      margin-top: 12px;
+    }
+  }
+
+  // 動畫效果
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    to {
+      opacity: 1;
+      max-height: 200px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .student-fields {
+    animation: slideDown 0.3s ease;
+  }
