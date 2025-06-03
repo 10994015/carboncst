@@ -39,11 +39,11 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'birthday' => ['nullable', 'date', 'before:today'],
-            'is_student' => ['nullable', 'boolean'],
+            'membership_type' => ['required', 'in:guest,student'],
         ];
 
-        // 如果勾選了學生，則學校和學號為必填
-        if ($request->has('is_student') && $request->is_student) {
+        // 如果選擇學生身分，則學校和學號為必填
+        if ($request->membership_type === 'student') {
             $rules['school'] = ['required', 'string', 'max:255'];
             $rules['student_id'] = ['required', 'string', 'max:50', 'unique:users,student_id'];
         } else {
@@ -61,6 +61,8 @@ class RegisteredUserController extends Controller
             'password.confirmed' => '密碼確認不一致',
             'birthday.date' => '請輸入有效的日期',
             'birthday.before' => '生日必須是今天之前的日期',
+            'membership_type.required' => '請選擇身分類型',
+            'membership_type.in' => '身分類型無效',
             'school.required' => '學生必須填寫就讀學校',
             'student_id.required' => '學生必須填寫學號',
             'student_id.unique' => '此學號已被註冊',
@@ -68,17 +70,17 @@ class RegisteredUserController extends Controller
 
         $request->validate($rules, $messages);
 
-        // 建立用戶
+        // 建立用戶資料
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'birthday' => $request->birthday,
-            'is_student' => $request->has('is_student') ? true : false,
+            'membership_type' => $request->membership_type, // 使用 membership_type
         ];
 
         // 如果是學生，添加學校和學號資訊
-        if ($userData['is_student']) {
+        if ($request->membership_type === 'student') {
             $userData['school'] = $request->school;
             $userData['student_id'] = $request->student_id;
         }

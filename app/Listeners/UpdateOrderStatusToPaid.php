@@ -3,15 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\PaymentSuccessful;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class UpdateOrderStatusToPaid implements ShouldQueue
+class UpdateOrderStatusToPaid
 {
-    use InteractsWithQueue;
-
     /**
      * Create the event listener.
      */
@@ -26,9 +22,6 @@ class UpdateOrderStatusToPaid implements ShouldQueue
     public function handle(PaymentSuccessful $event): void
     {
         try {
-            Log::info('aaaaaaaaaaaaaaaaaaaaaa');
-            Log::info('aaaaaaaaaaaaaaaaaaaaaa');
-            Log::info('aaaaaaaaaaaaaaaaaaaaaa');
             DB::beginTransaction();
 
             $order = $event->order;
@@ -72,20 +65,8 @@ class UpdateOrderStatusToPaid implements ShouldQueue
                 'error' => $e->getMessage()
             ]);
 
-            // 重新拋出異常，讓 Laravel 的 queue 系統處理重試
-            throw $e;
+            // 不再拋出異常，因為沒有 queue 重試機制
+            // throw $e;
         }
-    }
-
-    /**
-     * Handle a job failure.
-     */
-    public function failed(PaymentSuccessful $event, \Throwable $exception): void
-    {
-        Log::error('UpdateOrderStatusToPaid listener failed', [
-            'order_id' => $event->order->id,
-            'error' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString()
-        ]);
     }
 }

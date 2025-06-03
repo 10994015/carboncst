@@ -8,11 +8,9 @@
                 <h1>個人資料</h1>
                 <p class="user-subtitle">管理您的碳材料學會會員資訊</p>
                 <div class="member-badge">
-                    @if($is_student)
-                        <span class="badge student">學生會員</span>
-                    @else
-                        <span class="badge general">一般會員</span>
-                    @endif
+                    <span class="badge {{ $membership_type === 'student' ? 'student' : 'general' }}">
+                        {{ $this->getMembershipLabel() }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -89,19 +87,20 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox"
-                                           wire:model="is_student"
-                                           class="checkbox-input">
-                                    <span class="checkbox-custom"></span>
-                                    <span class="checkbox-text">我是學生</span>
-                                </label>
+                            <label>會員身分</label>
+                            <div class="readonly-field">
+                                <span class="membership-badge {{ $membership_type }}">
+                                    {{ $this->getMembershipLabel() }}
+                                </span>
+                                <small class="readonly-note">
+                                    <i class="fas fa-info-circle"></i>
+                                    會員身分無法自行修改，如需變更請聯繫管理員
+                                </small>
                             </div>
                         </div>
                     </div>
 
-                    @if($is_student)
+                    @if($this->isStudent())
                         <div class="student-fields">
                             <div class="form-row">
                                 <div class="form-group">
@@ -161,11 +160,11 @@
                         </div>
                         <div class="info-item">
                             <label>會員身份</label>
-                            <span class="value">{{ $is_student ? '學生會員' : '一般會員' }}</span>
+                            <span class="value">{{ $this->getMembershipLabel() }}</span>
                         </div>
                     </div>
 
-                    @if($is_student && ($school || $student_id))
+                    @if($this->isStudent() && ($school || $student_id))
                         <div class="info-row">
                             @if($school)
                                 <div class="info-item">
@@ -257,3 +256,137 @@
         @endif
     </div>
 </div>
+
+<!-- 新增的 CSS 樣式 -->
+<style>
+    .readonly-field {
+        margin-top: 8px;
+    }
+
+    .membership-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .membership-badge.guest {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border: 1px solid #bbdefb;
+    }
+
+    .membership-badge.regular {
+        background-color: #e8f5e8;
+        color: #388e3c;
+        border: 1px solid #c8e6c9;
+    }
+
+    .membership-badge.premium {
+        background-color: #fff3e0;
+        color: #f57c00;
+        border: 1px solid #ffcc02;
+    }
+
+    .membership-badge.student {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+        border: 1px solid #ce93d8;
+    }
+
+    .readonly-note {
+        display: block;
+        color: #666;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .readonly-note i {
+        margin-right: 4px;
+    }
+
+    .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 8px;
+    }
+
+    .radio-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        min-width: 120px;
+    }
+
+    .radio-label:hover {
+        background-color: rgba(45, 45, 45, 0.05);
+    }
+
+    .radio-input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .radio-custom {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border: 2px solid #ddd;
+        border-radius: 50%;
+        margin-right: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .radio-input:checked + .radio-custom {
+        border-color: #2d2d2d;
+        background-color: #2d2d2d;
+    }
+
+    .radio-input:checked + .radio-custom::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+
+    .radio-text {
+        color: #2d2d2d;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .radio-input:checked + .radio-custom + .radio-text {
+        font-weight: 600;
+    }
+
+    .student-fields {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

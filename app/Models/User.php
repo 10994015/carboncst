@@ -21,10 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_student',
         'school',
         'birthday',
         'student_id',
+        'membership_type', // guest or student
     ];
 
     /**
@@ -45,7 +45,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'birthday' => 'date',
-        'is_student' => 'boolean',
     ];
 
     /**
@@ -68,7 +67,7 @@ class User extends Authenticatable
      */
     public function isStudent()
     {
-        return $this->is_student;
+        return $this->membership_type === 'student';
     }
 
     /**
@@ -78,7 +77,7 @@ class User extends Authenticatable
      */
     public function getStudentInfoAttribute()
     {
-        if ($this->is_student && $this->school && $this->student_id) {
+        if ($this->membership_type === 'student' && $this->school && $this->student_id) {
             return "{$this->school} - {$this->student_id}";
         }
         return null;
@@ -89,7 +88,7 @@ class User extends Authenticatable
      */
     public function scopeStudents($query)
     {
-        return $query->where('is_student', true);
+        return $query->where('membership_type', 'student');
     }
 
     /**
@@ -97,7 +96,7 @@ class User extends Authenticatable
      */
     public function scopeNonStudents($query)
     {
-        return $query->where('is_student', false);
+        return $query->where('membership_type', '!=', 'student');
     }
 
     /**
@@ -187,7 +186,7 @@ class User extends Authenticatable
      */
     public function getUserTypeNameAttribute()
     {
-        return $this->is_student ? '學生身分' : '一般身分';
+        return $this->isStudent() ? '學生身分' : '一般身分';
     }
 
     /**
@@ -250,20 +249,6 @@ class User extends Authenticatable
     }
 
     /**
-     * 獲取完整的用戶資訊（包含身分和學校資訊）
-     */
-    public function getFullUserInfoAttribute()
-    {
-        $info = $this->name;
-
-        if ($this->is_student && $this->student_info) {
-            $info .= " ({$this->student_info})";
-        }
-
-        return $info;
-    }
-
-    /**
      * Scope: 已完成註冊的用戶
      */
     public function scopeRegistered($query)
@@ -309,7 +294,7 @@ class User extends Authenticatable
      */
     public function isStudentVerified()
     {
-        return $this->is_student && !empty($this->school) && !empty($this->student_id);
+        return $this->membership_type === 'student' && !empty($this->school) && !empty($this->student_id);
     }
 
     /**
@@ -326,5 +311,20 @@ class User extends Authenticatable
             'has_banquet' => $this->hasBanquetRegistration(),
             'registration_status' => $this->registration_status,
         ];
+    }
+
+    public function getMembershipLabel()
+    {
+        switch ($this->membership_type) {
+            case 'student':
+                return '學生會員';
+            case 'regular':
+                return '一般會員';
+            case 'premium':
+                return '永久會員';
+            case 'guest':
+            default:
+                return '訪客';
+        }
     }
 }

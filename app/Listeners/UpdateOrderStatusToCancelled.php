@@ -3,15 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\PaymentCancelled;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class UpdateOrderStatusToCancelled implements ShouldQueue
+class UpdateOrderStatusToCancelled
 {
-    use InteractsWithQueue;
-
     /**
      * Create the event listener.
      */
@@ -62,19 +58,8 @@ class UpdateOrderStatusToCancelled implements ShouldQueue
                 'error' => $e->getMessage()
             ]);
 
-            throw $e;
+            // 不再拋出異常，因為沒有 queue 重試機制
+            // throw $e;
         }
-    }
-
-    /**
-     * Handle a job failure.
-     */
-    public function failed(PaymentCancelled $event, \Throwable $exception): void
-    {
-        Log::error('UpdateOrderStatusToCancelled listener failed', [
-            'order_id' => $event->order->id,
-            'error' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString()
-        ]);
     }
 }

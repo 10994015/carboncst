@@ -3,15 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\PaymentFailed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class UpdateOrderStatusToFailed implements ShouldQueue
+class UpdateOrderStatusToFailed
 {
-    use InteractsWithQueue;
-
     /**
      * Create the event listener.
      */
@@ -57,19 +53,8 @@ class UpdateOrderStatusToFailed implements ShouldQueue
                 'error' => $e->getMessage()
             ]);
 
-            throw $e;
+            // 不再拋出異常，因為沒有 queue 重試機制
+            // throw $e;
         }
-    }
-
-    /**
-     * Handle a job failure.
-     */
-    public function failed(PaymentFailed $event, \Throwable $exception): void
-    {
-        Log::error('UpdateOrderStatusToFailed listener failed', [
-            'order_id' => $event->order->id,
-            'error' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString()
-        ]);
     }
 }

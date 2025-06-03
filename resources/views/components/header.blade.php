@@ -55,12 +55,12 @@
             <!-- 已登入：顯示用戶選單 -->
             <a href="javascript:;" class="member-menu">
                 <p>{{ Auth::user()->name }}</p>
-                <span>{{ Auth::user()->is_student ? '學生會員' : '一般會員' }}</span>
+                <span>{{ Auth::user()->getMembershipLabel() }}</span>
                 <ul>
                     <li class="member-info">
                         <i class="fas fa-user-circle"></i>
                         <span>{{ Auth::user()->name }}</span>
-                        <small>{{ Auth::user()->is_student ? '學生會員' : '一般會員' }}</small>
+                        <small>{{ Auth::user()->getMembershipLabel() }}</small>
                     </li>
                     <li onclick="window.location.href='/profile'">
                         <i class="fas fa-user-edit"></i>

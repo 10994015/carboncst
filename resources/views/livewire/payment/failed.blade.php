@@ -14,9 +14,8 @@
                 </svg>
             </div>
             <h2 class="mb-2 text-2xl font-bold text-gray-800">付款失敗</h2>
-            <p class="mb-4 text-gray-600">{{ $errorMsg }}</p>
+            <p class="mb-4 text-gray-600">{{ $error }}</p>
             <div class="p-4 mb-4 rounded-lg bg-gray-50">
-                <p class="text-sm text-gray-600">訂單編號: {{ $merchantTradeNo }}</p>
             </div>
             <div class="space-x-2">
                 <a href="/payment" class="px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700">

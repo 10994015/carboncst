@@ -13,7 +13,7 @@ class ProfileComponent extends Component
     public $name;
     public $email;
     public $birthday;
-    public $is_student;
+    public $membership_type;
     public $school;
     public $student_id;
 
@@ -34,7 +34,7 @@ class ProfileComponent extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->birthday = $user->birthday ? $user->birthday->format('Y-m-d') : '';
-        $this->is_student = $user->is_student;
+        $this->membership_type = $user->membership_type ?? 'guest';
         $this->school = $user->school;
         $this->student_id = $user->student_id;
     }
@@ -45,11 +45,10 @@ class ProfileComponent extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
             'birthday' => 'nullable|date|before:today',
-            'is_student' => 'boolean',
         ];
 
         // 如果是學生，學校和學號為必填
-        if ($this->is_student) {
+        if ($this->membership_type === 'student') {
             $rules['school'] = 'required|string|max:255';
             $rules['student_id'] = 'required|string|max:50|unique:users,student_id,' . Auth::id();
         } else {
@@ -75,6 +74,26 @@ class ProfileComponent extends Component
         ];
     }
 
+    public function getMembershipLabel()
+    {
+        switch ($this->membership_type) {
+            case 'student':
+                return '學生會員';
+            case 'regular':
+                return '一般會員';
+            case 'premium':
+                return '永久會員';
+            case 'guest':
+            default:
+                return '訪客';
+        }
+    }
+
+    public function isStudent()
+    {
+        return $this->membership_type === 'student';
+    }
+
     public function toggleEdit()
     {
         if ($this->isEditing) {
@@ -97,11 +116,11 @@ class ProfileComponent extends Component
                 'name' => $this->name,
                 'email' => $this->email,
                 'birthday' => $this->birthday ?: null,
-                'is_student' => $this->is_student,
+                // membership_type 不允許更新
             ];
 
             // 處理學生資料
-            if ($this->is_student) {
+            if ($this->membership_type === 'student') {
                 $updateData['school'] = $this->school;
                 $updateData['student_id'] = $this->student_id;
             } else {
@@ -155,9 +174,9 @@ class ProfileComponent extends Component
         }
     }
 
-    public function updatedIsStudent()
+    public function updatedMembershipType()
     {
-        if (!$this->is_student) {
+        if ($this->membership_type !== 'student') {
             $this->school = '';
             $this->student_id = '';
         }
@@ -176,6 +195,7 @@ class ProfileComponent extends Component
         $this->errorMessage = '';
         $this->resetErrorBag();
     }
+
     public function render()
     {
         return view('livewire.profile-component');

@@ -12,7 +12,7 @@
     <!-- 身分別顯示 -->
     <div class="p-4 mb-6 rounded-lg bg-blue-50">
         <h3 class="text-lg font-semibold text-blue-800">
-            當前身分：{{ $userType === 'student' ? '學生身分' : '一般身分' }}
+            當前身分：{{ $this->getUserTypeLabel() }} ({{ $this->getMembershipLabel() }})
         </h3>
         @if($userType === 'student')
             <p class="text-sm text-blue-600">學生身分的大會晚宴需額外付費 NT$ 1,200</p>
@@ -47,16 +47,16 @@
                     </td>
                     <td class="px-4 py-4 text-center border border-gray-300">
                         <div class="space-y-1">
-                            <div>新台幣3500元或</div>
-                            <div class="text-sm">新台幣3100元(一般會員/團體會員)</div>
-                            <div class="text-sm">新台幣2500元(永久會員)</div>
+                            <div>新台幣 {{ number_format($plans['general']['early_bird']['prices']['guest']) }} 元 (訪客)</div>
+                            <div class="text-sm">新台幣 {{ number_format($plans['general']['early_bird']['prices']['regular']) }} 元 (一般會員)</div>
+                            <div class="text-sm">新台幣 {{ number_format($plans['general']['early_bird']['prices']['premium']) }} 元 (永久會員)</div>
                         </div>
                     </td>
                     <td class="px-4 py-4 text-center border border-gray-300">
                         <div class="space-y-1">
-                            <div>新台幣4000元或</div>
-                            <div class="text-sm">新台幣3500元(一般會員/團體會員)</div>
-                            <div class="text-sm">新台幣3000元(永久會員)</div>
+                            <div>新台幣 {{ number_format($plans['general']['regular']['prices']['guest']) }} 元 (訪客)</div>
+                            <div class="text-sm">新台幣 {{ number_format($plans['general']['regular']['prices']['regular']) }} 元 (一般會員)</div>
+                            <div class="text-sm">新台幣 {{ number_format($plans['general']['regular']['prices']['premium']) }} 元 (永久會員)</div>
                         </div>
                     </td>
                     <td class="px-4 py-4 font-semibold text-center border border-gray-300">
@@ -70,13 +70,13 @@
                         <span class="text-sm font-normal">Student</span>
                     </td>
                     <td class="px-4 py-4 text-center border border-gray-300">
-                        新台幣2000元
+                        新台幣 {{ number_format($plans['student']['early_bird']['price']) }} 元
                     </td>
                     <td class="px-4 py-4 text-center border border-gray-300">
-                        新台幣2500元
+                        新台幣 {{ number_format($plans['student']['regular']['price']) }} 元
                     </td>
                     <td class="px-4 py-4 text-center border border-gray-300">
-                        新台幣1200元
+                        新台幣 {{ number_format($plans['student']['early_bird']['banquet_price']) }} 元
                     </td>
                 </tr>
             </tbody>
@@ -110,11 +110,18 @@
                 </div>
             @else
                 <div class="mb-2 text-2xl font-bold text-red-600">
-                    NT$ {{ number_format($plans['general']['early_bird']['prices']['single']) }}
+                    NT$ {{ number_format($plans['general']['early_bird']['prices'][$membershipType]) }}
                 </div>
                 <div class="text-sm text-gray-600">
-                    <div>一般會員：NT$ {{ number_format($plans['general']['early_bird']['prices']['member']) }}</div>
-                    <div>永久會員：NT$ {{ number_format($plans['general']['early_bird']['prices']['lifetime']) }}</div>
+                    <div class="{{ $membershipType === 'guest' ? 'font-bold text-red-600' : '' }}">
+                        訪客：NT$ {{ number_format($plans['general']['early_bird']['prices']['guest']) }}
+                    </div>
+                    <div class="{{ $membershipType === 'regular' ? 'font-bold text-red-600' : '' }}">
+                        一般會員：NT$ {{ number_format($plans['general']['early_bird']['prices']['regular']) }}
+                    </div>
+                    <div class="{{ $membershipType === 'premium' ? 'font-bold text-red-600' : '' }}">
+                        永久會員：NT$ {{ number_format($plans['general']['early_bird']['prices']['premium']) }}
+                    </div>
                 </div>
             @endif
         </div>
@@ -141,11 +148,18 @@
                 </div>
             @else
                 <div class="mb-2 text-2xl font-bold text-red-600">
-                    NT$ {{ number_format($plans['general']['regular']['prices']['single']) }}
+                    NT$ {{ number_format($plans['general']['regular']['prices'][$membershipType]) }}
                 </div>
                 <div class="text-sm text-gray-600">
-                    <div>一般會員：NT$ {{ number_format($plans['general']['regular']['prices']['member']) }}</div>
-                    <div>永久會員：NT$ {{ number_format($plans['general']['regular']['prices']['lifetime']) }}</div>
+                    <div class="{{ $membershipType === 'guest' ? 'font-bold text-red-600' : '' }}">
+                        訪客：NT$ {{ number_format($plans['general']['regular']['prices']['guest']) }}
+                    </div>
+                    <div class="{{ $membershipType === 'regular' ? 'font-bold text-red-600' : '' }}">
+                        一般會員：NT$ {{ number_format($plans['general']['regular']['prices']['regular']) }}
+                    </div>
+                    <div class="{{ $membershipType === 'premium' ? 'font-bold text-red-600' : '' }}">
+                        永久會員：NT$ {{ number_format($plans['general']['regular']['prices']['premium']) }}
+                    </div>
                 </div>
             @endif
         </div>
@@ -194,8 +208,8 @@
             </div>
         @else
             <div class="flex items-center justify-between">
-                <span class="text-gray-700">{{ $plans['general'][$selectedPlan]['name'] }}</span>
-                <span class="font-semibold">NT$ {{ number_format($plans['general'][$selectedPlan]['prices']['single']) }}</span>
+                <span class="text-gray-700">{{ $plans['general'][$selectedPlan]['name'] }} ({{ $this->getMembershipLabel() }})</span>
+                <span class="font-semibold">NT$ {{ number_format($plans['general'][$selectedPlan]['prices'][$membershipType]) }}</span>
             </div>
         @endif
 
@@ -226,7 +240,7 @@
         <p>• 使用綠界金流安全付款</p>
         <p>• 支援各大信用卡</p>
         <p>• 付款後立即完成註冊</p>
-        @if($userType === 'general')
+        @if($userType !== 'student')
             <p>• 一般身分註冊費已包含大會晚宴</p>
         @endif
     </div>

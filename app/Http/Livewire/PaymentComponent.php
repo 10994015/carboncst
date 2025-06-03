@@ -13,7 +13,8 @@ class PaymentComponent extends Component
 {
     public $selectedPlan = 'early_bird';
     public $includeBanquet = false;
-    public $userType = 'general'; // general or student
+    public $userType = 'guest'; // guest, regular, premium, student
+    public $membershipType = 'guest'; // 會員身分類型
     public $isEarlyBird = true; // 根據當前日期判斷是否還在早鳥期間
 
     public $plans = [
@@ -22,9 +23,9 @@ class PaymentComponent extends Component
                 'name' => '早鳥 Early-Bird 優惠註冊費',
                 'subtitle' => '(8月31日前完成繳費者)',
                 'prices' => [
-                    'single' => 3500,
-                    'member' => 3100, // 一般會員/團體會員
-                    'lifetime' => 2500, // 永久會員
+                    'guest' => 3500,      // 訪客
+                    'regular' => 3100,    // 一般會員
+                    'premium' => 2500,    // 永久會員
                 ],
                 'banquet_included' => true,
             ],
@@ -32,9 +33,9 @@ class PaymentComponent extends Component
                 'name' => '非早鳥網路及現場報名',
                 'subtitle' => 'Regular & On-site 註冊費',
                 'prices' => [
-                    'single' => 4000,
-                    'member' => 3500, // 一般會員/團體會員
-                    'lifetime' => 3000, // 永久會員
+                    'guest' => 4000,      // 訪客
+                    'regular' => 3500,    // 一般會員
+                    'premium' => 3000,    // 永久會員
                 ],
                 'banquet_included' => true,
             ]
@@ -59,9 +60,10 @@ class PaymentComponent extends Component
 
     public function mount()
     {
-        // 檢查用戶身分
+        // 檢查用戶身分 - 改用 membership_type
         if (Auth::check()) {
-            $this->userType = Auth::user()->is_student ? 'student' : 'general';
+            $this->membershipType = Auth::user()->membership_type ?? 'guest';
+            $this->userType = $this->membershipType === 'student' ? 'student' : 'general';
         }
 
         // 判斷是否還在早鳥期間 (假設8月31日前)
@@ -88,9 +90,8 @@ class PaymentComponent extends Component
             $banquetPrice = $this->includeBanquet ? $this->plans['student'][$this->selectedPlan]['banquet_price'] : 0;
             return $basePrice + $banquetPrice;
         } else {
-            // 一般身分的價格邏輯，這裡假設使用 single 價格
-            // 您可以根據實際的會員狀態來調整
-            return $this->plans['general'][$this->selectedPlan]['prices']['single'];
+            // 根據會員身分返回對應價格
+            return $this->plans['general'][$this->selectedPlan]['prices'][$this->membershipType];
         }
     }
 
@@ -103,8 +104,30 @@ class PaymentComponent extends Component
             }
             return $planName;
         } else {
-            return $this->plans['general'][$this->selectedPlan]['name'];
+            $membershipLabel = $this->getMembershipLabel();
+            return $this->plans['general'][$this->selectedPlan]['name'] . ' (' . $membershipLabel . ')';
         }
+    }
+
+    public function getMembershipLabel()
+    {
+        switch ($this->membershipType) {
+            case 'guest':
+                return '訪客';
+            case 'regular':
+                return '一般會員';
+            case 'premium':
+                return '永久會員';
+            case 'student':
+                return '學生身分';
+            default:
+                return '訪客';
+        }
+    }
+
+    public function getUserTypeLabel()
+    {
+        return $this->userType === 'student' ? '學生身分' : '一般身分';
     }
 
     private function createOrder($merchantTradeNo)
@@ -117,10 +140,11 @@ class PaymentComponent extends Component
         // 準備訂單詳細資訊
         $orderDetails = [
             'user_type' => $this->userType,
+            'membership_type' => $this->membershipType,
             'plan_name' => $this->getCurrentPlanName(),
             'base_amount' => $this->userType === 'student'
                 ? $this->plans['student'][$this->selectedPlan]['price']
-                : $this->plans['general'][$this->selectedPlan]['prices']['single'],
+                : $this->plans['general'][$this->selectedPlan]['prices'][$this->membershipType],
             'banquet_included' => $this->includeBanquet,
             'banquet_fee' => $banquetFee,
             'registration_date' => now()->toDateTimeString(),
@@ -185,7 +209,7 @@ class PaymentComponent extends Component
             $autoSubmitFormService = $factory->create('AutoSubmitFormWithCmvService');
 
             $totalAmount = $this->getCurrentPrice();
-            $totalAmount = $totalAmount / 200;
+            $totalAmount = $totalAmount;
             $planName = $this->getCurrentPlanName();
 
             $input = [

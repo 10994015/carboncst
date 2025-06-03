@@ -10,7 +10,7 @@
                             <text x="50" y="55" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">C</text>
                         </svg>
                     </div>
-                    <h1 class="logo-text">加入碳材料學會</h1>
+                    <h1 class="logo-text">註冊帳號</h1>
                     <p class="logo-subtitle">Create Your Account</p>
                 </div>
             </div>
@@ -80,23 +80,35 @@
                            value="{{ old('birthday') }}">
                 </div>
 
-                <!-- Student Status -->
-                <div class="form-group-checkbox">
-                    <label for="is_student" class="checkbox-label">
-                        <input id="is_student"
-                               type="checkbox"
-                               class="carbon-checkbox"
-                               name="is_student"
-                               value="1"
-                               {{ old('is_student') ? 'checked' : '' }}
-                               onchange="toggleStudentFields(this)">
-                        <span class="checkbox-custom"></span>
-                        <span class="checkbox-text">我是學生</span>
-                    </label>
+                <!-- Membership Type -->
+                <div class="form-group">
+                    <label class="form-label">身分類型</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio"
+                                   name="membership_type"
+                                   value="guest"
+                                   class="carbon-radio"
+                                   {{ old('membership_type', 'guest') === 'guest' ? 'checked' : '' }}
+                                   onchange="toggleStudentFields()">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">一般身分</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio"
+                                   name="membership_type"
+                                   value="student"
+                                   class="carbon-radio"
+                                   {{ old('membership_type') === 'student' ? 'checked' : '' }}
+                                   onchange="toggleStudentFields()">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">學生身分</span>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Student Fields (Hidden by default) -->
-                <div id="student-fields" class="student-fields" style="display: {{ old('is_student') ? 'block' : 'none' }}">
+                <div id="student-fields" class="student-fields" style="display: {{ old('membership_type') === 'student' ? 'block' : 'none' }}">
                     <!-- School -->
                     <div class="form-group">
                         <label for="school" class="form-label">就讀學校</label>
@@ -143,12 +155,13 @@
 
     <!-- JavaScript for Student Fields Toggle -->
     <script>
-        function toggleStudentFields(checkbox) {
+        function toggleStudentFields() {
+            const studentRadio = document.querySelector('input[name="membership_type"][value="student"]');
             const studentFields = document.getElementById('student-fields');
             const schoolInput = document.getElementById('school');
             const studentIdInput = document.getElementById('student_id');
 
-            if (checkbox.checked) {
+            if (studentRadio.checked) {
                 studentFields.style.display = 'block';
                 // 如果是學生，設為必填
                 schoolInput.setAttribute('required', 'required');
@@ -164,12 +177,97 @@
             }
         }
 
-        // 頁面載入時檢查是否已勾選學生
+        // 頁面載入時檢查選擇的身分類型
         document.addEventListener('DOMContentLoaded', function() {
-            const isStudentCheckbox = document.getElementById('is_student');
-            if (isStudentCheckbox.checked) {
-                toggleStudentFields(isStudentCheckbox);
-            }
+            toggleStudentFields();
         });
     </script>
+
+    <!-- 新增的 CSS 樣式 -->
+    <style>
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            transition: all 0.2s ease;
+        }
+
+        .radio-label:hover {
+            background-color: rgba(45, 45, 45, 0.05);
+            border-radius: 6px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .carbon-radio {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-custom {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .carbon-radio:checked + .radio-custom {
+            border-color: #2d2d2d;
+            background-color: #2d2d2d;
+        }
+
+        .carbon-radio:checked + .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .radio-text {
+            color: #2d2d2d;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .carbon-radio:checked + .radio-custom + .radio-text {
+            color: #2d2d2d;
+            font-weight: 600;
+        }
+
+        .student-fields {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </x-guest-layout>

@@ -20,22 +20,9 @@ class PaymentController extends Controller
      */
     public function ecpayReturn(Request $request)
     {
-        log::info('ECPay Return Callback Received', $request->all());
-        log::info('ECPay Return Callback Received', $request->all());
-        log::info('ECPay Return Callback Received', $request->all());
-        log::info('ECPay Return Callback Received', $request->all());
-        log::info('ECPay Return Callback Received', $request->all());
+
         try {
-            // 建立綠界工廠實例
-            $factory = new Factory([
-                'hashKey' => config('ecpay.hash_key'),
-                'hashIv' => config('ecpay.hash_iv'),
-            ]);
-
-            $checkoutResponse = $factory->create('CheckoutResponseService');
-
-            // 取得回傳的資料
-            $feedback = $checkoutResponse->get($request->all());
+            $feedback = $request->all();
 
             // 記錄回調資料
             Log::info('ECPay Return Callback', $feedback);
@@ -50,11 +37,9 @@ class PaymentController extends Controller
 
             // 檢查付款狀態
             if (isset($feedback['RtnCode']) && $feedback['RtnCode'] == '1') {
-                // 觸發付款成功事件
                 $this->handleSuccessfulPayment($feedback, $order);
                 return response('1|OK');
             } else {
-                // 觸發付款失敗事件
                 $this->handleFailedPayment($feedback, $order);
                 return response('0|' . ($feedback['RtnMsg'] ?? 'Payment failed'));
             }
@@ -69,6 +54,7 @@ class PaymentController extends Controller
      */
     public function paymentSuccess(Request $request)
     {
+        return redirect()->route('payment.history');
         $user = auth()->user();
         $latestOrder = null;
 
@@ -78,7 +64,6 @@ class PaymentController extends Controller
                 ->latest()
                 ->first();
         }
-
         return view('livewire.payment.success', [
             'message' => '付款成功！您的註冊已完成。',
             'order' => $latestOrder
