@@ -8,7 +8,20 @@
                 <h1>個人資料</h1>
                 <p class="user-subtitle">管理您的碳材料學會會員資訊</p>
                 <div class="member-badge">
-                    <span class="badge {{ $membership_type === 'student' ? 'student' : 'general' }}">
+                    @php
+                        $user = Auth::user();
+                        $badgeClass = 'general'; // 預設
+                        if ($user->is_admin) {
+                            $badgeClass = 'admin';
+                        } elseif ($membership_type === 'student') {
+                            $badgeClass = 'student';
+                        } elseif ($membership_type === 'premium') {
+                            $badgeClass = 'premium';
+                        } elseif ($membership_type === 'regular') {
+                            $badgeClass = 'regular';
+                        }
+                    @endphp
+                    <span class="badge {{ $badgeClass }}">
                         {{ $this->getMembershipLabel() }}
                     </span>
                 </div>
@@ -89,7 +102,14 @@
                         <div class="form-group">
                             <label>會員身分</label>
                             <div class="readonly-field">
-                                <span class="membership-badge {{ $membership_type }}">
+                                @php
+                                    $user = Auth::user();
+                                    $badgeClass = $membership_type; // 預設使用 membership_type
+                                    if ($user->is_admin) {
+                                        $badgeClass = 'admin';
+                                    }
+                                @endphp
+                                <span class="membership-badge {{ $badgeClass }}">
                                     {{ $this->getMembershipLabel() }}
                                 </span>
                                 <small class="readonly-note">
@@ -270,6 +290,30 @@
         font-weight: 600;
         font-size: 14px;
         margin-bottom: 8px;
+    }
+
+    .membership-badge.admin {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #ef9a9a;
+        position: relative;
+    }
+
+    .membership-badge.admin::before {
+        content: '👑';
+        margin-right: 4px;
+    }
+
+    .badge.admin {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #ef9a9a;
+        position: relative;
+    }
+
+    .badge.admin::before {
+        content: '👑';
+        margin-right: 4px;
     }
 
     .membership-badge.guest {

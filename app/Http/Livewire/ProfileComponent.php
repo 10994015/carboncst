@@ -41,14 +41,16 @@ class ProfileComponent extends Component
 
     public function rules()
     {
+        $user = Auth::user();
+
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
             'birthday' => 'nullable|date|before:today',
         ];
 
-        // 如果是學生，學校和學號為必填
-        if ($this->membership_type === 'student') {
+        // 如果是學生且不是管理員，學校和學號為必填
+        if ($this->membership_type === 'student' && !$user->is_admin) {
             $rules['school'] = 'required|string|max:255';
             $rules['student_id'] = 'required|string|max:50|unique:users,student_id,' . Auth::id();
         } else {
@@ -76,6 +78,13 @@ class ProfileComponent extends Component
 
     public function getMembershipLabel()
     {
+        $user = Auth::user();
+
+        // 如果是管理員，優先顯示管理員身分
+        if ($user->is_admin) {
+            return '管理員';
+        }
+
         switch ($this->membership_type) {
             case 'student':
                 return '學生會員';
@@ -91,6 +100,13 @@ class ProfileComponent extends Component
 
     public function isStudent()
     {
+        $user = Auth::user();
+
+        // 如果是管理員，不視為學生
+        if ($user->is_admin) {
+            return false;
+        }
+
         return $this->membership_type === 'student';
     }
 
@@ -119,8 +135,8 @@ class ProfileComponent extends Component
                 // membership_type 不允許更新
             ];
 
-            // 處理學生資料
-            if ($this->membership_type === 'student') {
+            // 處理學生資料 - 管理員不需要填寫學生資料
+            if ($this->membership_type === 'student' && !$user->is_admin) {
                 $updateData['school'] = $this->school;
                 $updateData['student_id'] = $this->student_id;
             } else {
@@ -176,7 +192,10 @@ class ProfileComponent extends Component
 
     public function updatedMembershipType()
     {
-        if ($this->membership_type !== 'student') {
+        $user = Auth::user();
+
+        // 如果不是學生或是管理員，清空學生相關資料
+        if ($this->membership_type !== 'student' || $user->is_admin) {
             $this->school = '';
             $this->student_id = '';
         }

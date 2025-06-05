@@ -315,6 +315,9 @@ class User extends Authenticatable
 
     public function getMembershipLabel()
     {
+        if ($this->is_admin) {
+            return '管理員';
+        }
         switch ($this->membership_type) {
             case 'student':
                 return '學生會員';

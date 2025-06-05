@@ -17,6 +17,7 @@ use App\Http\Livewire\JoinMemberComponent;
 use App\Http\Livewire\LearnaboutComponet;
 use App\Http\Livewire\LearncharterComponet;
 use App\Http\Livewire\LetterComponent;
+use App\Http\Livewire\MemberManagementComponent;
 use App\Http\Livewire\NewsComponet;
 use App\Http\Livewire\OrganizationComponet;
 use App\Http\Livewire\OverseaComponent;
@@ -114,5 +115,11 @@ Route::get('/ecpay/client-back', function () {
         return redirect()->route('payment.history');
     }
 })->name('ecpay.client.back'); // 新增
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/members', MemberManagementComponent::class)
+        ->name('admin.members');
+});
 
 require __DIR__ . '/auth.php';

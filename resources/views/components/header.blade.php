@@ -70,6 +70,12 @@
                         <i class="fas fa-credit-card"></i>
                         付款紀錄
                     </li>
+                    @if(Auth::user()->is_admin == "1")
+                        <li onclick="window.location.href='/admin/members'">
+                            <i class="fas fa-cog"></i>
+                            會員管理
+                        </li>
+                    @endif
                     <li onclick="confirmLogout()" class="logout-item">
                         <i class="fas fa-sign-out-alt"></i>
                         登出
