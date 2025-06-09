@@ -69,11 +69,9 @@
                     </button>
 
                     <div class="action-links">
-                        @if (Route::has('password.request'))
-                            <a class="forgot-password-link" href="{{ route('password.request') }}">
-                                忘記密碼？
-                            </a>
-                        @endif
+                        <a class="forgot-password-link" href="/contact?message=forgot-password">
+                            忘記密碼？
+                        </a>
 
                         @if (Route::has('register'))
                             <span class="link-divider">|</span>
