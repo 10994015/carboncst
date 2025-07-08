@@ -47,7 +47,7 @@
             <p>聯絡我們</p><span>Contact Us</span>
         </a>
         <a href="/payment">
-            <p>付款專區</p><span>Payment</span>
+            <p>研討會付款專區</p><span>Payment</span>
         </a>
 
         <!-- 登入狀態區域 -->
