@@ -144,9 +144,8 @@ nav.navigation{
         overflow: hidden;
         transition: .3s;
         display: flex;
-        flex-direction: column;
         &.open{
-            height: auto;
+            min-height:100px !important;
         }
         a{
             margin:6px 0;

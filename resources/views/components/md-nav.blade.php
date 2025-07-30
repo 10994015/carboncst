@@ -2,7 +2,31 @@
     isAbout:false,
     isInfo:false,
     isAwards:false,
-    isUser:false
+    isUser:false,
+    toggleMenuAbout() {
+        this.isInfo = false;
+        this.isAwards = false;
+        this.isUser = false;
+        this.isAbout = !this.isAbout;
+    },
+    toggleMenuInfo() {
+        this.isAbout = false;
+        this.isAwards = false;
+        this.isUser = false;
+        this.isInfo = !this.isInfo;
+    },
+    toggleMenuAwards() {
+        this.isAbout = false;
+        this.isInfo = false;
+        this.isUser = false;
+        this.isAwards = !this.isAwards;
+    },
+    toggleMenuUser() {
+        this.isAbout = false;
+        this.isInfo = false;
+        this.isAwards = false;
+        this.isUser = !this.isUser;
+    }
 }">
     <i class="fas fa-times" id="menuClose"></i>
 
@@ -31,7 +55,7 @@
     <a href="/news">
         <p>最新消息</p><span>News</span>
     </a>
-    <a href="javascript:;" x-on:click="isInfo = false;isAwards=false;isUser=false;isAbout = !isAbout">
+    <a href="javascript:;" x-on:click="toggleMenuAbout()">
         <p>關於學會</p><span>About CST</span>
     </a>
     <ul :class="{'open':isAbout}">
@@ -41,7 +65,7 @@
         <a href="/cst-group">➤ 學會平台小組</a>
         <a href="/learnchart">➤ 學會章程</a>
     </ul>
-    <a href="javascript:;" x-on:click="isAbout = false;isInfo=false;isUser=false;isAwards = !isAwards">
+    <a href="javascript:;" x-on:click="toggleMenuAwards()">
         <p>學會獎項</p><span>CST Awards</span>
     </a>
     <ul :class="{'open':isAwards}">
@@ -55,10 +79,10 @@
     <a href="/cst-database">
         <p>『碳才』資料庫</p><span>CST Database</span>
     </a>
-    <a href="javascript:;" x-on:click="isAbout = false;isAwards=false;isUser=false;isInfo = !isInfo">
+    <a href="javascript:;" x-on:click="toggleMenuInfo()">
         <p>論壇&研討會資訊</p><span>Seminar Information</span>
     </a>
-    <ul :class="{'open':isInfo}">
+    <ul :class="{'open':isInfo}"">
         <a href="/cst-seminar">➤ 臺灣碳材料學術研討會</a>
         <a href="/oversea">➤ 國內外研討會</a>
         <a href="/forum">➤ 碳材料論壇</a>

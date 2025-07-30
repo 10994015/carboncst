@@ -154,10 +154,9 @@ nav.navigation > ul {
   overflow: hidden;
   transition: 0.3s;
   display: flex;
-  flex-direction: column;
 }
 nav.navigation > ul.open {
-  height: auto;
+  min-height: 100px !important;
 }
 nav.navigation > ul a {
   margin: 6px 0;
