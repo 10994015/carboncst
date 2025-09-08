@@ -21,7 +21,7 @@ class PaymentComponent extends Component
         'general' => [
             'early_bird' => [
                 'name' => '早鳥 Early-Bird 優惠註冊費',
-                'subtitle' => '(8月31日前完成繳費者)',
+                'subtitle' => '(10月31日前完成繳費者)',
                 'prices' => [
                     'guest' => 3500,      // 訪客
                     'regular' => 3100,    // 一般會員
@@ -42,8 +42,8 @@ class PaymentComponent extends Component
         ],
         'student' => [
             'early_bird' => [
-                'name' => '學生身分早鳥',
-                'subtitle' => '(8月31日前完成繳費者)',
+                'name' => '學生身份早鳥',
+                'subtitle' => '(10月31日前完成繳費者)',
                 'price' => 2000,
                 'banquet_price' => 1200,
                 'banquet_included' => false,
@@ -66,8 +66,8 @@ class PaymentComponent extends Component
             $this->userType = $this->membershipType === 'student' ? 'student' : 'general';
         }
 
-        // 判斷是否還在早鳥期間 (假設8月31日前)
-        $this->isEarlyBird = now() <= now()->parse('2025-08-31 23:59:59');
+        // 判斷是否還在早鳥期間 (假設10月31日前)
+        $this->isEarlyBird = now() <= now()->parse('2025-10-31 23:59:59');
 
         // 設定預設方案
         $this->selectedPlan = $this->isEarlyBird ? 'early_bird' : 'regular';

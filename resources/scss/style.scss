@@ -99,6 +99,9 @@ nav.navigation{
     z-index: 20;
     padding: 50px 40px 0;
     transition: .3s;
+    &.md-navigation{
+        overflow-y: scroll;
+    }
     &.open{
         top: 0%;
     }

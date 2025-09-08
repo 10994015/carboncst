@@ -27,7 +27,7 @@
                     <th class="px-4 py-3 font-semibold text-center border border-gray-300">身分別</th>
                     <th class="px-4 py-3 font-semibold text-center border border-gray-300">
                         早鳥 Early-Bird 優惠註冊費<br>
-                        <span class="text-sm font-normal">(8月31日前完成繳費者)</span>
+                        <span class="text-sm font-normal">(10月31日前完成繳費者)</span>
                     </th>
                     <th class="px-4 py-3 font-semibold text-center border border-gray-300">
                         非早鳥網路及現場報名<br>
@@ -93,7 +93,7 @@
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <h3 class="text-xl font-bold text-gray-800">早鳥優惠方案</h3>
-                    <p class="text-sm text-gray-600">8月31日前完成繳費</p>
+                    <p class="text-sm text-gray-600">10月31日前完成繳費</p>
                     @if(!$isEarlyBird)
                         <p class="text-xs text-red-500">早鳥期間已結束</p>
                     @endif

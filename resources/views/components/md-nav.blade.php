@@ -1,4 +1,4 @@
-<nav class="navigation" id="navigation" x-data="{
+<nav class="navigation md-navigation" id="navigation" x-data="{
     isAbout:false,
     isInfo:false,
     isAwards:false,

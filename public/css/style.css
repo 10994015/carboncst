@@ -107,6 +107,9 @@ nav.navigation {
   padding: 50px 40px 0;
   transition: 0.3s;
 }
+nav.navigation.md-navigation {
+  overflow-y: scroll;
+}
 nav.navigation.open {
   top: 0%;
 }
