@@ -35,14 +35,14 @@ class ContactComponent extends Component
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'cy9577@gmail.com';
-            $mail->Password = 'grqrdvmjhszzvafa';
+            $mail->Username = env('MAIL_USERNAME');
+            $mail->Password = env('MAIL_PASSWORD');
             $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
+            $mail->Port = env('MAIL_PORT');
 
-            $mail->setFrom('cy9577@gmail.com');
+            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
 
-            $mail->addAddress('carbon.cst@gmail.com');
+            $mail->addAddress(env('MAIL_TO_ADDRESS'));
 
             $mail->isHTML(true);
 

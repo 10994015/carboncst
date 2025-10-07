@@ -2,12 +2,12 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="/images/logo.png" alt="臺灣碳材料學會" width="200"></a>
             </a>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+            忘記密碼了嗎?沒問題。只需告訴我們您的電子郵件地址,我們將透過電子郵件發送密碼重設連結,讓您可以設定新密碼。
         </div>
 
         <!-- Session Status -->
@@ -21,14 +21,14 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" value="電子郵件" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-button>
-                    {{ __('Email Password Reset Link') }}
+                    發送密碼重設連結
                 </x-button>
             </div>
         </form>

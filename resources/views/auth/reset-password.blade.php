@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="/images/logo.png" alt="臺灣碳材料學會" width="200"></a>
             </a>
         </x-slot>
 
@@ -17,30 +17,30 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" value="電子郵件" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email', $request->email)" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" value="新密碼" />
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                <x-input id="password" class="block w-full mt-1" type="password" name="password" required />
             </div>
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="password_confirmation" value="確認密碼" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <x-input id="password_confirmation" class="block w-full mt-1"
                                     type="password"
                                     name="password_confirmation" required />
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-button>
-                    {{ __('Reset Password') }}
+                    重設密碼
                 </x-button>
             </div>
         </form>

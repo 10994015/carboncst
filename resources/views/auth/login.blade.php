@@ -69,7 +69,7 @@
                     </button>
 
                     <div class="action-links">
-                        <a class="forgot-password-link" href="/contact?message=forgot-password">
+                        <a class="forgot-password-link" href="/forgot-password">
                             忘記密碼？
                         </a>
 
