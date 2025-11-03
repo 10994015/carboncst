@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                @if($createForm['membership_type'] === 'student' && !$createForm['is_admin'])
+                @if($createForm['membership_type'] === 'student')
                 <div class="student-fields">
                     <div class="form-row">
                         <div class="form-group">
@@ -208,7 +208,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if($editForm['membership_type'] === 'student' && !$editForm['is_admin'])
+                                    @if($editForm['membership_type'] === 'student')
                                         <div class="student-edit">
                                             <input type="text" wire:model="editForm.school" placeholder="學校" class="table-input mini @error('editForm.school') error @enderror">
                                             <input type="text" wire:model="editForm.student_id" placeholder="學號" class="table-input mini @error('editForm.student_id') error @enderror">
