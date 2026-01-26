@@ -8,7 +8,21 @@
             </h1>
             <p class="page-subtitle">管理系統中的所有會員資料</p>
         </div>
-        <div class="header-actions">
+       <div class="header-actions">
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button">
+                    <i class="fas fa-download"></i>
+                    匯出資料 ▼
+                </button>
+                <div class="dropdown-menu">
+                    <a wire:click="exportToExcel" href="javascript:void(0)" class="dropdown-item">
+                        <i class="fas fa-file-excel"></i> Excel 格式
+                    </a>
+                    <a wire:click="exportToCsv" href="javascript:void(0)" class="dropdown-item">
+                        <i class="fas fa-file-csv"></i> CSV 格式
+                    </a>
+                </div>
+            </div>
             <button wire:click="showCreateForm" class="btn btn-primary">
                 <i class="fas fa-plus"></i>
                 新增會員
@@ -320,7 +334,7 @@
 
     .page-header {
         display: flex;
-        justify-content: between;
+        justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
         padding-bottom: 20px;
@@ -344,7 +358,8 @@
     }
 
     .header-actions {
-        margin-left: auto;
+        display: flex;
+        gap: 12px;
     }
 
     .alert {
@@ -459,49 +474,6 @@
         margin-top: 4px;
     }
 
-    .checkbox-label {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        margin-top: 8px;
-    }
-
-    .checkbox-input {
-        position: absolute;
-        opacity: 0;
-    }
-
-    .checkbox-custom {
-        width: 18px;
-        height: 18px;
-        border: 2px solid #ddd;
-        border-radius: 4px;
-        margin-right: 8px;
-        position: relative;
-        transition: all 0.2s;
-    }
-
-    .checkbox-input:checked + .checkbox-custom {
-        background-color: #2d2d2d;
-        border-color: #2d2d2d;
-    }
-
-    .checkbox-input:checked + .checkbox-custom::after {
-        content: '✓';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .checkbox-text {
-        font-size: 14px;
-        color: #2d2d2d;
-    }
-
     .student-fields {
         margin-top: 20px;
         padding-top: 20px;
@@ -545,6 +517,15 @@
 
     .btn-secondary:hover {
         background-color: #5a6268;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
     }
 
     .filters-card {
@@ -851,17 +832,6 @@
         gap: 8px;
     }
 
-    .admin-checkbox {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 12px;
-    }
-
-    .admin-checkbox input {
-        margin: 0;
-    }
-
     .student-edit {
         display: flex;
         flex-direction: column;
@@ -895,54 +865,55 @@
         justify-content: center;
     }
 
-.pagination-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
 
-.pagination {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+    .pagination {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
-.pagination .page-item {
-    margin: 0 2px;
-}
+    .pagination .page-item {
+        margin: 0 2px;
+    }
 
-.pagination .page-link {
-    display: block;
-    padding: 8px 12px;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #007bff;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-}
+    .pagination .page-link {
+        display: block;
+        padding: 8px 12px;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #007bff;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+    }
 
-.pagination .page-link:hover {
-    color: #0056b3;
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-}
+    .pagination .page-link:hover {
+        color: #0056b3;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
 
-.pagination .page-item.active .page-link {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
+    .pagination .page-item.active .page-link {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
 
-.pagination .page-item.disabled .page-link {
-    color: #6c757d;
-    pointer-events: none;
-    cursor: auto;
-    background-color: #fff;
-    border-color: #dee2e6;
-}
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+        pointer-events: none;
+        cursor: auto;
+        background-color: #fff;
+        border-color: #dee2e6;
+    }
+
     /* 響應式設計 */
     @media (max-width: 768px) {
         .page-header {
@@ -952,7 +923,11 @@
         }
 
         .header-actions {
-            margin-left: 0;
+            width: 100%;
+        }
+
+        .header-actions .btn {
+            flex: 1;
         }
 
         .filters-row {
@@ -977,4 +952,52 @@
             padding: 12px 8px;
         }
     }
+    /* 下拉選單樣式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    z-index: 1000;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #2d2d2d;
+    text-decoration: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item i {
+    width: 20px;
+}
 </style>

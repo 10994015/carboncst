@@ -58,7 +58,6 @@ class MemberManagementComponent extends Component
             'editForm.membership_type' => 'required|in:guest,regular,premium,student',
         ];
 
-        // 如果是學生，學校和學號為必填
         if ($this->editForm['membership_type'] === 'student') {
             $rules['editForm.school'] = 'required|string|max:255';
             $rules['editForm.student_id'] = 'required|string|max:50|unique:users,student_id,' . ($this->editingUserId ?: 'NULL');
@@ -77,7 +76,6 @@ class MemberManagementComponent extends Component
             'createForm.membership_type' => 'required|in:guest,regular,premium,student',
         ];
 
-        // 如果是學生，學校和學號為必填
         if ($this->createForm['membership_type'] === 'student') {
             $rules['createForm.school'] = 'required|string|max:255';
             $rules['createForm.student_id'] = 'required|string|max:50|unique:users,student_id';
@@ -121,6 +119,162 @@ class MemberManagementComponent extends Component
             default:
                 return '訪客';
         }
+    }
+
+    /**
+     * 匯出會員資料為 CSV（使用 Response 方式）
+     */
+    public function exportToCsv()
+    {
+        try {
+            $fileName = '會員資料_' . now()->format('Y-m-d_His') . '.csv';
+
+            // 取得資料
+            $users = $this->getExportUsers();
+
+            // 使用 response()->streamDownload
+            return response()->streamDownload(function () use ($users) {
+                $output = fopen('php://output', 'w');
+
+                // UTF-8 BOM
+                fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+                // 表頭
+                fputcsv($output, [
+                    '編號',
+                    '姓名',
+                    '電子郵件',
+                    '生日',
+                    '會員身分',
+                    '就讀學校',
+                    '學號',
+                    '註冊時間'
+                ]);
+
+                // 資料
+                foreach ($users as $user) {
+                    fputcsv($output, [
+                        $user->id,
+                        $user->name,
+                        $user->email,
+                        $user->birthday ? $user->birthday->format('Y-m-d') : '',
+                        $this->getMembershipLabel($user->membership_type, $user->is_admin),
+                        $user->school ?? '',
+                        $user->student_id ?? '',
+                        $user->created_at->format('Y-m-d H:i:s')
+                    ]);
+                }
+
+                fclose($output);
+            }, $fileName, [
+                'Content-Type' => 'text/csv; charset=utf-8',
+            ]);
+        } catch (\Exception $e) {
+            $this->errorMessage = '匯出失敗：' . $e->getMessage();
+        }
+    }
+
+    /**
+     * 匯出會員資料為 Excel XML
+     */
+    public function exportToExcel()
+    {
+        try {
+            $fileName = '會員資料_' . now()->format('Y-m-d_His') . '.xls';
+
+            // 取得資料
+            $users = $this->getExportUsers();
+
+            // 使用 response()->streamDownload
+            return response()->streamDownload(function () use ($users) {
+                echo $this->generateExcelXml($users);
+            }, $fileName, [
+                'Content-Type' => 'application/vnd.ms-excel',
+            ]);
+        } catch (\Exception $e) {
+            $this->errorMessage = '匯出失敗：' . $e->getMessage();
+        }
+    }
+
+    /**
+     * 取得要匯出的使用者資料
+     */
+    protected function getExportUsers()
+    {
+        $query = User::query();
+        $query->where('is_admin', false);
+
+        if ($this->search) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('school', 'like', '%' . $this->search . '%')
+                    ->orWhere('student_id', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        if ($this->membershipFilter) {
+            $query->where('membership_type', $this->membershipFilter);
+        }
+
+        $query->orderBy('created_at', 'desc');
+
+        return $query->get();
+    }
+
+    /**
+     * 生成 Excel XML
+     */
+    protected function generateExcelXml($users)
+    {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<?mso-application progid="Excel.Sheet"?>' . "\n";
+        $xml .= '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"';
+        $xml .= ' xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">' . "\n";
+
+        // 樣式
+        $xml .= '<Styles>' . "\n";
+        $xml .= '<Style ss:ID="header">' . "\n";
+        $xml .= '<Font ss:Bold="1" ss:Size="12" ss:Color="#FFFFFF"/>' . "\n";
+        $xml .= '<Interior ss:Color="#2d2d2d" ss:Pattern="Solid"/>' . "\n";
+        $xml .= '<Alignment ss:Horizontal="Center" ss:Vertical="Center"/>' . "\n";
+        $xml .= '</Style>' . "\n";
+        $xml .= '</Styles>' . "\n";
+
+        // 工作表
+        $xml .= '<Worksheet ss:Name="會員資料">' . "\n";
+        $xml .= '<Table>' . "\n";
+
+        // 欄寬
+        $xml .= '<Column ss:Width="50"/><Column ss:Width="120"/><Column ss:Width="200"/>';
+        $xml .= '<Column ss:Width="100"/><Column ss:Width="100"/><Column ss:Width="150"/>';
+        $xml .= '<Column ss:Width="100"/><Column ss:Width="150"/>' . "\n";
+
+        // 表頭
+        $xml .= '<Row ss:StyleID="header">' . "\n";
+        $headers = ['編號', '姓名', '電子郵件', '生日', '會員身分', '就讀學校', '學號', '註冊時間'];
+        foreach ($headers as $header) {
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($header, ENT_XML1) . '</Data></Cell>';
+        }
+        $xml .= '</Row>' . "\n";
+
+        // 資料
+        foreach ($users as $user) {
+            $xml .= '<Row>';
+            $xml .= '<Cell><Data ss:Type="Number">' . $user->id . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($user->name, ENT_XML1) . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($user->email, ENT_XML1) . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . ($user->birthday ? $user->birthday->format('Y-m-d') : '') . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($this->getMembershipLabel($user->membership_type, $user->is_admin), ENT_XML1) . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($user->school ?? '', ENT_XML1) . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . htmlspecialchars($user->student_id ?? '', ENT_XML1) . '</Data></Cell>';
+            $xml .= '<Cell><Data ss:Type="String">' . $user->created_at->format('Y-m-d H:i:s') . '</Data></Cell>';
+            $xml .= '</Row>' . "\n";
+        }
+
+        $xml .= '</Table></Worksheet></Workbook>';
+
+        return $xml;
     }
 
     public function updatedSearch()
@@ -171,10 +325,8 @@ class MemberManagementComponent extends Component
                 'email' => $this->editForm['email'],
                 'birthday' => $this->editForm['birthday'] ?: null,
                 'membership_type' => $this->editForm['membership_type'],
-                // 不允許修改 is_admin
             ];
 
-            // 處理學生資料
             if ($this->editForm['membership_type'] === 'student') {
                 $updateData['school'] = $this->editForm['school'];
                 $updateData['student_id'] = $this->editForm['student_id'];
@@ -234,10 +386,9 @@ class MemberManagementComponent extends Component
                 'password' => Hash::make($this->createForm['password']),
                 'birthday' => $this->createForm['birthday'] ?: null,
                 'membership_type' => $this->createForm['membership_type'],
-                'is_admin' => false, // 強制設為非管理員
+                'is_admin' => false,
             ];
 
-            // 處理學生資料
             if ($this->createForm['membership_type'] === 'student') {
                 $createData['school'] = $this->createForm['school'];
                 $createData['student_id'] = $this->createForm['student_id'];
@@ -295,10 +446,8 @@ class MemberManagementComponent extends Component
     {
         $query = User::query();
 
-        // 排除管理員帳號
         $query->where('is_admin', false);
 
-        // 搜尋
         if ($this->search) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
@@ -308,12 +457,10 @@ class MemberManagementComponent extends Component
             });
         }
 
-        // 會員身分篩選
         if ($this->membershipFilter) {
             $query->where('membership_type', $this->membershipFilter);
         }
 
-        // 排序
         $query->orderBy($this->sortField, $this->sortDirection);
 
         $users = $query->paginate($this->perPage);

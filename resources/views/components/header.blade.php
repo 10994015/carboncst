@@ -46,9 +46,9 @@
         <a href="/contact">
             <p>聯絡我們</p><span>Contact Us</span>
         </a>
-        <a href="/payment">
+        {{-- <a href="/payment">
             <p>研討會付款專區</p><span>Payment</span>
-        </a>
+        </a> --}}
 
         <!-- 登入狀態區域 -->
         @auth

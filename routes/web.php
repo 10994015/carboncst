@@ -60,8 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', ProfileComponent::class)->name('profile');
 
     // 付款相關路由
-    Route::get('/payment', PaymentComponent::class)->name('payment.form');
-    Route::get('/payment/history', PaymentHistoryComponent::class)->name('payment.history'); // 新增
+    // Route::get('/payment', PaymentComponent::class)->name('payment.form');
+    // Route::get('/payment/history', PaymentHistoryComponent::class)->name('payment.history'); // 新增
 
     // 訂單詳情頁面（如果需要單獨的詳情頁面）
     Route::get('/order/{id}', [PaymentController::class, 'orderDetail'])->name('order.detail'); // 新增
@@ -77,20 +77,20 @@ Route::middleware(['auth'])->group(function () {
     })->name('ecpay.form');
 
     // 付款成功頁面
-    Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])
-        ->name('payment.success');
+    // Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])
+    //     ->name('payment.success');
 
-    // 付款結果頁面
-    Route::get('/payment/result', [PaymentController::class, 'paymentResult'])
-        ->name('payment.result');
+    // // 付款結果頁面
+    // Route::get('/payment/result', [PaymentController::class, 'paymentResult'])
+    //     ->name('payment.result');
 
-    // 付款失敗頁面 (新增)
-    Route::get('/payment/failed', function () {
-        return view('livewire.payment.failed', [
-            'message' => '付款失敗，請重新嘗試',
-            'error' => request()->get('error', '')
-        ]);
-    })->name('payment.failed');
+    // // 付款失敗頁面 (新增)
+    // Route::get('/payment/failed', function () {
+    //     return view('livewire.payment.failed', [
+    //         'message' => '付款失敗，請重新嘗試',
+    //         'error' => request()->get('error', '')
+    //     ]);
+    // })->name('payment.failed');
 });
 
 // 綠界金流回調路由（不需要認證，因為是第三方回調）
